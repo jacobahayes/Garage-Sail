@@ -11,6 +11,7 @@
  *@
 @main("Welcome to Play") {
     <script type='text/javascript' src='@routes.Assets.versioned("js/index.js")'></script>
+    <link rel="stylesheet" type="text/css" href='@routes.Assets.versioned("css/bootstrap.min.css")'>
     <ul id="person"></ul>
     <form action="@routes.HomeController.addPerson()" method = "post">
         <input type="text" name="name"></input>

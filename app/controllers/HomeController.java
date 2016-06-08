@@ -37,4 +37,9 @@ public class HomeController extends Controller {
                 .all();
         return ok(toJson(persons));
     }
+
+    public Result attemptLogin() {
+
+        return redirect(routes.HomeController.index());
+    }
 }

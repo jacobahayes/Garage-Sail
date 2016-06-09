@@ -3,6 +3,11 @@
 
 # --- !Ups
 
+create table login_user (
+  username                  varchar(255),
+  password                  varchar(255))
+;
+
 create table person (
   id                        varchar(255) not null,
   name                      varchar(255),
@@ -17,6 +22,8 @@ create sequence person_seq;
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
+
+drop table if exists login_user;
 
 drop table if exists person;
 

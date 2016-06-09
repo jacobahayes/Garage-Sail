@@ -10,9 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Person extends Model{
-    @Id
-    public String id;
+public class LoginUser extends Model{
 
-    public String name;
+    public String username;
+
+    public String password;
 }

@@ -48,7 +48,7 @@
 
         button {
             /*background-color: #5cb85c;*/
-            width: 175px;
+            /*width: 175px;*/
             padding: 5px;
             text-align: center;
             text-decoration: none;
@@ -73,6 +73,14 @@
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         }
 
+        #cancel_button {
+            width: 45px;
+        }
+
+        #login_button {
+            width: 125px;
+        }
+
 
     </style>
 
@@ -93,7 +101,10 @@
 
                     </div>
 
-                    <button>Login</button>
+                    <div id="buttons">
+                        <button id="cancel_button">X</button>
+                        <button id="login_button">Login</button>
+                    </div>
 
                 </form>
             </div>

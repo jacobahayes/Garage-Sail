@@ -392,3 +392,40 @@ play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evoluti
 2016-06-08 21:54:01,114 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-6 - Bean [models.LoginUser] has no unique id set
 2016-06-08 21:54:01,119 [INFO] from application in application-akka.actor.default-dispatcher-6 - ApplicationTimer demo: Starting application at 2016-06-09T01:54:01.119Z
 2016-06-08 21:54:01,171 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-6 - Application started (Dev)
+2016-06-09 10:02:54,489 [WARN] from com.zaxxer.hikari.pool.HikariPool in Hikari housekeeper (pool HikariPool-0) - HikariPool-0 - Unusual system clock change detected, soft-evicting connections from pool.
+2016-06-09 10:03:21,252 [WARN] from com.zaxxer.hikari.pool.HikariPool in Hikari housekeeper (pool HikariPool-48) - HikariPool-48 - Unusual system clock change detected, soft-evicting connections from pool.
+2016-06-09 10:05:00,620 [INFO] from application in application-akka.actor.default-dispatcher-23 - ApplicationTimer demo: Stopping application at 2016-06-09T14:05:00.620Z after 43859s.
+2016-06-09 10:05:00,621 [INFO] from application in application-akka.actor.default-dispatcher-23 - Shutting down connection pool.
+2016-06-09 10:05:00,715 [INFO] from application in application-akka.actor.default-dispatcher-23 - Creating Pool for datasource 'default'
+2016-06-09 10:05:00,716 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-23 - Database [default] connected at jdbc:h2:mem:play
+2016-06-09 10:05:00,746 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-23 - Bean [models.LoginUser] has no unique id set
+2016-06-09 10:05:00,755 [INFO] from application in application-akka.actor.default-dispatcher-23 - ApplicationTimer demo: Starting application at 2016-06-09T14:05:00.755Z
+2016-06-09 10:05:00,790 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-23 - Application started (Dev)
+2016-06-09 10:11:10,089 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Stopping application at 2016-06-09T14:11:10.089Z after 370s.
+2016-06-09 10:11:10,090 [INFO] from application in application-akka.actor.default-dispatcher-5 - Shutting down connection pool.
+2016-06-09 10:11:10,155 [INFO] from application in application-akka.actor.default-dispatcher-5 - Creating Pool for datasource 'default'
+2016-06-09 10:11:10,158 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-5 - Database [default] connected at jdbc:h2:mem:play
+2016-06-09 10:11:10,180 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-5 - Bean [models.LoginUser] has no unique id set
+2016-06-09 10:11:10,186 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Starting application at 2016-06-09T14:11:10.186Z
+2016-06-09 10:11:10,236 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-5 - Application started (Dev)
+2016-06-09 10:13:42,801 [INFO] from application in application-akka.actor.default-dispatcher-11 - ApplicationTimer demo: Stopping application at 2016-06-09T14:13:42.800Z after 152s.
+2016-06-09 10:13:42,802 [INFO] from application in application-akka.actor.default-dispatcher-11 - Shutting down connection pool.
+2016-06-09 10:13:42,866 [INFO] from application in application-akka.actor.default-dispatcher-11 - Creating Pool for datasource 'default'
+2016-06-09 10:13:42,867 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-11 - Database [default] connected at jdbc:h2:mem:play
+2016-06-09 10:13:42,893 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-11 - Bean [models.LoginUser] has no unique id set
+2016-06-09 10:13:42,898 [INFO] from application in application-akka.actor.default-dispatcher-11 - ApplicationTimer demo: Starting application at 2016-06-09T14:13:42.898Z
+2016-06-09 10:13:42,930 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-11 - Application started (Dev)
+2016-06-09 10:14:19,586 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Stopping application at 2016-06-09T14:14:19.585Z after 37s.
+2016-06-09 10:14:19,586 [INFO] from application in application-akka.actor.default-dispatcher-4 - Shutting down connection pool.
+2016-06-09 10:14:19,649 [INFO] from application in application-akka.actor.default-dispatcher-4 - Creating Pool for datasource 'default'
+2016-06-09 10:14:19,650 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-4 - Database [default] connected at jdbc:h2:mem:play
+2016-06-09 10:14:19,682 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-4 - Bean [models.LoginUser] has no unique id set
+2016-06-09 10:14:19,688 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Starting application at 2016-06-09T14:14:19.687Z
+2016-06-09 10:14:19,747 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-4 - Application started (Dev)
+2016-06-09 10:15:03,050 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Stopping application at 2016-06-09T14:15:03.050Z after 44s.
+2016-06-09 10:15:03,051 [INFO] from application in application-akka.actor.default-dispatcher-9 - Shutting down connection pool.
+2016-06-09 10:15:03,107 [INFO] from application in application-akka.actor.default-dispatcher-9 - Creating Pool for datasource 'default'
+2016-06-09 10:15:03,109 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-9 - Database [default] connected at jdbc:h2:mem:play
+2016-06-09 10:15:03,129 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-9 - Bean [models.LoginUser] has no unique id set
+2016-06-09 10:15:03,134 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Starting application at 2016-06-09T14:15:03.133Z
+2016-06-09 10:15:03,166 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-9 - Application started (Dev)

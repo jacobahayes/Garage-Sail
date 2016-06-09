@@ -1,7 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Model;
-import models.Person;
+import models.LoginUser;
 import play.data.Form;
 import play.mvc.*;
 
@@ -26,15 +26,18 @@ public class HomeController extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
-    public Result addPerson() {
-        Person person = Form.form(Person.class).bindFromRequest().get();
-        person.save();
-        return redirect(routes.HomeController.index());
-    }
 
-    public Result getPersons() {
-        List<Person> persons = new Model.Finder<>(String.class, Person.class)
-                .all();
-        return ok(toJson(persons));
+    public Result login() {
+        String username;
+        String password;
+        LoginUser loginUser = Form.form(LoginUser.class).bindFromRequest().get();
+        username = loginUser.username;
+        password = loginUser.password;
+        
+        if (username.equals("user") && password.equals("pass")) {
+            return ok(homepage.render());
+        } else {
+            return redirect(routes.HomeController.index());
+        }
     }
 }

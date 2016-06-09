@@ -35,7 +35,7 @@ public class HomeController extends Controller {
         password = loginUser.password;
         
         if (username.equals("user") && password.equals("pass")) {
-            return ok(login.render());
+            return ok(homepage.render());
         } else {
             return redirect(routes.HomeController.index());
         }

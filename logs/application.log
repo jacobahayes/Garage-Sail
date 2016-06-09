@@ -429,3 +429,10 @@ play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evoluti
 2016-06-09 10:15:03,129 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-9 - Bean [models.LoginUser] has no unique id set
 2016-06-09 10:15:03,134 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Starting application at 2016-06-09T14:15:03.133Z
 2016-06-09 10:15:03,166 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-9 - Application started (Dev)
+2016-06-09 10:18:53,800 [INFO] from application in application-akka.actor.default-dispatcher-13 - ApplicationTimer demo: Stopping application at 2016-06-09T14:18:53.800Z after 230s.
+2016-06-09 10:18:53,802 [INFO] from application in application-akka.actor.default-dispatcher-13 - Shutting down connection pool.
+2016-06-09 10:18:53,890 [INFO] from application in application-akka.actor.default-dispatcher-13 - Creating Pool for datasource 'default'
+2016-06-09 10:18:53,893 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-13 - Database [default] connected at jdbc:h2:mem:play
+2016-06-09 10:18:53,916 [WARN] from com.avaje.ebeaninternal.server.deploy.BeanDescriptorManager in application-akka.actor.default-dispatcher-13 - Bean [models.LoginUser] has no unique id set
+2016-06-09 10:18:53,920 [INFO] from application in application-akka.actor.default-dispatcher-13 - ApplicationTimer demo: Starting application at 2016-06-09T14:18:53.920Z
+2016-06-09 10:18:53,953 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-13 - Application started (Dev)

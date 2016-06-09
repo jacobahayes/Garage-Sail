@@ -33,11 +33,40 @@ public class HomeController extends Controller {
         LoginUser loginUser = Form.form(LoginUser.class).bindFromRequest().get();
         username = loginUser.username;
         password = loginUser.password;
-        
+
         if (username.equals("user") && password.equals("pass")) {
             return ok(homepage.render());
         } else {
             return redirect(routes.HomeController.index());
         }
     }
+
+    public Result registration() {
+        return ok(registration.render());
+    }
+
+    public Result registerUser() {
+
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String action = postAction[0];
+        if ("register".equals(action)) {
+            return completeRegister(request());
+        } else if ("cancel".equals(action)) {
+            return cancelRegister(request());
+        } else {
+            return badRequest("This action is not allowed");
+        }
+    }
+
+    public Result completeRegister(Http.Request request) {
+
+        System.out.println("User Created");
+        return ok(homepage.render());
+    }
+
+    public Result cancelRegister(Http.Request resquest) {
+
+        return redirect(routes.HomeController.index());
+    }
+
 }

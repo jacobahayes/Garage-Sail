@@ -1,86 +1,85 @@
 @*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
+* This template takes a single argument, a String containing a
+* message to display.
+*@
 @(message: String)
 
 @*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
+* Call the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
 @main("Garage Sail") {
     <script type='text/javascript' src='@routes.Assets.versioned("js/index.js")'></script>
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <style>
 
-        body {
-            background-color: #0086b3;
-            font-family: "Poiret One";
-        }
+    body {
+        background-color: #0086b3;
+        font-family: "Poiret One";
+    }
 
-        #password {
-            -webkit-text-security: circle;
-        }
+    #password {
+        -webkit-text-security: circle;
+    }
 
-        #title {
-            text-align: center;
-            color: #5cb85c;
-            font-size: 140px;
-        }
+    #title {
+        text-align: center;
+        color: #5cb85c;
+        font-size: 140px;
+    }
 
-        #login_form {
-            text-align: center;
-            margin: auto;
-            width: 200px;
-        }
+    #login_form {
+        text-align: center;
+        margin: auto;
+        width: 200px;
+    }
 
-        #login_form input {
-            width: 150px;
-            margin: auto;
-            padding: 10px;
-            text-align: left;
-        }
+    #login_form input {
+        width: 150px;
+        margin: auto;
+        padding: 10px;
+        text-align: left;
+    }
 
-        #register {
-            color: white;
-            text-align: center;
-        }
+    #register {
+        text-align: center;
+    }
 
-        button {
-            /*background-color: #5cb85c;*/
-            /*width: 175px;*/
-            padding: 5px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            -webkit-transition-duration: 0.4s; /* Safari */
-            transition-duration: 0.4s;
+    button {
+        /*background-color: #5cb85c;*/
+        /*width: 175px;*/
+        padding: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
 
-            background-color: #0086b3;
-            color: #5cb85c;
-            border: 2px solid #5cb85c;
-        }
+        background-color: #0086b3;
+        color: #5cb85c;
+        border: 2px solid #5cb85c;
+    }
 
-        #space {
-            height: 5px;
-        }
+    #space {
+        height: 5px;
+    }
 
 
-        button:hover {
-            background-color: #5cb85c; /* Green */
-            color: white;
-            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        }
+    button:hover {
+        background-color: #5cb85c; /* Green */
+        color: white;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
 
-        #cancel_button {
-            width: 45px;
-        }
+    #cancel_button {
+        width: 45px;
+    }
 
-        #login_button {
-            width: 125px;
-        }
+    #login_button {
+        width: 125px;
+    }
 
 
     </style>
@@ -111,7 +110,7 @@
             </div>
 
             <div id="register">
-                <p>Not Registered?<a style="color:white" href="@routes.HomeController.login" id="logo">Sign Up Here.</a></p>
+                <p>Not Registered?<a href="registration" id="logo">Sign Up Here.</a></p>
             </div>
         </body>
     </html>

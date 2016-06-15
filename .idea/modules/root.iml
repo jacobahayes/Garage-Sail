@@ -19,24 +19,11 @@
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.11/resource_managed/main" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.11/resource_managed/test" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../test/resources" type="java-test-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/../../target/resolution-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/../../target/streams" />
+      <excludeFolder url="file://$MODULE_DIR$/../../target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="SBT: unmanaged-jars">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../lib/avaje-ebeanorm-4.6.2-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/../../lib/avaje-ebeanorm-4.6.2.jar!/" />
-          <root url="jar://$MODULE_DIR$/../../lib/persistence-api-1.0-sources.jar!/" />
-          <root url="jar://$MODULE_DIR$/../../lib/persistence-api-1.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/../../lib/play-json_2.11-2.5.3.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="SBT: aopalliance:aopalliance:1.0:jar" level="project" />
     <orderEntry type="library" name="SBT: xml-apis:xml-apis:1.4.01:jar" level="project" />
     <orderEntry type="library" name="SBT: xerces:xercesImpl:2.11.0:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: xalan:xalan:2.7.2:jar" level="project" />
@@ -176,6 +163,5 @@
     <orderEntry type="library" name="SBT: ch.qos.logback:logback-core:1.1.4:jar" level="project" />
     <orderEntry type="library" name="SBT: ch.qos.logback:logback-classic:1.1.4:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: cglib:cglib-nodep:2.1_3:jar" level="project" />
-    <orderEntry type="library" name="SBT: aopalliance:aopalliance:1.0:jar" level="project" />
   </component>
 </module>

@@ -9,6 +9,10 @@ POST    /                           controllers.HomeController.login()
 GET     /registration               controllers.HomeController.registration()
 POST    /registration               controllers.HomeController.registerUser()
 
+GET     /edituser                   controllers.HomeController.editUser()
+POST    /edituser/name              controllers.HomeController.editName()
+POST    /edituser/password          controllers.HomeController.editPass()
+
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
 # An example controller showing how to write asynchronous code

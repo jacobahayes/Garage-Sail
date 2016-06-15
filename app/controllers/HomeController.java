@@ -2,7 +2,6 @@ package controllers;
 
 import com.avaje.ebean.Model;
 import models.User;
-import models.User;
 import play.data.Form;
 import play.mvc.*;
 
@@ -16,13 +15,6 @@ import static play.libs.Json.toJson;
  * to the application's home page.
  */
 public class HomeController extends Controller {
-
-
-
-    /*the logged in User to pull info from*/
-    private User loggedInUser = null;
-
-
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -43,20 +35,10 @@ public class HomeController extends Controller {
         password = loginUser.password;
 
         if (username.equals("user") && password.equals("pass")) {
-
-            /*Need to search DB and pull actual user info,
-            * then create the loggedInUser based on that info
-            */
-            loggedInUser = loginUser;
-
             return ok(homepage.render());
-
         } else {
-
             return redirect(routes.HomeController.index());
-
         }
-
     }
 
     public Result registration() {
@@ -78,21 +60,25 @@ public class HomeController extends Controller {
 
     public Result completeRegister(Http.Request request) {
 
-        User registerUser = Form.form(User.class).bindFromRequest().get();
-        System.out.println("First Name: " + registerUser.getFirstName());
-        System.out.println("Last Name: " + registerUser.getLastName());
-        System.out.println("Email: " + registerUser.getEmail());
-        System.out.println("Password: " + registerUser.getPassword());
-
-        /*Automatically login the newly created user*/
-        loggedInUser = registerUser;
-
+        System.out.println("User Created");
         return ok(homepage.render());
     }
 
     public Result cancelRegister(Http.Request resquest) {
 
         return redirect(routes.HomeController.index());
+    }
+
+    public Result editUser() {
+        return ok(edituser.render());
+    }
+
+    public Result editName() {
+        return TODO;
+    }
+
+    public Result editPass() {
+        return TODO;
     }
 
 }

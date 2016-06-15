@@ -7,20 +7,152 @@
 
 <style>
 
-  body {
-    background-color: #0086b3;
-    font-family: "Poiret One";
-  }
+body {
+  background-color: #0086b3;
+  font-family: "Poiret One";
+}
 
-  #logout {
-    color: #5cb85c;
-  }
+#logo {
+  text-align: left;
+  text-size: 40px;
+  color: #5cb85c;
+  text-decoration: none;
+}
+
+#heading {
+  text-align: center;
+  color: #5cb85c;
+}
+
+#title {
+  font-size: 80px;
+}
+
+#instructions {
+  font-size: 20px;
+}
+
+.home-menu li{
+  width: 500px;
+  height: 100px;
+  overflow: hidden;
+  display: block;
+  background: #1fffe5;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  margin-bottom: 4px;
+  border-left: 10px solid rgba(103, 134, 141, 0.79);
+  transition: all 300ms ease-in-out;
+}
+.home-menu li:last-child{
+  margin-bottom: 0px;
+}
+
+.home-menu li a{
+  text-align: left;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #333;
+  position:relative;
+}
+
+.sailboat{
+  font-family: 'Monoton', cursive;
+  font-size: 20px;
+  text-shadow: 0px 0px 1px #333;
+  line-height: 90px;
+  position: absolute;
+  width: 90px;
+  left: 20px;
+  text-align: center;
+  transition: all 300ms linear;
+}
+
+.menu-content{
+  position: absolute;
+  left: 120px;
+  width: 370px;
+  height: 60px;
+  top: 20px;
+}
+
+.content-main{
+  font-size: 30px;
+  transition: all 300ms linear;
+}
+.content-sub{
+  font-size: 14px;
+  color: #666;
+  transition: all 300ms linear;
+}
+
+.home-menu li:hover{
+  border-color: #1fffe5;
+  background: #000;
+}
+.home-menu li:hover .sailboat{
+  color: #1fffe5;
+  text-shadow: 0px 0px 1px #fefdff;
+  font-size: 30px;
+}
+.home-menu li:hover .content-main{
+  color: #1fffe5;
+  font-size: 16px;
+}
+.content-menu li:hover .content-sub{
+  color: #fff;
+  font-size: 50px;
+}
+#space {
+  height: 10px;
+}
+
+
 
 </style>
 
 <body>
-  <a href="@routes.HomeController.login" id="logout">Log out</a>
-  <a href="@routes.HomeController.editUser()" id="edituser">Edit User</a>
+
+  <div id="logo">
+    <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
+  </div>
+  <div id="heading">
+    <p id="title">Garage Sail</p>
+    <p id="instructions">Welcome to the most badass app of the motherfucking century bitchez.</p>
+    <p id="instructions">Proceed with Caution</p>
+  </div>
+  <div id="space"></div>
+
+  <ul class="home-menu">
+    <li>
+    <a href="edituser">
+      <span class="sailboat">GSail</span>
+      <div class="menu-content">
+        <h2 class="content-main">Edit Profile</h2>
+        <h3 class="content-sub">Change username, password, etc.</h3>
+      </div>
+    </a>
+  </li>
+    <li>
+      <a href="/">
+        <span class="sailboat">GSail</span>
+        <div class="menu-content">
+          <h2 class="content-main">Logout</h2>
+          <h3 class="content-sub">See you later!</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <span class="sailboat">GSail</span>
+        <div class="menu-content">
+          <h2 class="content-main">Stuart Wallace</h2>
+          <h3 class="content-sub">Is deluded.  Lebron is a puss.</h3>
+        </div>
+      </a>
+    </li>
+  </ul>
+
 </body>
 
 </html>

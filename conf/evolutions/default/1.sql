@@ -3,9 +3,12 @@
 
 # --- !Ups
 
-create table login_user (
+create table user (
   username                  varchar(255),
-  password                  varchar(255))
+  password                  varchar(255),
+  email                     varchar(255),
+  first_name                varchar(255),
+  last_name                 varchar(255))
 ;
 
 
@@ -15,7 +18,7 @@ create table login_user (
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists login_user;
+drop table if exists user;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 

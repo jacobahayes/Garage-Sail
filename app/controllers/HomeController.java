@@ -1,7 +1,8 @@
 package controllers;
 
 import com.avaje.ebean.Model;
-import models.LoginUser;
+import models.User;
+import models.User;
 import play.data.Form;
 import play.mvc.*;
 
@@ -15,6 +16,13 @@ import static play.libs.Json.toJson;
  * to the application's home page.
  */
 public class HomeController extends Controller {
+
+
+
+    /*the logged in User to pull info from*/
+    private User loggedInUser = null;
+
+
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -30,15 +38,25 @@ public class HomeController extends Controller {
     public Result login() {
         String username;
         String password;
-        LoginUser loginUser = Form.form(LoginUser.class).bindFromRequest().get();
+        User loginUser = Form.form(User.class).bindFromRequest().get();
         username = loginUser.username;
         password = loginUser.password;
 
         if (username.equals("user") && password.equals("pass")) {
+
+            /*Need to search DB and pull actual user info,
+            * then create the loggedInUser based on that info
+            */
+            loggedInUser = loginUser;
+
             return ok(homepage.render());
+
         } else {
+
             return redirect(routes.HomeController.index());
+
         }
+
     }
 
     public Result registration() {
@@ -60,7 +78,15 @@ public class HomeController extends Controller {
 
     public Result completeRegister(Http.Request request) {
 
-        System.out.println("User Created");
+        User registerUser = Form.form(User.class).bindFromRequest().get();
+        System.out.println("First Name: " + registerUser.getFirstName());
+        System.out.println("Last Name: " + registerUser.getLastName());
+        System.out.println("Email: " + registerUser.getEmail());
+        System.out.println("Password: " + registerUser.getPassword());
+
+        /*Automatically login the newly created user*/
+        loggedInUser = registerUser;
+
         return ok(homepage.render());
     }
 

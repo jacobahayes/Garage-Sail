@@ -37,6 +37,8 @@ public class HomeController extends Controller {
         User loginUser = Form.form(User.class).bindFromRequest().get();
         username = loginUser.getUsername();
         password = loginUser.getPassword();
+        int num = User.find().findRowCount();
+        System.out.println(num);
 
         if (username.equals("user") && password.equals("pass")) {
             loggedInUser = loginUser;
@@ -67,6 +69,7 @@ public class HomeController extends Controller {
 
         System.out.println("User Created");
         User registerUser = Form.form(User.class).bindFromRequest().get();
+        registerUser.save();
         System.out.println(registerUser.getFirstName());
         loggedInUser = registerUser;
         return ok(homepage.render());

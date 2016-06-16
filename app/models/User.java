@@ -12,6 +12,9 @@ import javax.persistence.Id;
 @Entity
 public class User extends Model{
 
+    @Id
+    private int id;
+
     private String username;
 
     private String password;
@@ -62,5 +65,10 @@ public class User extends Model{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+
+    public static Finder<Integer, User> find() {
+        return new Finder<Integer, User>(Integer.class, User.class);
     }
 }

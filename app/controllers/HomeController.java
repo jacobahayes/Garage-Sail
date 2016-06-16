@@ -16,6 +16,10 @@ import static play.libs.Json.toJson;
  */
 public class HomeController extends Controller {
 
+
+    User loggedInUser = null;
+
+
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
@@ -31,10 +35,11 @@ public class HomeController extends Controller {
         String username;
         String password;
         User loginUser = Form.form(User.class).bindFromRequest().get();
-        username = loginUser.username;
-        password = loginUser.password;
+        username = loginUser.getUsername();
+        password = loginUser.getPassword();
 
         if (username.equals("user") && password.equals("pass")) {
+            loggedInUser = loginUser;
             return ok(homepage.render());
         } else {
             return redirect(routes.HomeController.index());
@@ -61,6 +66,9 @@ public class HomeController extends Controller {
     public Result completeRegister(Http.Request request) {
 
         System.out.println("User Created");
+        User registerUser = Form.form(User.class).bindFromRequest().get();
+        System.out.println(registerUser.getFirstName());
+        loggedInUser = registerUser;
         return ok(homepage.render());
     }
 

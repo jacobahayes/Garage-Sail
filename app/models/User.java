@@ -12,15 +12,15 @@ import javax.persistence.Id;
 @Entity
 public class User extends Model{
 
-    public String username;
+    private String username;
 
-    public String password;
+    private String password;
 
-    public String email;
+    private String email;
 
-    public String firstName;
+    private String firstName;
 
-    public String lastName;
+    private String lastName;
 
 
 

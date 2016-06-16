@@ -32,15 +32,14 @@ public class HomeController extends Controller {
 
 
     public Result login() {
-        String username;
-        String password;
-        User loginUser = Form.form(User.class).bindFromRequest().get();
-        username = loginUser.getUsername();
-        password = loginUser.getPassword();
-        int num = User.find().findRowCount();
-        System.out.println(num);
 
-        if (username.equals("user") && password.equals("pass")) {
+        User loginUser = Form.form(User.class).bindFromRequest().get();
+        String username = loginUser.getUsername();
+        String password = loginUser.getPassword();
+
+        List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
+
+        if (dbList.size() > 0) {
             loggedInUser = loginUser;
             return ok(homepage.render());
         } else {

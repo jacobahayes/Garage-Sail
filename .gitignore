@@ -1,11 +1,13 @@
 # Ignore stuff we don't mess with #
 bin/
+/conf/evolutions/default
 /db
 .eclipse
 /lib/
 /logs/
 /modules
 /project/target
+/project/project
 /target
 tmp/
 test-result

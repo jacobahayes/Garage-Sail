@@ -25,10 +25,10 @@
     text-decoration: none;
   }
 
-  #heading {
-    text-align: center;
-    color: #5cb85c;
-  }
+#heading {
+  text-align: center;
+  color: #5cb85c;
+}
 
   #title {
     font-size: 80px;
@@ -107,6 +107,9 @@
     <div id="logo">
       <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
     </div>
+    <div id="heading">
+      <p id="title">Garage Sail</p>
+    </div>
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
       <p id="title">Edit User Information</p>
@@ -135,6 +138,36 @@
           <input type="password" name="password" id="password" placeholder="New Password">
 
           <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password">
+
+          <div id="space"></div>
+          <div id="buttons">
+            <button id="name_button" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </fieldset>
+
+    <fieldset id="fields">
+      <legend>Change Name</legend>
+      <div id="edit-form">
+        <form action="@routes.HomeController.editName()" method="post">
+          <input type="text" name="firstName" id="lastName" placeholder="First Name">
+
+          <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+
+          <div id="space"></div>
+          <div id="buttons">
+            <button id="name_button" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </fieldset>
+
+    <fieldset id="fields">
+      <legend>Change Email</legend>
+      <div id="edit-form">
+        <form action="@routes.HomeController.editName()" method="post">
+          <input type="text" name="email" id="email" placeholder="New Email">
 
           <div id="space"></div>
           <div id="buttons">

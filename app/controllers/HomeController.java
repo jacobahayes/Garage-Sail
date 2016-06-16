@@ -86,8 +86,8 @@ public class HomeController extends Controller {
         return redirect(routes.HomeController.index());
     }
 
-    public Result editUser() {
-        return TODO;
+    public Result profile() {
+        return ok(profile.render());
     }
 
     public Result editName() {

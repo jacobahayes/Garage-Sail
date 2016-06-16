@@ -30,7 +30,6 @@ public class HomeController extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
-
     public Result login() {
 
         User loginUser = Form.form(User.class).bindFromRequest().get();
@@ -87,7 +86,7 @@ public class HomeController extends Controller {
     }
 
     public Result cancelShit() {
-        return redirect(routes.HomeController.index());
+        return ok(homepage.render());
     }
 
     public Result profile() {

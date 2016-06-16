@@ -83,6 +83,13 @@
     height: 5px;
   }
 
+  legend {
+    color: #5cb85c;
+  }
+
+  #edit-form input {
+    padding: 10px;
+  }
 
   button:hover {
     background-color: #5cb85c; /* Green */
@@ -104,33 +111,24 @@
   </style>
 
   <body>
-    <div id="logo">
-      <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
-    </div>
-    <div id="heading">
-      <p id="title">Garage Sail</p>
-    </div>
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
-      <p id="title">Edit User Information</p>
-      <p id="instructions">Remember to save before exiting</p>
+      <p id="title">My Profile</p>
+      <p id="instructions">remember to save any changes</p>
     </div>
 
     <fieldset id="fields">
-      <legend id="legend">Change Username</legend>
+      <legend id="legend">Username</legend>
       <div id="edit-form">
       <form action="@routes.HomeController.editName()" method="post">
         <input type="text" name="username" id="username" placeholder="username">
         <div id="space"></div>
-        <div id="buttons">
-          <button id="name_button" type="submit">Save</button>
-        </div>
       </form>
       </div>
     </fieldset>
 
     <fieldset id="fields">
-      <legend>Change Password</legend>
+      <legend>Password</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editPass()" method="post">
           <input type="text" name="oldpass" id="oldpass" placeholder="Old Password">
@@ -140,15 +138,12 @@
           <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password">
 
           <div id="space"></div>
-          <div id="buttons">
-            <button id="name_button" type="submit">Save</button>
-          </div>
         </form>
       </div>
     </fieldset>
 
     <fieldset id="fields">
-      <legend>Change Name</legend>
+      <legend>Name</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editName()" method="post">
           <input type="text" name="firstName" id="lastName" placeholder="First Name">
@@ -156,26 +151,24 @@
           <input type="text" name="lastName" id="lastName" placeholder="Last Name">
 
           <div id="space"></div>
-          <div id="buttons">
-            <button id="name_button" type="submit">Save</button>
-          </div>
         </form>
       </div>
     </fieldset>
 
     <fieldset id="fields">
-      <legend>Change Email</legend>
+      <legend>Email</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editName()" method="post">
           <input type="text" name="email" id="email" placeholder="New Email">
 
           <div id="space"></div>
-          <div id="buttons">
-            <button id="name_button" type="submit">Save</button>
-          </div>
         </form>
       </div>
     </fieldset>
+    <div id="buttons">
+      <button id="cancel_button" type="submit">Cancel</button>
+      <button id="save_button" type="submit">Save</button>
+    </div>
 
   </body>
 </html>

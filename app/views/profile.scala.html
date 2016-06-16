@@ -120,7 +120,7 @@
     <fieldset id="fields">
       <legend id="legend">Username</legend>
       <div id="edit-form">
-      <form action="@routes.HomeController.editName()" method="post">
+      <form action="@routes.HomeController.editUsername()" method="post">
         <input type="text" name="username" id="username" placeholder="username">
         <div id="space"></div>
       </form>
@@ -130,7 +130,7 @@
     <fieldset id="fields">
       <legend>Password</legend>
       <div id="edit-form">
-        <form action="@routes.HomeController.editPass()" method="post">
+        <form action="@routes.HomeController.editPassword()" method="post">
           <input type="text" name="oldpass" id="oldpass" placeholder="Old Password">
 
           <input type="password" name="password" id="password" placeholder="New Password">
@@ -158,7 +158,7 @@
     <fieldset id="fields">
       <legend>Email</legend>
       <div id="edit-form">
-        <form action="@routes.HomeController.editName()" method="post">
+        <form action="@routes.HomeController.editEmail()" method="post">
           <input type="text" name="email" id="email" placeholder="New Email">
 
           <div id="space"></div>

@@ -10,8 +10,11 @@ GET     /registration               controllers.HomeController.registration()
 POST    /registration               controllers.HomeController.registerUser()
 
 GET     /profile                   controllers.HomeController.profile()
-POST    /profile/name              controllers.HomeController.editName()
-POST    /profile/password          controllers.HomeController.editPass()
+POST    /profile/firstname         controllers.HomeController.editFirstName()
+POST    /profile/lastname          controllers.HomeController.editLastName()
+POST    /profile/email             controllers.HomeController.editEmail()
+POST    /profile/username          controllers.HomeController.editUsername()
+POST    /profile/password          controllers.HomeController.editPassword()
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

@@ -90,11 +90,23 @@ public class HomeController extends Controller {
         return ok(profile.render());
     }
 
-    public Result editName() {
+    public Result editFirstName() {
         return TODO;
     }
 
-    public Result editPass() {
+    public Result editLastName() {
+        return TODO;
+    }
+
+    public Result editEmail() {
+        return TODO;
+    }
+
+    public Result editUsername() {
+        return TODO;
+    }
+
+    public Result editPassword() {
         return TODO;
     }
 

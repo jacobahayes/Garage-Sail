@@ -39,7 +39,7 @@ public class HomeController extends Controller {
 
         List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
 
-        if (dbList.size() > 0) {
+        if (dbList != null && dbList.size() > 0) {
             loggedInUser = loginUser;
             return ok(homepage.render());
         } else {
@@ -55,22 +55,29 @@ public class HomeController extends Controller {
 
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         String action = postAction[0];
+
         if ("register".equals(action)) {
+
             return completeRegister(request());
+
         } else if ("cancel".equals(action)) {
+
             return cancelRegister(request());
+
         } else {
+
             return badRequest("This action is not allowed");
+
         }
     }
 
     public Result completeRegister(Http.Request request) {
 
-        System.out.println("User Created");
         User registerUser = Form.form(User.class).bindFromRequest().get();
         registerUser.save();
-        System.out.println(registerUser.getFirstName());
+
         loggedInUser = registerUser;
+
         return ok(homepage.render());
     }
 

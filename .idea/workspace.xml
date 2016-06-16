@@ -4,7 +4,6 @@
     <list default="true" id="00245758-3c4c-40aa-8cb1-936490cd0cb5" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/HomeController.java" afterPath="$PROJECT_DIR$/app/controllers/HomeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/registration.scala.html" afterPath="$PROJECT_DIR$/app/views/registration.scala.html" />
     </list>
     <ignored path="play-java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,8 +46,8 @@
       <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+            <state relative-caret-position="181">
+              <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1085,7 +1084,7 @@
       <workItem from="1466037813200" duration="85000" />
       <workItem from="1466038256627" duration="4208000" />
       <workItem from="1466042919676" duration="1456000" />
-      <workItem from="1466088144392" duration="4880000" />
+      <workItem from="1466088144392" duration="5124000" />
     </task>
     <task id="LOCAL-00001" summary="changed color scheme on edit page to match rest of app, edited homepage to render better sizes">
       <created>1466089373562</created>
@@ -1101,11 +1100,18 @@
       <option name="project" value="LOCAL" />
       <updated>1466116650399</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fixed login to pull data from db,&#10;registering new user adds user to db">
+      <created>1466117756566</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1466117756566</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17871000" />
+    <option name="totallyTimeSpent" value="18115000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -1159,7 +1165,8 @@
     <MESSAGE value="changed color scheme on homepage to match rest of app" />
     <MESSAGE value="changed color scheme on edit page to match rest of app, edited homepage to render better sizes" />
     <MESSAGE value="changed database back to local Play implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed database back to local Play implementation" />
+    <MESSAGE value="fixed login to pull data from db,&#10;registering new user adds user to db" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed login to pull data from db,&#10;registering new user adds user to db" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1546,8 +1553,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="41" column="29" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+        <state relative-caret-position="181">
+          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

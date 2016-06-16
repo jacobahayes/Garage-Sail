@@ -11,6 +11,7 @@
 *@
 @main("Garage Sail") {
     <script type='text/javascript' src='@routes.Assets.versioned("js/index.js")'></script>
+    <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" type='text/css'>
     <style>
@@ -82,6 +83,12 @@
         width: 125px;
     }
 
+    #boatpicture img{
+        width: 128px;
+        height: 128px;
+    }
+
+
 
     </style>
 
@@ -91,7 +98,8 @@
             <div>
                 <h1 id="title">Garage Sail</h1>
             </div>
-
+            <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+            <div id="space">
             <div id="login_form">
                 <form action="@routes.HomeController.login()" method="post">
                     <input type="text" name="username" id="username" placeholder="username">

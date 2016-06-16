@@ -5,6 +5,7 @@
       <title>Register New User</title>
     </head>
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
 
 
     <style>
@@ -84,7 +85,10 @@
       box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     }
 
-
+    #boatpicture img{
+      width: 128px;
+      height: 128px;
+    }
 
     </style>
 
@@ -94,6 +98,8 @@
     <div id="logo">
       <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
     </div>
+
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
 
     <div id="heading">
       <p id="title">Register New User</p>

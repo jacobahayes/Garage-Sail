@@ -5,7 +5,7 @@
     <title>Edit User</title>
   </head>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-
+  <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
 
   <style>
 
@@ -95,6 +95,11 @@
       text-align: center;
     }
 
+  #boatpicture img{
+    width: 128px;
+    height: 128px;
+  }
+
 
   </style>
 
@@ -102,6 +107,7 @@
     <div id="logo">
       <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
     </div>
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
       <p id="title">Edit User Information</p>
       <p id="instructions">Remember to save before exiting</p>

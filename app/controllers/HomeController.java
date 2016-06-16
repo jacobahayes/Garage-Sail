@@ -86,6 +86,10 @@ public class HomeController extends Controller {
         return redirect(routes.HomeController.index());
     }
 
+    public Result cancelShit() {
+        return redirect(routes.HomeController.index());
+    }
+
     public Result profile() {
         return ok(profile.render());
     }

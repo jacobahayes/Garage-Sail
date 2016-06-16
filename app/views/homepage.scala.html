@@ -6,7 +6,6 @@
 </head>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet" type='text/css'>
-  <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
 
 <style>
 
@@ -15,7 +14,7 @@ body {
   font-family: "Poiret One";
 }
 
-#logo {
+#logout {
   text-align: left;
   text-size: 40px;
   color: #5cb85c;
@@ -36,7 +35,7 @@ body {
 }
 
 .home-menu li{
-  width: 500px;
+  width: 20%;
   height: 100px;
   overflow: hidden;
   display: block;
@@ -73,7 +72,7 @@ body {
 
 .menu-content{
   position: absolute;
-  left: 120px;
+  left: 20px;
   width: 370px;
   height: 60px;
   top: 20px;
@@ -84,7 +83,7 @@ body {
   transition: all 300ms linear;
 }
 .content-sub{
-  font-size: 14px;
+  font-size: 12px;
   color: #0086b3;
   transition: all 300ms linear;
 }
@@ -93,8 +92,10 @@ body {
   border-color: #5cb85c;
   background: #5ccf5c;
 }
-.home-menu li:hover .image{
-  height: 75px;
+.home-menu li:hover .sailboat{
+  color: #0086b3;
+  text-shadow: 0px 0px 1px #fefdff;
+  font-size: 30px;
 }
 .home-menu li:hover .content-main{
   color: #0086b3;
@@ -108,60 +109,40 @@ body {
   height: 10px;
 }
 
-.image {
-  height: 100px;
-  transition: all 300ms linear;
-}
-
-#boatpicture img{
-  width: 128px;
-  height: 128px;
-}
-
-
-
 
 
 </style>
 
 <body>
-  <div id="logo">
-    <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
-  </div>
 
-  <div id="heading">
-    <p id="title">Garage Sail</p>
-    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
-    <p id="instructions">Welcome to the most badass app of the motherfucking century bitchez.</p>
-    <p id="instructions">Proceed with Caution</p>
+  <div id="logout">
+    <h3><a href="@routes.HomeController.index" id="logout">Logout</a></h3>
   </div>
-  <div id="space"></div>
 
   <ul class="home-menu">
     <li>
     <a href="edituser">
-      <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+      <!--<span class="sailboat">GS</span>-->
       <div class="menu-content">
-        <h2 class="content-main">Edit Profile</h2>
-        <h3 class="content-sub">Change username, password, etc.</h3>
+        <h2 class="content-main">My Profile</h2>
+        <h3 class="content-sub">view and change your profile</h3>
       </div>
     </a>
-  </li>
+    </li>
     <li>
-      <a href="/">
-        <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+      <a href="viewsales">
+          <!--<span class="sailboat">GS</span>-->
         <div class="menu-content">
-          <h2 class="content-main">Logout</h2>
-          <h3 class="content-sub">See you later!</h3>
+          <h2 class="content-main">My Sales</h2>
+          <h3 class="content-sub">view and create sales</h3>
         </div>
       </a>
     </li>
     <li>
-      <a href="#">
-        <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+      <a href="/">
         <div class="menu-content">
-          <h2 class="content-main">Stuart Wallace</h2>
-          <h3 class="content-sub">Is deluded.  Lebron is a puss.</h3>
+          <h2 class="content-main">Logout</h2>
+          <h3 class="content-sub">See you later!</h3>
         </div>
       </a>
     </li>

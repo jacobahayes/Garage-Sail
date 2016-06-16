@@ -40,7 +40,7 @@ public class HomeController extends Controller {
         List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
 
         if (dbList != null && dbList.size() > 0) {
-            loggedInUser = loginUser;
+            loggedInUser = dbList.get(0);
             return ok(homepage.render());
         } else {
             return redirect(routes.HomeController.index());
@@ -87,7 +87,7 @@ public class HomeController extends Controller {
     }
 
     public Result editUser() {
-        return ok(edituser.render());
+        return TODO;
     }
 
     public Result editName() {

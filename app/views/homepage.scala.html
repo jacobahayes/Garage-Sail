@@ -113,6 +113,11 @@ body {
   transition: all 300ms linear;
 }
 
+#boatpicture img{
+  width: 128px;
+  height: 128px;
+}
+
 
 
 
@@ -123,8 +128,10 @@ body {
   <div id="logo">
     <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
   </div>
+
   <div id="heading">
     <p id="title">Garage Sail</p>
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <p id="instructions">Welcome to the most badass app of the motherfucking century bitchez.</p>
     <p id="instructions">Proceed with Caution</p>
   </div>

@@ -6,8 +6,10 @@ package models;
 
 import com.avaje.ebean.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 public class User extends Model{
@@ -15,6 +17,7 @@ public class User extends Model{
     @Id
     private int id;
 
+    @Column(unique=true)
     private String username;
 
     private String password;
@@ -25,7 +28,13 @@ public class User extends Model{
 
     private String lastName;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

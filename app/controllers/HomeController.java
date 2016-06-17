@@ -116,7 +116,21 @@ public class HomeController extends Controller {
 
     public Result editUsername() {
 
-        return TODO;
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        User updateUser = Form.form(User.class).bindFromRequest().get();
+        String newUsername = updateUser.getUsername();
+
+        int result = JavaApplicationDatabase.updateUsername(loggedInUser, newUsername);
+        System.out.println("RESULT: " + result);
+        if (result == 1) {
+
+            return ok(profile.render());
+
+        } else {
+
+            return badRequest("An error occurred while saving");
+
+        }
     }
 
     public Result editPassword() {

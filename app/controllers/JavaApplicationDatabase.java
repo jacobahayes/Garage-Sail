@@ -54,6 +54,7 @@ class JavaApplicationDatabase extends Controller {
                 returnUser.setLastName(rs.getString("last_name"));
                 returnUser.setUsername(rs.getString("username"));
                 returnUser.setEmail(rs.getString("email"));
+                returnUser.setId(rs.getInt("id"));
 
             }
 
@@ -65,6 +66,35 @@ class JavaApplicationDatabase extends Controller {
 
         return returnUser;
 
+
+    }
+
+    public static int updateUsername(User user, String newUsername) {
+
+        int result = 0;
+        Statement stmt = null;
+        User returnUser = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE user");
+        buf.append(" SET username='" + newUsername + "'");
+        buf.append(" WHERE id=" + user.getId());
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        return result;
 
     }
 }

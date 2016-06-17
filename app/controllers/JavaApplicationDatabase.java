@@ -97,4 +97,31 @@ class JavaApplicationDatabase extends Controller {
         return result;
 
     }
+
+    public static int updatePassword(User user, String newPassword) {
+
+        int result = 0;
+        Statement stmt = null;
+        User returnUser = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE user");
+        buf.append(" SET password='" + newPassword + "'");
+        buf.append(" WHERE id=" + user.getId());
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+    }
 }

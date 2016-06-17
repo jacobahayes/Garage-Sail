@@ -1,9 +1,12 @@
 package controllers;
 
+import javax.inject.Inject;
+
 import com.avaje.ebean.Model;
 import models.User;
 import play.data.Form;
 import play.mvc.*;
+import play.db.*;
 
 import views.html.*;
 
@@ -19,7 +22,6 @@ public class HomeController extends Controller {
 
     User loggedInUser = null;
 
-
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
@@ -27,6 +29,7 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
+        JavaApplicationDatabase.select();
         return ok(index.render("Your new application is ready."));
     }
 

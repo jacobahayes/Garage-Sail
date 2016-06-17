@@ -3,6 +3,8 @@ package controllers;
 import javax.inject.Inject;
 
 import com.avaje.ebean.Model;
+import com.avaje.ebean.RawSql;
+import com.avaje.ebean.RawSqlBuilder;
 import models.User;
 import play.data.Form;
 import play.mvc.*;
@@ -29,7 +31,7 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        JavaApplicationDatabase.select();
+
         return ok(index.render("Your new application is ready."));
     }
 
@@ -39,10 +41,12 @@ public class HomeController extends Controller {
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();
 
-        List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
+        //List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
 
-        if (dbList != null && dbList.size() > 0) {
-            loggedInUser = dbList.get(0);
+        User foundUser = JavaApplicationDatabase.attemptLogin(username, password);
+
+        if (foundUser != null) {
+            loggedInUser = foundUser;
             return ok(homepage.render());
         } else {
             return redirect(routes.HomeController.index());
@@ -97,18 +101,26 @@ public class HomeController extends Controller {
     }
 
     public Result editName() {
+
+        //List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
+        //RawSql sql = RawSqlBuilder.parse("SELECTß").create();
+        //User.find().setRawSql(sql);
+
         return TODO;
     }
 
     public Result editEmail() {
+
         return TODO;
     }
 
     public Result editUsername() {
+
         return TODO;
     }
 
     public Result editPassword() {
+
         return TODO;
     }
 

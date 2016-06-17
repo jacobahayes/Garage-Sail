@@ -2,9 +2,12 @@ package controllers;
 
 import javax.inject.Inject;
 
+import models.User;
 import play.mvc.*;
 import play.db.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 class JavaApplicationDatabase extends Controller {
 
@@ -17,16 +20,51 @@ class JavaApplicationDatabase extends Controller {
     
     static Connection conn = db.getConnection();
 
-    public static void select() {
+
+    public static User attemptLogin(String username, String password) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        User returnUser = null;
+
         try {
-            Statement s = conn.createStatement();
-            String str = "SELECT * FROM user";
-            ResultSet rs = s.executeQuery(str);
-            while (rs.next()) {
-                System.out.println(rs.getString("first_name"));
-            }
+            stmt = conn.createStatement();
         } catch (Exception e) {
-            System.out.println("Stu is real stupid.");
+            System.out.println(e.getMessage());
         }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM user");
+        buf.append(" WHERE username='" + username + "'");
+        buf.append(" AND password='" + password + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                returnUser= new User();
+                returnUser.setFirstName(rs.getString("first_name"));
+                returnUser.setLastName(rs.getString("last_name"));
+                returnUser.setUsername(rs.getString("username"));
+                returnUser.setEmail(rs.getString("email"));
+
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return returnUser;
+
+
     }
 }

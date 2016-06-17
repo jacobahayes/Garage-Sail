@@ -130,6 +130,7 @@ public class HomeController extends Controller {
         int result = JavaApplicationDatabase.updateEmail(loggedInUser, newEmail);
         System.out.println("RESULT: " + result);
         if (result == 1) {
+            loggedInUser.setEmail(newEmail);
             return ok(profile.render());
         } else {
             return badRequest("An error occured while saving");
@@ -165,6 +166,7 @@ public class HomeController extends Controller {
         int result = JavaApplicationDatabase.updatePassword(loggedInUser, newPassword);
         System.out.println("RESULT: " + result);
         if (result == 1) {
+            loggedInUser.setPassword(newPassword);
             return ok(profile.render());
         } else {
             return badRequest("An error occured while saving");

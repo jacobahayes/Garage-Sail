@@ -151,4 +151,30 @@ class JavaApplicationDatabase extends Controller {
 
         return result;
     }
+
+    public static int updateEmail(User user, String newEmail) {
+        int result = 0;
+        Statement stmt = null;
+        User returnUser = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE user");
+        buf.append(" SET email='" + newEmail + "'");
+        buf.append(" WHERE id=" + user.getId());
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+    }
 }

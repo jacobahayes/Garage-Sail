@@ -123,8 +123,17 @@ public class HomeController extends Controller {
     }
 
     public Result editEmail() {
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        User updateUser = Form.form(User.class).bindFromRequest().get();
+        String newEmail = updateUser.getEmail();
 
-        return TODO;
+        int result = JavaApplicationDatabase.updateEmail(loggedInUser, newEmail);
+        System.out.println("RESULT: " + result);
+        if (result == 1) {
+            return ok(profile.render());
+        } else {
+            return badRequest("An error occured while saving");
+        }
     }
 
     public Result editUsername() {

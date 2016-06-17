@@ -102,11 +102,24 @@ public class HomeController extends Controller {
 
     public Result editName() {
 
-        //List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
-        //RawSql sql = RawSqlBuilder.parse("SELECTß").create();
-        //User.find().setRawSql(sql);
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        User updateUser = Form.form(User.class).bindFromRequest().get();
+        String newFirstName = updateUser.getFirstName();
+        String newLastName = updateUser.getLastName();
 
-        return TODO;
+        int result = JavaApplicationDatabase.updateName(loggedInUser, newFirstName, newLastName);
+        System.out.println("RESULT: " + result);
+        if (result == 1) {
+
+            loggedInUser.setFirstName(newFirstName);
+            loggedInUser.setLastName(newLastName);
+            return ok(profile.render());
+
+        } else {
+
+            return badRequest("An error occurred while saving");
+
+        }
     }
 
     public Result editEmail() {
@@ -124,6 +137,7 @@ public class HomeController extends Controller {
         System.out.println("RESULT: " + result);
         if (result == 1) {
 
+            loggedInUser.setUsername(newUsername);
             return ok(profile.render());
 
         } else {

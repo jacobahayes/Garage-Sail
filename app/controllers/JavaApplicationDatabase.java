@@ -68,12 +68,40 @@ class JavaApplicationDatabase extends Controller {
 
 
     }
+    public static int updateName(User user, String newFirstName, String newLastName) {
+
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE user");
+        buf.append(" SET first_name='" + newFirstName + "'");
+        buf.append(" AND last_name='" + newLastName + "'");
+        buf.append(" WHERE id=" + user.getId());
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        return result;
+
+    }
+
 
     public static int updateUsername(User user, String newUsername) {
 
         int result = 0;
         Statement stmt = null;
-        User returnUser = null;
 
         try {
             stmt = conn.createStatement();
@@ -102,7 +130,6 @@ class JavaApplicationDatabase extends Controller {
 
         int result = 0;
         Statement stmt = null;
-        User returnUser = null;
 
         try {
             stmt = conn.createStatement();

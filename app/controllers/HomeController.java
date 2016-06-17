@@ -35,6 +35,10 @@ public class HomeController extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
+    /**
+     * skeleton to login to the application
+     * @return the HTTP response depending if the login was successful or not
+     */
     public Result login() {
 
         User loginUser = Form.form(User.class).bindFromRequest().get();
@@ -53,10 +57,18 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * pulls up the registration page
+     * @return the HTTP response to render the registration page
+     */
     public Result registration() {
         return ok(registration.render());
     }
 
+    /**
+     * skeleton to set up registration
+     * @return the HTTP response
+     */
     public Result registerUser() {
 
         String[] postAction = request().body().asFormUrlEncoded().get("action");
@@ -77,6 +89,11 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * completes registration for a user
+     * @param request the HTTP request
+     * @return the HTTP response
+     */
     public Result completeRegister(Http.Request request) {
 
         User registerUser = Form.form(User.class).bindFromRequest().get();
@@ -87,19 +104,36 @@ public class HomeController extends Controller {
         return ok(homepage.render());
     }
 
-    public Result cancelRegister(Http.Request resquest) {
+    /**
+     * cancels registration for a user
+     * @param request the HTTP request
+     * @return the HTTP response
+     */
+    public Result cancelRegister(Http.Request request) {
 
         return redirect(routes.HomeController.index());
     }
 
-    public Result cancelShit() {
+    /**
+     * returns the User to their homepage
+     * @return the HTTP response
+     */
+    public Result cancel() {
         return ok(homepage.render());
     }
 
+    /**
+     * renders the my profile page
+     * @return the HTTP response
+     */
     public Result profile() {
         return ok(profile.render());
     }
 
+    /**
+     * skeleton to change the User's name
+     * @return the HTTP response
+     */
     public Result editName() {
 
         String[] postAction = request().body().asFormUrlEncoded().get("action");
@@ -122,6 +156,10 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * skeleton to change the User's email
+     * @return the HTTP response
+     */
     public Result editEmail() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         User updateUser = Form.form(User.class).bindFromRequest().get();
@@ -137,6 +175,10 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * skeleton to change the User's username
+     * @return the HTTP response
+     */
     public Result editUsername() {
 
         String[] postAction = request().body().asFormUrlEncoded().get("action");
@@ -157,6 +199,10 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * skeleton to change the User's password
+     * @return the HTTP response
+     */
     public Result editPassword() {
 
         String[] postAction = request().body().asFormUrlEncoded().get("action");

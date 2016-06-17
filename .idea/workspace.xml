@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00245758-3c4c-40aa-8cb1-936490cd0cb5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/HomeController.java" afterPath="$PROJECT_DIR$/app/controllers/HomeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" afterPath="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/profile.scala.html" afterPath="$PROJECT_DIR$/app/views/profile.scala.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/routes" afterPath="$PROJECT_DIR$/conf/routes" />
     </list>
     <ignored path="play-java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +39,8 @@
       <file leaf-file-name="profile.scala.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/profile.scala.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1740">
-              <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
+            <state relative-caret-position="620">
+              <caret line="180" column="50" selection-start-line="180" selection-start-column="50" selection-end-line="180" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -47,8 +49,8 @@
       <file leaf-file-name="routes" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/conf/routes">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="70" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
+            <state relative-caret-position="240">
+              <caret line="16" column="68" selection-start-line="16" selection-start-column="68" selection-end-line="16" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -57,8 +59,8 @@
       <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="659">
-              <caret line="168" column="48" selection-start-line="168" selection-start-column="48" selection-end-line="168" selection-end-column="48" />
+            <state relative-caret-position="524">
+              <caret line="202" column="45" selection-start-line="202" selection-start-column="45" selection-end-line="202" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,8 +71,8 @@
       <file leaf-file-name="JavaApplicationDatabase.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2190">
-              <caret line="155" column="23" selection-start-line="155" selection-start-column="23" selection-end-line="155" selection-end-column="23" />
+            <state relative-caret-position="2595">
+              <caret line="182" column="36" selection-start-line="182" selection-start-column="36" selection-end-line="182" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -105,11 +107,11 @@
         <option value="$PROJECT_DIR$/conf/application.conf" />
         <option value="$PROJECT_DIR$/app/views/registration.scala.html" />
         <option value="$PROJECT_DIR$/app/views/homepage.scala.html" />
-        <option value="$PROJECT_DIR$/app/views/profile.scala.html" />
-        <option value="$PROJECT_DIR$/conf/routes" />
         <option value="$PROJECT_DIR$/app/models/User.java" />
-        <option value="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" />
+        <option value="$PROJECT_DIR$/conf/routes" />
+        <option value="$PROJECT_DIR$/app/views/profile.scala.html" />
         <option value="$PROJECT_DIR$/app/controllers/HomeController.java" />
+        <option value="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" />
       </list>
     </option>
   </component>
@@ -766,7 +768,7 @@
       <workItem from="1466124692536" duration="2386000" />
       <workItem from="1466181807984" duration="1498000" />
       <workItem from="1466184460302" duration="620000" />
-      <workItem from="1466200039863" duration="467000" />
+      <workItem from="1466200039863" duration="1360000" />
     </task>
     <task id="LOCAL-00001" summary="changed color scheme on edit page to match rest of app, edited homepage to render better sizes">
       <created>1466089373562</created>
@@ -824,11 +826,18 @@
       <option name="project" value="LOCAL" />
       <updated>1466125831744</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="checked over everything, made sure all db functions are correct">
+      <created>1466200532163</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1466200532163</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25206000" />
+    <option name="totallyTimeSpent" value="26099000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="224" y="23" width="1627" height="951" extended-state="0" />
@@ -888,7 +897,8 @@
     <MESSAGE value="fixed routes to better flow profile changes" />
     <MESSAGE value="fixed cancel button on edit profile page to redirect back to homepage" />
     <MESSAGE value="added db functions for attempting login" />
-    <option name="LAST_COMMIT_MESSAGE" value="added db functions for attempting login" />
+    <MESSAGE value="checked over everything, made sure all db functions are correct" />
+    <option name="LAST_COMMIT_MESSAGE" value="checked over everything, made sure all db functions are correct" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1232,14 +1242,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/routes">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="70" selection-start-line="6" selection-start-column="70" selection-end-line="6" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf/application.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -1248,14 +1250,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/conf/evolutions/default/1.sql" />
-    <entry file="file://$PROJECT_DIR$/app/views/profile.scala.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1740">
-          <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1264,10 +1258,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/conf/routes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="68" selection-start-line="16" selection-start-column="68" selection-end-line="16" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/profile.scala.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="180" column="50" selection-start-line="180" selection-start-column="50" selection-end-line="180" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="168" column="48" selection-start-line="168" selection-start-column="48" selection-end-line="168" selection-end-column="48" />
+        <state relative-caret-position="524">
+          <caret line="202" column="45" selection-start-line="202" selection-start-column="45" selection-end-line="202" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1276,8 +1286,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2190">
-          <caret line="155" column="23" selection-start-line="155" selection-start-column="23" selection-end-line="155" selection-end-column="23" />
+        <state relative-caret-position="2595">
+          <caret line="182" column="36" selection-start-line="182" selection-start-column="36" selection-end-line="182" selection-end-column="36" />
           <folding />
         </state>
       </provider>

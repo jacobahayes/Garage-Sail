@@ -14,7 +14,7 @@ POST    /profile/name              controllers.HomeController.editName()
 POST    /profile/email             controllers.HomeController.editEmail()
 POST    /profile/username          controllers.HomeController.editUsername()
 POST    /profile/password          controllers.HomeController.editPassword()
-POST    /profile                   controllers.HomeController.cancelShit()
+POST    /profile                   controllers.HomeController.cancel()
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

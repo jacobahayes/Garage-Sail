@@ -20,7 +20,12 @@ class JavaApplicationDatabase extends Controller {
     
     static Connection conn = db.getConnection();
 
-
+    /**
+     * db access to attempt login
+     * @param username the username to attempt
+     * @param password the password to attempt
+     * @return the User that was found in the database, null if not found
+     */
     public static User attemptLogin(String username, String password) {
 
         ResultSet rs = null;
@@ -68,6 +73,14 @@ class JavaApplicationDatabase extends Controller {
 
 
     }
+
+    /**
+     * db access to update name
+     * @param user the User to update
+     * @param newFirstName the new first name
+     * @param newLastName the new last name
+     * @return the number of rows affected by the update
+     */
     public static int updateName(User user, String newFirstName, String newLastName) {
 
         int result = 0;
@@ -98,6 +111,12 @@ class JavaApplicationDatabase extends Controller {
     }
 
 
+    /**
+     * db access to edit username
+     * @param user the User to update
+     * @param newUsername the new username
+     * @return the number of rows affected by the update
+     */
     public static int updateUsername(User user, String newUsername) {
 
         int result = 0;
@@ -126,6 +145,12 @@ class JavaApplicationDatabase extends Controller {
 
     }
 
+    /**
+     * db access to edit password
+     * @param user the User to update
+     * @param newPassword the new password
+     * @return the number of rows affected by the update
+     */
     public static int updatePassword(User user, String newPassword) {
 
         int result = 0;
@@ -152,6 +177,12 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
+    /**
+     * db access to edit email
+     * @param user the User to update
+     * @param newEmail the new email
+     * @return the number of rows affected by the update
+     */
     public static int updateEmail(User user, String newEmail) {
         int result = 0;
         Statement stmt = null;

@@ -14,7 +14,7 @@
     font-family: "Poiret One";
   }
   #logout {
-    text-align: left;
+    text-align: right;
     text-size: 40px;
     color: #5cb85c;
     text-decoration: none;
@@ -107,8 +107,15 @@
   </style>
 
   <body>
-    <div id="logout">
-      <h3><a href="@routes.HomeController.index" id="logo">Logout</a></h3>
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
+
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+
+    <div id="heading">
+      <p id="title">Garage Sail</p>
+      <p id="instructions">see if you can sail our superior sea of sails</p>
     </div>
 
     <ul class="home-menu">
@@ -117,16 +124,25 @@
           <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
           <div class="menu-content">
             <h2 class="content-main">My Profile</h2>
-            <h3 class="content-sub">view and change your profile information</h3>
+            <h3 class="content-sub">view & change your profile information</h3>
           </div>
         </a>
       </li>
       <li>
-        <a href="/">
+        <a href="sales">
           <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
           <div class="menu-content">
             <h2 class="content-main">My Sales</h2>
             <h3 class="content-sub">view and create garage sales</h3>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="logout">
+          <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+          <div class="menu-content">
+            <h2 class="content-main">Logout</h2>
+            <h3 class="content-sub">SEA you later!</h3>
           </div>
         </a>
       </li>

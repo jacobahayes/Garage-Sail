@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
+    <title>Add Item</title>
+  </head>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
+
+  <style>
+
+  body {
+    background-color: #0086b3;
+    font-family: "Poiret One";
+  }
+
+  #logo {
+    text-align: left;
+    text-size: 40px;
+    color: #5cb85c;
+    text-decoration: none;
+  }
+
+  #heading {
+    text-align: center;
+    color: #5cb85c;
+  }
+
+  #title {
+    font-size: 80px;
+  }
+
+  #instructions {
+    font-size: 20px;
+  }
+
+  #createsale {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #createsale input {
+    width: 250px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+  }
+
+  #buttons {
+    text-align: center;
+  }
+
+  button {
+    /*background-color: #5cb85c;*/
+    width: 135px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+    background-color: #0086b3;
+    color: #5cb85c;
+    border: 2px solid #5cb85c;
+    margin: auto;
+  }
+
+  #space {
+    height: 5px;
+  }
+
+  button:hover {
+    background-color: #5cb85c; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+  #boatpicture img{
+    width: 128px;
+    height: 128px;
+  }
+
+  #textarea {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #textarea input{
+    white-space: pre-wrap;
+    padding: 10px;
+    margin: auto;
+    width: 250px;
+    height: 250px;
+  }
+
+  </style>
+
+
+  <body>
+
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
+
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+
+    <div id="heading">
+      <p id="title">Add Item</p>
+      <p id="instructions">add as many items as you would like</p>
+    </div>
+
+
+    <form action="@routes.HomeController.renderAddItem()" method="post">
+      <div id="createsale">
+        <input type="text" name="location" id="location" placeholder="Location">
+        <div id="space"></div>
+        <input type="text" placeholder="Date and Time">
+        <div id="space"></div>
+        <div id="space"></div>
+      </div>
+      <div id="textarea">
+        <input type="text-area" wrap="on" name="description" id="description" placeholder="Description">
+      </div>
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="buttons">
+        <button type="submit" name="action" value="additems" id="add_button">Add Items</button>
+      </div>
+    </form>
+    <div id="space"></div>
+    <form action="@routes.HomeController.renderHome()">
+      <div id="buttons">
+        <button type="submit" id="cancel_button">Cancel</button>
+      </div>
+    </form>
+  </body>
+</html>

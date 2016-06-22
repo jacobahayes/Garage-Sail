@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.UniqueConstraint;
+import java.util.List;
 
 @Entity
 public class User extends Model{
@@ -27,6 +28,8 @@ public class User extends Model{
     private String firstName;
 
     private String lastName;
+
+    private List<Sale> sales;
 
     public int getId() {
         return id;
@@ -74,6 +77,12 @@ public class User extends Model{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Sale> getSales() { return sales; }
+
+    public void newSale(Sale newSale) {
+        sales.add(newSale);
     }
 
 

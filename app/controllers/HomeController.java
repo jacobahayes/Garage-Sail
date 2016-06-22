@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import com.avaje.ebean.Model;
 import com.avaje.ebean.RawSql;
 import com.avaje.ebean.RawSqlBuilder;
+import models.Sale;
 import models.User;
 import play.data.Form;
 import play.mvc.*;
@@ -35,6 +36,10 @@ public class HomeController extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
+    public Result renderHome() {
+        return ok(homepage.render());
+    }
+
     /**
      * skeleton to login to the application
      * @return the HTTP response depending if the login was successful or not
@@ -53,7 +58,7 @@ public class HomeController extends Controller {
             loggedInUser = foundUser;
             return ok(homepage.render());
         } else {
-            return redirect(routes.HomeController.index());
+            return redirect(routes.HomeController.renderHome());
         }
     }
 
@@ -217,6 +222,25 @@ public class HomeController extends Controller {
         } else {
             return badRequest("An error occured while saving");
         }
+    }
+
+    /**
+     * adds sale item to user then renders page to edit items on the sale page
+     * @return
+     */
+    public Result renderAddItem() {
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        Sale sale = Form.form(Sale.class).bindFromRequest().get();
+        loggedInUser.newSale(sale);
+        return ok(additem.render());
+    }
+
+    public Result saleScreen() {
+        return ok(sales.render());
+    }
+
+    public Result renderCreateSale() {
+        return ok(createsale.render());
     }
 
 }

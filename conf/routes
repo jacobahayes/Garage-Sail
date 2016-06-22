@@ -3,11 +3,15 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-POST    /                           controllers.HomeController.login()
+GET     /                          controllers.HomeController.index
+GET     /logout                    controllers.HomeController.index
+POST    /                          controllers.HomeController.login()
 
-GET     /registration               controllers.HomeController.registration()
-POST    /registration               controllers.HomeController.registerUser()
+
+GET     /home                      controllers.HomeController.renderHome()
+
+GET     /registration              controllers.HomeController.registration()
+POST    /registration              controllers.HomeController.registerUser()
 
 GET     /profile                   controllers.HomeController.profile()
 POST    /profile/name              controllers.HomeController.editName()
@@ -15,6 +19,10 @@ POST    /profile/email             controllers.HomeController.editEmail()
 POST    /profile/username          controllers.HomeController.editUsername()
 POST    /profile/password          controllers.HomeController.editPassword()
 POST    /profile                   controllers.HomeController.cancel()
+
+GET     /sales                     controllers.HomeController.saleScreen()
+GET     /sales/createsale          controllers.HomeController.renderCreateSale()
+POST    /sales/createsale          controllers.HomeController.renderAddItem()
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

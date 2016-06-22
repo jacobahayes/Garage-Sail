@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sales</title>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
+</head>
+<body>
+
+  <div id="logo">
+    <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+  </div>
+
+  <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+
+  <div id="heading">
+    <p id="title">My Sales</p>
+    <p id="instructions">your sales (if any) show up here</p>
+  </div>
+
+  <form action="@routes.HomeController.renderCreateSale()" method="get">
+    <center><button action="submit">Create a Sale</button></center>
+  </form>
+
+  <div id="heading">
+    <p id="title">Browse Sales</p>
+    <p id="instructions">browse what others are selling near you</p>
+  </div>
+
+</body>
+</html>
+
+<style>
+
+body {
+  background-color: #0086b3;
+  font-family: "Poiret One";
+}
+
+#boatpicture img{
+  width: 128px;
+  height: 128px;
+}
+
+#logo {
+  text-align: left;
+  text-size: 40px;
+  color: #5cb85c;
+  text-decoration: none;
+}
+
+#heading {
+  text-align: center;
+  color: #5cb85c;
+}
+
+#title {
+  font-size: 80px;
+}
+
+#instructions {
+  font-size: 20px;
+}
+
+button {
+  /*background-color: #5cb85c;*/
+  /*width: 175px;*/
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+
+  background-color: #0086b3;
+  color: #5cb85c;
+  border: 2px solid #5cb85c;
+}
+
+#space {
+  height: 5px;
+}
+
+
+button:hover {
+  background-color: #5cb85c; /* Green */
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+</style>

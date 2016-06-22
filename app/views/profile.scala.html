@@ -113,7 +113,7 @@
   <body>
 
   <div id="logo">
-    <h3><a href="@routes.HomeController.index" id="logo">Garage Sail</a></h3>
+    <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
   </div>
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
@@ -137,11 +137,11 @@
       <legend>Password</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editPassword()" method="post">
-          <input type="text" name="oldpass" id="oldpass" placeholder="Old Password">
+          <input type="text" name="oldpass" id="oldpass" placeholder="pld password">
           <div id="space"></div>
-          <input type="password" name="password" id="password" placeholder="New Password">
+          <input type="password" name="password" id="password" placeholder="new password">
           <div id="space"></div>
-          <input type="password" name="password_confirm" id="password_confirm" placeholder="Confirm Password">
+          <input type="password" name="password_confirm" id="password_confirm" placeholder="confirm password">
           <div id="space"></div>
           <button type="submit">Save</button>
           <div id="space"></div>
@@ -153,9 +153,9 @@
       <legend>Name</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editName()" method="post">
-          <input type="text" name="firstName" id="lastName" placeholder="First Name">
+          <input type="text" name="firstName" id="lastName" placeholder="first name">
           <div id="space"></div>
-          <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+          <input type="text" name="lastName" id="lastName" placeholder="last name">
           <div id="space"></div>
           <button type="submit">Save</button>
           <div id="space"></div>
@@ -167,7 +167,7 @@
       <legend>Email</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editEmail()" method="post">
-          <input type="text" name="email" id="email" placeholder="New Email">
+          <input type="text" name="email" id="email" placeholder="new email">
           <div id="space"></div>
           <button type="submit">Save</button>
           <div id="space"></div>

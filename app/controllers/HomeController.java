@@ -34,7 +34,7 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-
+        loggedInUser = null;
         return ok(index.render("Your new application is ready."));
     }
 
@@ -47,7 +47,6 @@ public class HomeController extends Controller {
      * @return the HTTP response depending if the login was successful or not
      */
     public Result login() {
-
         User loginUser = Form.form(User.class).bindFromRequest().get();
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();
@@ -60,7 +59,7 @@ public class HomeController extends Controller {
             loggedInUser = foundUser;
             return ok(homepage.render());
         } else {
-            return redirect(routes.HomeController.index());
+            return ok(index.render("Your new application is ready."));
         }
     }
 
@@ -247,12 +246,10 @@ public class HomeController extends Controller {
     public Result addItem() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         Item newItem = Form.form(Item.class).bindFromRequest().get();
-        tmpSale.addItem(newItem);
         return ok(additem.render());
     }
 
     public Result newSale() {
-        loggedInUser.newSale(tmpSale);
         return TODO;
     }
 

@@ -13,7 +13,7 @@
         <entry key="root">
           <value>
             <ProjectSettingsEntry>
-              <option name="confDir" value="C:\Users\Spencer\dev\activator-1.3.10\bin\Garage_Sail\app" />
+              <option name="confDir" value="C:\Users\spencer\dev\Garage_Sail\app" />
               <option name="templateImports">
                 <list>
                   <option value="models._" />
@@ -38,7 +38,7 @@
                   <option value="play.libs.F" />
                 </list>
               </option>
-              <option name="uri" value="/C:/Users/Spencer/dev/activator-1.3.10/bin/Garage_Sail" />
+              <option name="uri" value="/C:/Users/spencer/dev/Garage_Sail" />
             </ProjectSettingsEntry>
           </value>
         </entry>

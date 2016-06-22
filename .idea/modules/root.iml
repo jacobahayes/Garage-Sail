@@ -55,9 +55,10 @@
     <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-java8-compat_2.11:0.7.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-reflect:2.11.7:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
     <orderEntry type="library" name="SBT: org.reflections:reflections:0.9.10:jar" level="project" />
     <orderEntry type="library" name="SBT: org.reactivestreams:reactive-streams:1.0.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.mindrot:jbcrypt:0.3m:jar" level="project" />
     <orderEntry type="library" name="SBT: org.joda:joda-convert:1.8.1:jar" level="project" />
     <orderEntry type="library" name="SBT: org.jboss.logging:jboss-logging:3.2.1.Final:jar" level="project" />
     <orderEntry type="library" name="SBT: org.javassist:javassist:3.20.0-GA:jar" level="project" />
@@ -78,11 +79,12 @@
     <orderEntry type="library" name="SBT: org.apache.tomcat:tomcat-servlet-api:8.0.32:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.apache.httpcomponents:httpmime:4.5.2:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.apache.httpcomponents:httpcore:4.4.4:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.apache.httpcomponents:httpcore:4.0.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.httpcomponents:httpcore:4.4.1:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.apache.httpcomponents:httpclient:4.5.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.apache.httpcomponents:httpclient:4.0.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.httpcomponents:httpclient:4.5:jar" level="project" />
     <orderEntry type="library" name="SBT: org.apache.commons:commons-lang3:3.4:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: org.apache.commons:commons-exec:1.3:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.commons:commons-email:1.3.3:jar" level="project" />
     <orderEntry type="library" name="SBT: oauth.signpost:signpost-core:1.2.1.2:jar" level="project" />
     <orderEntry type="library" name="SBT: oauth.signpost:signpost-commonshttp4:1.2.1.2:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: net.sourceforge.nekohtml:nekohtml:1.9.22:jar" level="project" />
@@ -93,13 +95,16 @@
     <orderEntry type="library" name="SBT: net.jodah:typetools:0.4.4:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: net.java.dev.jna:jna-platform:4.1.0:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: net.java.dev.jna:jna:4.1.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: mysql:mysql-connector-java:5.1.39:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: junit:junit:4.12:jar" level="project" />
     <orderEntry type="library" name="SBT: joda-time:joda-time:2.9.2:jar" level="project" />
     <orderEntry type="library" name="SBT: javax.validation:validation-api:1.1.0.Final:jar" level="project" />
     <orderEntry type="library" name="SBT: javax.transaction:jta:1.1:jar" level="project" />
     <orderEntry type="library" name="SBT: javax.persistence:persistence-api:1.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: javax.mail:mail:1.4.5:jar" level="project" />
     <orderEntry type="library" name="SBT: javax.inject:javax.inject:1:jar" level="project" />
     <orderEntry type="library" name="SBT: javax.el:javax.el-api:3.0.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: javax.activation:activation:1.1.1:jar" level="project" />
     <orderEntry type="library" name="SBT: io.netty:netty-transport-native-epoll:4.0.36.Final:linux-x86_64:jar" level="project" />
     <orderEntry type="library" name="SBT: io.netty:netty-transport:4.0.36.Final:jar" level="project" />
     <orderEntry type="library" name="SBT: io.netty:netty-handler:4.0.36.Final:jar" level="project" />
@@ -108,8 +113,7 @@
     <orderEntry type="library" name="SBT: io.netty:netty-codec:4.0.36.Final:jar" level="project" />
     <orderEntry type="library" name="SBT: io.netty:netty-buffer:4.0.36.Final:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: io.netty:netty:3.5.2.Final:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: commons-logging:commons-logging:1.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: commons-logging:commons-logging:1.1.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: commons-logging:commons-logging:1.2:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: commons-io:commons-io:2.4:jar" level="project" />
     <orderEntry type="library" name="SBT: commons-codec:commons-codec:1.10:jar" level="project" />
     <orderEntry type="library" name="SBT: com.zaxxer:HikariCP:2.4.3:jar" level="project" />
@@ -121,6 +125,7 @@
     <orderEntry type="library" name="SBT: com.typesafe.play:play-server_2.11:2.5.3:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.play:play-netty-utils:2.5.3:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.play:play-netty-server_2.11:2.5.3:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.play:play-mailer_2.11:3.0.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.play:play-logback_2.11:2.5.3:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.play:play-json_2.11:2.5.3:jar" level="project" />
     <orderEntry type="library" name="SBT: com.typesafe.play:play-jdbc_2.11:2.5.3:jar" level="project" />
@@ -154,6 +159,8 @@
     <orderEntry type="library" name="SBT: com.google.guava:guava:19.0:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="SBT: com.google.code.gson:gson:2.3.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.google.code.findbugs:jsr305:3.0.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.feth:play-easymail_2.11:0.7.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.feth:play-authenticate_2.11:0.7.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.7.1:jar" level="project" />
     <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-databind:2.7.1:jar" level="project" />

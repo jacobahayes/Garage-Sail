@@ -35,13 +35,13 @@
     font-size: 20px;
   }
 
-  #createsale {
+  #additem {
     text-align: center;
     margin: auto;
     width: 280px;
   }
 
-  #createsale input {
+  #additem input {
     width: 250px;
     margin: auto;
     padding: 10px;
@@ -54,7 +54,7 @@
 
   button {
     /*background-color: #5cb85c;*/
-    width: 135px;
+    width: 175px;
     padding: 5px;
     text-align: center;
     text-decoration: none;
@@ -96,7 +96,14 @@
     margin: auto;
     width: 250px;
     height: 250px;
+
   }
+
+    #piclabel {
+      font-size: 15px;
+      color: #5cb85c;
+    }
+
 
   </style>
 
@@ -111,31 +118,38 @@
 
     <div id="heading">
       <p id="title">Add Item</p>
+      <p id="instructions">enter the details of your item, then select "add another item" or "save and finish"</p>
       <p id="instructions">add as many items as you would like</p>
     </div>
 
 
-    <form action="@routes.HomeController.renderAddItem()" method="post">
-      <div id="createsale">
-        <input type="text" name="location" id="location" placeholder="Location">
+    <form action="@routes.HomeController.addItem()" method="post">
+      <div id="additem">
+        <input type="text" name="name" id="name" placeholder="name">
         <div id="space"></div>
-        <input type="text" placeholder="Date and Time">
+        <input type="text" name="list price" placeholder="list price">
+        <div id="space"></div>
+        <input type="text" name="bottom price" placeholder="bottom price">
+        <div id="space"></div>
+        <input type="text" name="quantity" placeholder="quantity">
+        <div id="space"></div>
+        <input type="file" name="pic" id="pic">
         <div id="space"></div>
         <div id="space"></div>
       </div>
       <div id="textarea">
-        <input type="text-area" wrap="on" name="description" id="description" placeholder="Description">
+        <input type="text-area" wrap="on" name="description" id="description" placeholder="description">
       </div>
       <div id="space"></div>
       <div id="space"></div>
       <div id="buttons">
-        <button type="submit" name="action" value="additems" id="add_button">Add Items</button>
+        <button type="submit" name="action" value="additems" id="add_button">Add Another Item</button>
       </div>
     </form>
     <div id="space"></div>
     <form action="@routes.HomeController.renderHome()">
       <div id="buttons">
-        <button type="submit" id="cancel_button">Cancel</button>
+        <button type="submit" id="cancel_button">Save and Exit</button>
       </div>
     </form>
   </body>

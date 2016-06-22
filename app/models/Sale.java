@@ -63,4 +63,8 @@ public class Sale extends Model {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    public void addItem(Item newItem) {
+        itemList.add(newItem);
+    }
 }

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import com.avaje.ebean.Model;
 import com.avaje.ebean.RawSql;
 import com.avaje.ebean.RawSqlBuilder;
+import models.Item;
 import models.Sale;
 import models.User;
 import play.data.Form;
@@ -24,6 +25,7 @@ public class HomeController extends Controller {
 
 
     User loggedInUser = null;
+    Sale tmpSale = null;
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -58,7 +60,7 @@ public class HomeController extends Controller {
             loggedInUser = foundUser;
             return ok(homepage.render());
         } else {
-            return redirect(routes.HomeController.renderHome());
+            return redirect(routes.HomeController.index());
         }
     }
 
@@ -228,10 +230,9 @@ public class HomeController extends Controller {
      * adds sale item to user then renders page to edit items on the sale page
      * @return
      */
-    public Result renderAddItem() {
+    public Result addSale() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
-        Sale sale = Form.form(Sale.class).bindFromRequest().get();
-        loggedInUser.newSale(sale);
+        Sale newSale = Form.form(Sale.class).bindFromRequest().get();
         return ok(additem.render());
     }
 
@@ -241,6 +242,18 @@ public class HomeController extends Controller {
 
     public Result renderCreateSale() {
         return ok(createsale.render());
+    }
+
+    public Result addItem() {
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        Item newItem = Form.form(Item.class).bindFromRequest().get();
+        tmpSale.addItem(newItem);
+        return ok(additem.render());
+    }
+
+    public Result newSale() {
+        loggedInUser.newSale(tmpSale);
+        return TODO;
     }
 
 }

@@ -272,6 +272,14 @@ public class HomeController extends Controller {
         return ok(sales.render());
     }
 
+    public Result searchItemInSale() {
+
+        // ??
+        List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, "name");
+
+        return ok(homepage.render());
+    }
+
     public Result newSale() {
         return TODO;
     }

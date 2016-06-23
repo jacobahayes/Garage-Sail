@@ -8,7 +8,7 @@ import com.avaje.ebean.Model;
 
 public class Item extends Model{
 
-    private String tag;
+    private String name;
     private String description;
 
     private int quantity;
@@ -19,17 +19,17 @@ public class Item extends Model{
 
     //photo?
 
-    public String getTag() {
-        return tag;
+    public String getName() {
+        return name;
     }
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDesc() {
+    public String getDescription() {
         return description;
     }
-    public void setDesc(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

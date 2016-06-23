@@ -232,6 +232,13 @@ public class HomeController extends Controller {
     public Result addSale() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         Sale newSale = Form.form(Sale.class).bindFromRequest().get();
+        System.out.println(newSale.getSaleID());
+        System.out.println(newSale.getStartTime());
+        System.out.println(newSale.getEndTime());
+        System.out.println(newSale.getDate());
+        System.out.println(newSale.getSeller());
+        System.out.println(newSale.getLocation());
+        System.out.println(newSale.getDescription());
         return ok(additem.render());
     }
 
@@ -246,6 +253,11 @@ public class HomeController extends Controller {
     public Result addItem() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         Item newItem = Form.form(Item.class).bindFromRequest().get();
+        System.out.println(newItem.getName());
+        System.out.println(newItem.getListPrice());
+        System.out.println(newItem.getBottomPrice());
+        System.out.println(newItem.getQuantity());
+        System.out.println(newItem.getDescription());
         return ok(additem.render());
     }
 

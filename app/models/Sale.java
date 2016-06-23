@@ -20,6 +20,7 @@ public class Sale extends Model {
     private String date;
     private String seller;
     private String location;
+    private String description;
     private List<Item> itemList;
 
     public int getSaleID() {
@@ -60,8 +61,17 @@ public class Sale extends Model {
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void addItem(Item newItem) {

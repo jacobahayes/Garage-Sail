@@ -57,7 +57,7 @@ public class Item extends Model{
     public double getBottomPrice() {
         return bottomPrice;
     }
-    public void setBottomPrice(int bottomPrice) {
+    public void setBottomPrice(double bottomPrice) {
         this.bottomPrice  = bottomPrice;
     }
 

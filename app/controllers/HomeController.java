@@ -267,6 +267,11 @@ public class HomeController extends Controller {
         return ok(additem.render());
     }
 
+    public Result updateItem() {
+
+        return ok(sales.render());
+    }
+
     public Result newSale() {
         return TODO;
     }

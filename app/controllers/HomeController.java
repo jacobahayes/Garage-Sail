@@ -25,7 +25,7 @@ public class HomeController extends Controller {
 
 
     User loggedInUser = null;
-    Sale tmpSale = null;
+    Sale saleInView = null;
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -227,18 +227,21 @@ public class HomeController extends Controller {
 
     /**
      * adds sale item to user then renders page to edit items on the sale page
-     * @return
+     * @return the HTTP response
      */
     public Result addSale() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         Sale newSale = Form.form(Sale.class).bindFromRequest().get();
-        System.out.println(newSale.getSaleID());
+        System.out.println(newSale.getId());
         System.out.println(newSale.getStartTime());
         System.out.println(newSale.getEndTime());
         System.out.println(newSale.getDate());
         System.out.println(newSale.getSeller());
         System.out.println(newSale.getLocation());
         System.out.println(newSale.getDescription());
+        newSale.save();
+        saleInView = newSale;
+
         return ok(additem.render());
     }
 
@@ -258,6 +261,9 @@ public class HomeController extends Controller {
         System.out.println(newItem.getBottomPrice());
         System.out.println(newItem.getQuantity());
         System.out.println(newItem.getDescription());
+        newItem.setSaleId(saleInView.getId());
+        newItem.save();
+
         return ok(additem.render());
     }
 

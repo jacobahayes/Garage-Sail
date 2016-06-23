@@ -2,14 +2,21 @@ package models;
 
 import com.avaje.ebean.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by spencer on 6/22/2016.
  */
-
+@Entity
 public class Item extends Model{
+
+    @Id
+    private int id;
 
     private String name;
     private String description;
+    private int saleId;
 
     private int quantity;
     private double listPrice;
@@ -68,4 +75,19 @@ public class Item extends Model{
         this.ebayPrice = ebayPrice;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSaleId() {
+        return saleId;
+    }
+
+    public void setSaleId(int saleId) {
+        this.saleId = saleId;
+    }
 }

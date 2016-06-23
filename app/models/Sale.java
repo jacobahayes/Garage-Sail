@@ -13,7 +13,7 @@ import java.util.List;
 public class Sale extends Model {
 
     @Id
-    private int saleID;
+    private int id;
 
     private String startTime;
     private String endTime;
@@ -23,11 +23,11 @@ public class Sale extends Model {
     private String description;
     private List<Item> itemList;
 
-    public int getSaleID() {
-        return saleID;
+    public int getId() {
+        return id;
     }
-    public void setSaleID(int saleID) {
-        this.saleID = saleID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStartTime() {

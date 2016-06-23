@@ -26,6 +26,7 @@ GET     /sales/createsale          controllers.HomeController.renderCreateSale()
 POST    /sales/createsale/add      controllers.HomeController.addSale()
 
 POST    /add                       controllers.HomeController.addItem()
+GET     /add                       controllers.HomeController.addItem()
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

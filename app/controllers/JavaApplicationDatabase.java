@@ -289,6 +289,55 @@ class JavaApplicationDatabase extends Controller {
         }
 
         return returnList;
+    }
 
+    //Attempted sql query, but not used yet
+    public static List<Sale> getMySales(String userName) {
+        
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Sale> returnList = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM sale");
+        buf.append(" WHERE seller='" + userName + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                Sale returnSale = new Sale();
+                returnSale.setStartTime(rs.getString("start_time"));
+                returnSale.setEndTime(rs.getString("end_time"));
+                returnSale.setDate(rs.getString("date"));
+                returnSale.setSeller(rs.getString("seller"));
+                returnSale.setLocation(rs.getString("location"));
+                returnSale.setDescription(rs.getString("description"));
+                returnSale.setId(rs.getInt("id"));
+
+                returnList.add(returnSale);
+
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return returnList;
     }
 }

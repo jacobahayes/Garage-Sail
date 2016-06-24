@@ -287,10 +287,6 @@ public class HomeController extends Controller {
         return ok(homepage.render());
     }
 
-    public Result newSale() {
-        return TODO;
-    }
-
     public Result salePage() {
         return ok(salepage.render());
     }

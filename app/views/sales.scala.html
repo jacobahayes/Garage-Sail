@@ -19,6 +19,12 @@
     <p id="instructions">your sales (if any) show up here</p>
   </div>
 
+  <center>
+    <button><a href="@routes.HomeController.salePage()" id="logo">Sample Sale</a></button>
+  </center>
+
+  <div id="space"></div>
+  
   <form action="@routes.HomeController.renderCreateSale()" method="get">
     <center><button action="submit">Create a Sale</button></center>
   </form>

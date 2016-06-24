@@ -226,6 +226,13 @@ public class HomeController extends Controller {
     }
 
     /**
+     * shows all sales from all users
+     */
+    public Result browseScreen() {
+        return ok(allsales.render());
+    }
+
+    /**
      * adds sale item to user then renders page to edit items on the sale page
      * @return the HTTP response
      */

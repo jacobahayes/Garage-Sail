@@ -291,4 +291,12 @@ public class HomeController extends Controller {
         return TODO;
     }
 
+    public Result salePage() {
+        return ok(salepage.render());
+    }
+
+    public Result renderItem() {
+        return ok(item.render());
+    }
+
 }

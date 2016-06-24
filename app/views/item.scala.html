@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+  </head>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
+
+  <style>
+
+  body {
+    background-color: #0086b3;
+    font-family: "Poiret One";
+  }
+
+  #password, #password_confirm {
+    -webkit-text-security: circle;
+  }
+
+  #logo {
+    text-align: left;
+    text-size: 40px;
+    color: #5cb85c;
+    text-decoration: none;
+  }
+
+#heading {
+  text-align: center;
+  color: #5cb85c;
+}
+
+  #title {
+    font-size: 80px;
+  }
+
+  #instructions {
+    font-size: 20px;
+  }
+
+  #edit-name-form input {
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    width: auto;
+  }
+
+  #edit-password-form input {
+    width: 250px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+  }
+
+  #edit-form {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #buttons {
+    width: 280px;
+    margin: auto;
+  }
+
+  button {
+    /*background-color: #5cb85c;*/
+    width: 135px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+    background-color: #0086b3;
+    color: #5cb85c;
+    border: 2px solid #5cb85c;
+  }
+
+  #space {
+    height: 5px;
+  }
+
+  legend {
+    color: #5cb85c;
+  }
+
+  #edit-form input {
+    padding: 10px;
+  }
+
+  button:hover {
+    background-color: #5cb85c; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+    #fields fieldset {
+      margin: auto;
+      text-align: center;
+    }
+
+  #boatpicture img{
+    width: 128px;
+    height: 128px;
+  }
+
+
+  </style>
+
+  <body>
+
+  <div id="logo">
+    <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+  </div>
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+    <div id="heading">
+      <p id="title">Item</p>
+      <p id="instructions">Sample Item Page</p>
+    </div>
+
+  </body>
+</html>

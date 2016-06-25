@@ -349,4 +349,62 @@ class JavaApplicationDatabase extends Controller {
         }
         return returnList;
     }
+
+    public static List<Item> getSaleItems(String userName, int saleID) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Item> returnList = new ArrayList<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM item");
+        buf.append(" WHERE seller='" + userName + "'");
+        buf.append(" WHERE sale_id='" + saleID + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs!=null && rs.next()) {
+
+                Item returnItem = new Item();
+
+
+                returnItem.setName(rs.getString("name"));
+                returnItem.setDescription(rs.getString("description"));
+                returnItem.setSaleId(rs.getInt("sale_id"));
+                returnItem.setQuantity(rs.getInt("quantity"));
+                returnItem.setListPrice(rs.getDouble("list_price"));
+                returnItem.setBottomPrice(rs.getDouble("bottom_price"));
+
+                //System.out.println(rs.getString("seller"));
+                //System.out.println(rs.getString("seller"));
+                //System.out.println(rs.getString("seller"));
+                if (returnItem != null) {
+                    returnList.add(returnItem);
+                }
+                //returnList.add(returnSale);
+
+
+            }
+            //System.out.println(returnList);
+            //System.out.println(">>>");
+            return returnList;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
+        }
+        return returnList;
+    }
 }

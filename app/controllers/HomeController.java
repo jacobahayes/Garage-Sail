@@ -338,7 +338,14 @@ public class HomeController extends Controller {
     }
 
     public Result salePage() {
-        return ok(salepage.render());
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(loggedInUser.getUsername(), 1);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(salepage.render(itemsfromdb));
     }
 
     public Result renderItem() {

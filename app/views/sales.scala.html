@@ -29,7 +29,9 @@
 
     @for(sale <- mysales) {
         <center>
-            <button><a href="@routes.HomeController.salePage()" id="logo">@sale.getDescription</a></button>
+          <form action="@routes.HomeController.salePage()">
+            <button>@sale.getDescription</button>
+          </form>
         </center>
         <div id="space"></div>
     }

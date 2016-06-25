@@ -314,7 +314,7 @@ class JavaApplicationDatabase extends Controller {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
+        System.out.println(returnList + "lol");
         try {
 
             while (rs.next()) {

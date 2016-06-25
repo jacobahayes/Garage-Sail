@@ -11,6 +11,7 @@ import models.User;
 import play.data.Form;
 import play.mvc.*;
 import play.db.*;
+import java.util.*;
 
 import views.html.*;
 
@@ -229,6 +230,8 @@ public class HomeController extends Controller {
      * shows all sales from all users
      */
     public Result browseScreen() {
+
+
         return ok(allsales.render());
     }
 
@@ -239,6 +242,18 @@ public class HomeController extends Controller {
     public Result addSale() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         Sale newSale = Form.form(Sale.class).bindFromRequest().get();
+
+
+        //FOR TESTING IT DEFAULTS TO USERNAME STUART. ** REMOVE LATER **
+        if (loggedInUser == null) {
+            //System.out.println("no username");
+            loggedInUser = new User();
+            loggedInUser.setUsername("stuart");
+            newSale.setSeller(loggedInUser.getUsername());
+        } else {
+            newSale.setSeller(loggedInUser.getUsername());
+        }
+
         System.out.println(newSale.getId());
         System.out.println(newSale.getStartTime());
         System.out.println(newSale.getEndTime());
@@ -252,8 +267,47 @@ public class HomeController extends Controller {
         return ok(additem.render());
     }
 
+    /*
     public Result saleScreen() {
-        return ok(sales.render());
+
+        List<String> mysales = new ArrayList<String>();
+        mysales.add("Hello");
+        mysales.add("biotch");
+        //return ok(sales.render(mysales));
+        return ok(views.html.sales(mysales))
+    }*/
+
+    public Result saleScreen(){
+        List<String> mysales = new ArrayList<>();
+        List<Sale> salesfromdb = new ArrayList<>();
+
+
+        //FOR TESTING IT DEFAULTS TO USERNAME STUART. ** REMOVE LATER **
+        if (loggedInUser == null) {
+            System.out.println("no username");
+            this.loggedInUser = new User();
+            this.loggedInUser.setUsername("stuart");
+            //System.out.println(loggedInUser.getUsername());
+        } else {
+            //System.out.println(loggedInUser.getUsername());
+        }
+        //System.out.println(JavaApplicationDatabase.getMySales(loggedInUser.getUsername()));
+        System.out.println(loggedInUser.getUsername());
+
+        try {
+            salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getUsername());
+            for(Sale s : salesfromdb) {
+              mysales.add(s.getDescription());
+            }
+        } catch(Exception e) {
+            System.out.println("JavaApplicationDatabase.getMySales(loggedInUser.getUsername()) not working atm");
+            System.out.println(e.getStackTrace());
+        }
+
+
+
+
+        return ok(sales.render(mysales));
     }
 
     public Result renderCreateSale() {
@@ -276,8 +330,9 @@ public class HomeController extends Controller {
 
     public Result updateItem() {
 
-        return ok(sales.render());
+        return ok(sales.render(new ArrayList<String>()));
     }
+
 
     public Result searchItemInSale() {
 

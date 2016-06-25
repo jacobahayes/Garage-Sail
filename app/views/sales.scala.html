@@ -1,6 +1,15 @@
+@(mysales: List[String])
+
+@for(sale <- mysales){
+    @sale <br>
+}
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <title>Sales</title>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
@@ -13,6 +22,8 @@
   </div>
 
   <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+
+
 
   <div id="heading">
     <p id="title">My Sales</p>

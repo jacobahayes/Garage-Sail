@@ -278,7 +278,6 @@ public class HomeController extends Controller {
     }*/
 
     public Result saleScreen(){
-        List<String> mysales = new ArrayList<>();
         List<Sale> salesfromdb = new ArrayList<>();
 
 
@@ -296,17 +295,14 @@ public class HomeController extends Controller {
 
         try {
             salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getUsername());
-            for(Sale s: salesfromdb) {
-                mysales.add(s.getDescription());
-                System.out.println(s.getDescription());
-            }
+            
         } catch(Exception e) {
             e.printStackTrace();
         }
 
 
 
-        return ok(sales.render(mysales));
+        return ok(sales.render(salesfromdb));
     }
 
     public Result renderCreateSale() {
@@ -329,7 +325,7 @@ public class HomeController extends Controller {
 
     public Result updateItem() {
 
-        return ok(sales.render(new ArrayList<String>()));
+        return ok(sales.render(new ArrayList<Sale>()));
     }
 
 

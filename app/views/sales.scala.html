@@ -1,4 +1,4 @@
-@(mysales: List[String])
+@(mysales: List[Sale])
 
 
 
@@ -26,14 +26,13 @@
   <div id="heading">
     <p id="title">My Sales</p>
     <p id="instructions">your sales (if any) show up here</p>
-      @for(sale <- mysales){
-          @sale <br>
-          }
-  </div>
 
-  <center>
-    <button><a href="@routes.HomeController.salePage()" id="logo">Sample Sale</a></button>
-  </center>
+    @for(sale <- mysales) {
+        <center>
+            <button><a href="@routes.HomeController.salePage()" id="logo">@sale.getDescription</a></button>
+        </center>
+        <div id="space"></div>
+    }
 
   <div id="space"></div>
   
@@ -79,17 +78,19 @@ body {
 button {
   /*background-color: #5cb85c;*/
   /*width: 175px;*/
-  padding: 5px;
+  padding: 10px;
+
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+    width: 600px;
 
   background-color: #0086b3;
   color: #5cb85c;
-  border: 2px solid #5cb85c;
+  border: 1px solid #5cb85c;
 }
 
 #space {

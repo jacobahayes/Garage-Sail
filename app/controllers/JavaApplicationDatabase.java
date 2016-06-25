@@ -296,7 +296,7 @@ class JavaApplicationDatabase extends Controller {
         
         ResultSet rs = null;
         Statement stmt = null;
-        List<Sale> returnList = null;
+        List<Sale> returnList = new ArrayList<>();
 
         try {
             stmt = conn.createStatement();
@@ -312,15 +312,17 @@ class JavaApplicationDatabase extends Controller {
         try {
             rs = stmt.executeQuery(buf.toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "Query Execute fail");
         }
-        System.out.println(returnList + "lol");
+
         try {
 
-            while (rs.next()) {
+            while (rs!=null && rs.next()) {
 
                 Sale returnSale = new Sale();
-                returnSale.setStartTime(rs.getString("start_time"));
+
+
+                returnSale.setEndTime(rs.getString("start_time"));
                 returnSale.setEndTime(rs.getString("end_time"));
                 returnSale.setDate(rs.getString("date"));
                 returnSale.setSeller(rs.getString("seller"));
@@ -328,16 +330,23 @@ class JavaApplicationDatabase extends Controller {
                 returnSale.setDescription(rs.getString("description"));
                 returnSale.setId(rs.getInt("id"));
 
-                returnList.add(returnSale);
+                //System.out.println(rs.getString("seller"));
+                //System.out.println(rs.getString("seller"));
+                //System.out.println(rs.getString("seller"));
+                if (returnSale != null) {
+                    returnList.add(returnSale);
+                }
+                //returnList.add(returnSale);
+
 
             }
+            //System.out.println(returnList);
+            //System.out.println(">>>");
+            return returnList;
 
         } catch (SQLException e) {
-
-            e.printStackTrace();
-
+            System.out.println(e.getMessage() + "Fail to get the sales from the resultset");
         }
-
         return returnList;
     }
 }

@@ -1,8 +1,6 @@
 @(mysales: List[String])
 
-@for(sale <- mysales){
-    @sale <br>
-}
+
 
 
 <!DOCTYPE html>
@@ -28,6 +26,9 @@
   <div id="heading">
     <p id="title">My Sales</p>
     <p id="instructions">your sales (if any) show up here</p>
+      @for(sale <- mysales){
+          @sale <br>
+          }
   </div>
 
   <center>

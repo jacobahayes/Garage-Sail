@@ -296,14 +296,13 @@ public class HomeController extends Controller {
 
         try {
             salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getUsername());
-            for(Sale s : salesfromdb) {
-              mysales.add(s.getDescription());
+            for(Sale s: salesfromdb) {
+                mysales.add(s.getDescription());
+                System.out.println(s.getDescription());
             }
         } catch(Exception e) {
-            System.out.println("JavaApplicationDatabase.getMySales(loggedInUser.getUsername()) not working atm");
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
         }
-
 
 
 

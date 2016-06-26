@@ -36,7 +36,7 @@
     font-size: 80px;
   }
 
-  #instructions {
+  #saleinfo {
     font-size: 20px;
   }
 
@@ -125,6 +125,8 @@
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
         <p id="title">@sale.getName</p>
+        <p id="saleinfo">@sale.getDescription</p>
+        <p id="saleinfo"><b>Location:</b> @sale.getLocation <b>Date and Time:</b> @sale.getDate <b>from</b> @sale.getStartTime - @sale.getEndTime</p>
     </div>
 
     @for(item <- saleitems) {

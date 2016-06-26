@@ -61,6 +61,7 @@ class JavaApplicationDatabase extends Controller {
                 returnUser.setLastName(rs.getString("last_name"));
                 returnUser.setUsername(rs.getString("username"));
                 returnUser.setEmail(rs.getString("email"));
+                returnUser.setPassword(rs.getString("password"));
                 returnUser.setId(rs.getInt("id"));
 
             }
@@ -74,6 +75,55 @@ class JavaApplicationDatabase extends Controller {
         return returnUser;
 
 
+    }
+
+    /**
+     * db access to get user by id
+     * @param userId the id of the user
+     * @return the found item (if any)
+     */
+    public static User getUser(int userId) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        User user = new User();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM user");
+        buf.append(" WHERE id='" + userId + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setId(rs.getInt("id"));
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the user");
+        }
+
+        return user;
     }
 
     /**
@@ -212,7 +262,13 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
-    public static int updateItem(Item item, Item newItem) {
+    /**
+     * db access to update item
+     * @param itemId the id of the item to be updated
+     * @param newItem the new info to be placed into the item
+     * @return the number of rows affected by the update
+     */
+    public static int updateItem(int itemId, Item newItem) {
 
         int result = 0;
         Statement stmt = null;
@@ -230,7 +286,7 @@ class JavaApplicationDatabase extends Controller {
         buf.append(", quantity='" + newItem.getQuantity() + "'");
         buf.append(", list_price='" + newItem.getListPrice() + "'");
         buf.append(", bottom_price='" + newItem.getBottomPrice() + "'");
-        buf.append(" WHERE id=" + item.getId());
+        buf.append(" WHERE id=" + itemId);
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -242,6 +298,12 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
+    /**
+     * db access search item by name in a sale
+     * @param sale the sale to be searched in
+     * @param name the search string
+     * @return a list of matching items
+     */
     public static List<Item> searchItemInSale(Sale sale, String name) {
 
         ResultSet rs = null;
@@ -291,7 +353,11 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
-    //Attempted sql query, but not used yet
+    /**
+     * db access to get user's sales
+     * @param saleAdminId the id of the user
+     * @return a list of matching sales
+     */
     public static List<Sale> getMySales(int saleAdminId) {
         
         ResultSet rs = null;
@@ -351,6 +417,11 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    /**
+     * db access to get items within a sale
+     * @param saleID the id of the sale
+     * @return a list of items
+     */
     public static List<Item> getSaleItems(int saleID) {
 
         ResultSet rs = null;
@@ -404,6 +475,11 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    /**
+     * db access to find a sale by its id
+     * @param saleId the id of the sale
+     * @return the found sale (if any)
+     */
     public static Sale getSale(int saleId) {
 
         ResultSet rs = null;
@@ -450,6 +526,11 @@ class JavaApplicationDatabase extends Controller {
         return sale;
     }
 
+    /**
+     * db access to get item by its id
+     * @param itemId the id of the item
+     * @return the found item (if any)
+     */
     public static Item getItem(int itemId) {
 
         ResultSet rs = null;
@@ -494,4 +575,5 @@ class JavaApplicationDatabase extends Controller {
 
         return item;
     }
+
 }

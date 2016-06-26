@@ -116,6 +116,7 @@
 
     <form action="@routes.HomeController.addSale()" method="post">
       <div id="createsale">
+        <input type="text" name="name" id="name" placeholder="name">
         <input type="text" name="location" id="location" placeholder="location">
         <div id="space"></div>
         <input type="text" name="date" id="date" placeholder="date">
@@ -132,7 +133,7 @@
       <div id="space"></div>
       <div id="space"></div>
       <div id="buttons">
-        <button type="submit" name="action" id="add_button">Add Items</button>
+        <button type="submit" name="action" id="add_button">Create Sale</button>
       </div>
     </form>
     <div id="space"></div>

@@ -20,16 +20,18 @@ POST    /profile/username          controllers.HomeController.editUsername()
 POST    /profile/password          controllers.HomeController.editPassword()
 POST    /profile                   controllers.HomeController.cancel()
 
-GET     /allsales                  controllers.HomeController.browseScreen()
-GET     /allsales/salepage         controllers.HomeController.salePage()
-GET     /allsales/salepage/item    controllers.HomeController.renderItem()
-
 GET     /mysales                   controllers.HomeController.saleScreen()
-GET     /mysales/salepage          controllers.HomeController.salePage()
+GET     /mysales/salepage          controllers.HomeController.salePage(saleId: Integer)
+POST    /mysales/salepage          controllers.HomeController.salePage(saleId: Integer)
 
 GET     /mysales/createsale        controllers.HomeController.renderCreateSale()
 
 POST    /mysales/createsale/add    controllers.HomeController.addSale()
+
+GET     /allsales                  controllers.HomeController.browseScreen()
+GET     /allsales/salepage         controllers.HomeController.salePage(saleId: Integer)
+POST    /allsales/salepage         controllers.HomeController.salePage(saleId: Integer)
+GET     /allsales/salepage/item    controllers.HomeController.renderItem()
 
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.addItem()

@@ -15,13 +15,30 @@ public class Sale extends Model {
     @Id
     private int id;
 
+    private String name;
     private String startTime;
     private String endTime;
     private String date;
-    private String seller;
+    private int saleAdminId;
     private String location;
     private String description;
     private List<Item> itemList;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSaleAdminId() {
+        return saleAdminId;
+    }
+
+    public void setSaleAdminId(int saleAdminId) {
+        this.saleAdminId = saleAdminId;
+    }
 
     public int getId() {
         return id;
@@ -49,13 +66,6 @@ public class Sale extends Model {
     }
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getSeller() {
-        return seller;
-    }
-    public void setSeller(String seller) {
-        this.seller = seller;
     }
 
     public String getLocation() {

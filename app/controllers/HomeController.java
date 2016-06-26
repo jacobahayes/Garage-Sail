@@ -249,22 +249,15 @@ public class HomeController extends Controller {
             //System.out.println("no username");
             loggedInUser = new User();
             loggedInUser.setUsername("stuart");
-            newSale.setSeller(loggedInUser.getUsername());
+            newSale.setSaleAdminId(loggedInUser.getId());
         } else {
-            newSale.setSeller(loggedInUser.getUsername());
+            newSale.setSaleAdminId(loggedInUser.getId());
         }
 
-        System.out.println(newSale.getId());
-        System.out.println(newSale.getStartTime());
-        System.out.println(newSale.getEndTime());
-        System.out.println(newSale.getDate());
-        System.out.println(newSale.getSeller());
-        System.out.println(newSale.getLocation());
-        System.out.println(newSale.getDescription());
         newSale.save();
         saleInView = newSale;
 
-        return ok(additem.render());
+        return ok(salepage.render(saleInView, new ArrayList<>()));
     }
 
     /*
@@ -294,7 +287,7 @@ public class HomeController extends Controller {
         System.out.println(loggedInUser.getUsername());
 
         try {
-            salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getUsername());
+            salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getId());
             
         } catch(Exception e) {
             e.printStackTrace();
@@ -310,17 +303,13 @@ public class HomeController extends Controller {
     }
 
     public Result addItem() {
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+
         Item newItem = Form.form(Item.class).bindFromRequest().get();
-        System.out.println(newItem.getName());
-        System.out.println(newItem.getListPrice());
-        System.out.println(newItem.getBottomPrice());
-        System.out.println(newItem.getQuantity());
-        System.out.println(newItem.getDescription());
+
         newItem.setSaleId(saleInView.getId());
         newItem.save();
 
-        return ok(additem.render());
+        return ok(additem.render(saleInView));
     }
 
     public Result updateItem() {
@@ -332,24 +321,28 @@ public class HomeController extends Controller {
     public Result searchItemInSale() {
 
         // ??
-        List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, "name");
+        List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, "item_name_search");
 
         return ok(homepage.render());
     }
 
-    public Result salePage() {
+    public Result salePage(int saleId) {
+
+        saleInView = JavaApplicationDatabase.getSale(saleId);
+
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(loggedInUser.getUsername(), 1);
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return ok(salepage.render(itemsfromdb));
+        return ok(salepage.render(saleInView, itemsfromdb));
     }
 
     public Result renderItem() {
         return ok(item.render());
     }
+
 
 }

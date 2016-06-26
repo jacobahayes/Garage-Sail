@@ -292,7 +292,7 @@ class JavaApplicationDatabase extends Controller {
     }
 
     //Attempted sql query, but not used yet
-    public static List<Sale> getMySales(String userName) {
+    public static List<Sale> getMySales(int saleAdminId) {
         
         ResultSet rs = null;
         Statement stmt = null;
@@ -306,7 +306,7 @@ class JavaApplicationDatabase extends Controller {
 
         StringBuffer buf = new StringBuffer();
         buf.append("SELECT * FROM sale");
-        buf.append(" WHERE seller='" + userName + "'");
+        buf.append(" WHERE sale_admin_id='" + saleAdminId + "'");
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -325,9 +325,10 @@ class JavaApplicationDatabase extends Controller {
                 returnSale.setEndTime(rs.getString("start_time"));
                 returnSale.setEndTime(rs.getString("end_time"));
                 returnSale.setDate(rs.getString("date"));
-                returnSale.setSeller(rs.getString("seller"));
+                returnSale.setSaleAdminId(rs.getInt("sale_admin_id"));
                 returnSale.setLocation(rs.getString("location"));
                 returnSale.setDescription(rs.getString("description"));
+                returnSale.setName(rs.getString("name"));
                 returnSale.setId(rs.getInt("id"));
 
                 //System.out.println(rs.getString("seller"));
@@ -350,7 +351,7 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
-    public static List<Item> getSaleItems(String userName, int saleID) {
+    public static List<Item> getSaleItems(int saleID) {
 
         ResultSet rs = null;
         Statement stmt = null;
@@ -364,7 +365,6 @@ class JavaApplicationDatabase extends Controller {
 
         StringBuffer buf = new StringBuffer();
         buf.append("SELECT * FROM item");
-        buf.append(" WHERE seller='" + userName + "'");
         buf.append(" WHERE sale_id='" + saleID + "'");
 
         System.out.println("Execute Query: " + buf.toString());
@@ -406,5 +406,51 @@ class JavaApplicationDatabase extends Controller {
             System.out.println(e.getMessage() + "Fail to get the sales from the result set");
         }
         return returnList;
+    }
+
+    public static Sale getSale(int saleId) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        Sale sale = new Sale();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM sale");
+        buf.append(" WHERE id='" + saleId + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                sale.setName(rs.getString("name"));
+                sale.setDescription(rs.getString("description"));
+                sale.setId(rs.getInt("id"));
+                sale.setLocation(rs.getString("location"));
+                sale.setDate(rs.getString("date"));
+                sale.setStartTime(rs.getString("start_time"));
+                sale.setEndTime(rs.getString("end_time"));
+                sale.setSaleAdminId(rs.getInt("sale_admin_id"));
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the sale");
+        }
+
+        return sale;
     }
 }

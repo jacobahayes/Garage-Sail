@@ -1,8 +1,6 @@
 @(mysales: List[Sale])
 
 
-
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -29,9 +27,9 @@
 
     @for(sale <- mysales) {
         <center>
-          <form action="@routes.HomeController.salePage()">
-            <button>@sale.getDescription</button>
-          </form>
+            <form action="@routes.HomeController.salePage(sale.getId)">
+              <button>@sale.getName</button>
+            </form>
         </center>
         <div id="space"></div>
     }

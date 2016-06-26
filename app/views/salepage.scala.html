@@ -124,17 +124,20 @@
   </div>
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
-        <p id="title">@sale.getName()</p>
+        <p id="title">@sale.getName</p>
+    </div>
 
     @for(item <- saleitems) {
       <center>
         <form action="@routes.HomeController.renderItem()">
+          <input type="hidden" name="id" id ="id" value="@item.getId"/>
           <button>@item.getName</button>
         </form>
       </center>
       <div id="space"></div>
     }
-        <button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button>
+    <center><button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button></center>
+
 
   </body>
 

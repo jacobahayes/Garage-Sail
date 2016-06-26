@@ -316,7 +316,7 @@ public class HomeController extends Controller {
 
         } else if ("cancel".equals(action)) {
 
-            return redirect(routes.HomeController.salePage());
+            return backToSalePage();
 
         } else {
 
@@ -356,10 +356,8 @@ public class HomeController extends Controller {
 
     public Result salePage() {
 
-        if (saleInView == null) {
-            Sale sale = Form.form(Sale.class).bindFromRequest().get();
-            saleInView = sale;
-        }
+        Sale sale = Form.form(Sale.class).bindFromRequest().get();
+        saleInView = JavaApplicationDatabase.getSale(sale.getId());
 
 
         List<Item> itemsfromdb = new ArrayList<>();
@@ -368,11 +366,28 @@ public class HomeController extends Controller {
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return ok(salepage.render(new Sale(), itemsfromdb));
+        return ok(salepage.render(saleInView, itemsfromdb));
+    }
+
+    public Result backToSalePage() {
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(salepage.render(saleInView, itemsfromdb));
     }
 
     public Result renderItem() {
-        return ok(item.render());
+
+        Item selectedItem = Form.form(Item.class).bindFromRequest().get();
+        System.out.println(selectedItem.getId());
+        System.out.println(selectedItem.getName());
+        Item itemToRender = JavaApplicationDatabase.getItem(selectedItem.getId());
+
+        return ok(item.render(itemToRender));
     }
 
 

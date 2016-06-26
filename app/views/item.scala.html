@@ -1,3 +1,5 @@
+@(item: Item)
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +36,7 @@
     font-size: 80px;
   }
 
-  #instructions {
+  #iteminfo {
     font-size: 20px;
   }
 
@@ -117,8 +119,8 @@
   </div>
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
-      <p id="title">Item</p>
-      <p id="instructions">Sample Item Page</p>
+      <p id="title">@item.getName</p>
+      <p id="iteminfo">@item.getDescription</p>
     </div>
 
   </body>

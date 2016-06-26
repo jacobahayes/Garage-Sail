@@ -387,6 +387,7 @@ class JavaApplicationDatabase extends Controller {
                 returnItem.setQuantity(rs.getInt("quantity"));
                 returnItem.setListPrice(rs.getDouble("list_price"));
                 returnItem.setBottomPrice(rs.getDouble("bottom_price"));
+                returnItem.setId(rs.getInt("id"));
 
                 //System.out.println(rs.getString("seller"));
                 //System.out.println(rs.getString("seller"));
@@ -452,5 +453,49 @@ class JavaApplicationDatabase extends Controller {
         }
 
         return sale;
+    }
+
+    public static Item getItem(int itemId) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        Item item = new Item();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM item");
+        buf.append(" WHERE id='" + itemId + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                item.setName(rs.getString("name"));
+                item.setDescription(rs.getString("description"));
+                item.setSaleId(rs.getInt("sale_id"));
+                item.setQuantity(rs.getInt("quantity"));
+                item.setListPrice(rs.getDouble("list_price"));
+                item.setBottomPrice(rs.getDouble("bottom_price"));
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the item");
+        }
+
+        return item;
     }
 }

@@ -312,6 +312,26 @@ public class HomeController extends Controller {
         return ok(additem.render(saleInView));
     }
 
+    public Result addItemAndExit() {
+
+        Item newItem = Form.form(Item.class).bindFromRequest().get();
+
+        newItem.setSaleId(saleInView.getId());
+        newItem.save();
+
+        Sale sale = Form.form(Sale.class).bindFromRequest().get();
+        saleInView = sale;
+
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(salepage.render(new Sale(), itemsfromdb));
+    }
+
     public Result updateItem() {
 
         return ok(sales.render(new ArrayList<Sale>()));
@@ -326,9 +346,10 @@ public class HomeController extends Controller {
         return ok(homepage.render());
     }
 
-    public Result salePage(int saleId) {
+    public Result salePage() {
 
-        saleInView = JavaApplicationDatabase.getSale(saleId);
+        Sale sale = Form.form(Sale.class).bindFromRequest().get();
+        saleInView = sale;
 
 
         List<Item> itemsfromdb = new ArrayList<>();
@@ -337,7 +358,7 @@ public class HomeController extends Controller {
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return ok(salepage.render(saleInView, itemsfromdb));
+        return ok(salepage.render(new Sale(), itemsfromdb));
     }
 
     public Result renderItem() {

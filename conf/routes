@@ -21,20 +21,23 @@ POST    /profile/password          controllers.HomeController.editPassword()
 POST    /profile                   controllers.HomeController.cancel()
 
 GET     /mysales                   controllers.HomeController.saleScreen()
-GET     /mysales/salepage          controllers.HomeController.salePage(saleId: Integer)
-POST    /mysales/salepage          controllers.HomeController.salePage(saleId: Integer)
+GET     /mysales/salepage          controllers.HomeController.salePage()
+POST    /mysales/salepage          controllers.HomeController.salePage()
 
 GET     /mysales/createsale        controllers.HomeController.renderCreateSale()
 
 POST    /mysales/createsale/add    controllers.HomeController.addSale()
 
 GET     /allsales                  controllers.HomeController.browseScreen()
-GET     /allsales/salepage         controllers.HomeController.salePage(saleId: Integer)
-POST    /allsales/salepage         controllers.HomeController.salePage(saleId: Integer)
+GET     /allsales/salepage         controllers.HomeController.salePage()
+POST    /allsales/salepage         controllers.HomeController.salePage()
 GET     /allsales/salepage/item    controllers.HomeController.renderItem()
 
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.addItem()
+
+POST    /add                       controllers.HomeController.addItemAndExit()
+GET     /add                       controllers.HomeController.addItemAndExit()
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

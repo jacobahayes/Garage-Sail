@@ -120,8 +120,7 @@
 
     <div id="heading">
       <p id="title">Add Item</p>
-      <p id="instructions">enter the details of your item, then select "add another item" or "save and finish"</p>
-      <p id="instructions">add as many items as you would like</p>
+      <p id="instructions">enter the details of your item</p>
     </div>
 
 
@@ -149,7 +148,8 @@
       </div>
     </form>
     <div id="space"></div>
-    <form action="@routes.HomeController.salePage()">
+    <form action="@routes.HomeController.addItemAndExit()">
+      <input type="hidden" name="id" id ="id" value="@sale.getId"/>
       <div id="buttons">
         <button type="submit" id="cancel_button">Save and Exit</button>
       </div>

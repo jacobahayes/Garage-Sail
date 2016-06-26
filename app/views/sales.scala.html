@@ -27,7 +27,8 @@
 
     @for(sale <- mysales) {
         <center>
-            <form action="@routes.HomeController.salePage(sale.getId)">
+            <form action="@routes.HomeController.salePage()">
+              <input type="hidden" name="id" id ="id" value="@sale.getId"/>
               <button>@sale.getName</button>
             </form>
         </center>

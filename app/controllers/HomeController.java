@@ -302,7 +302,32 @@ public class HomeController extends Controller {
         return ok(createsale.render());
     }
 
+    public Result renderAddItem() { return ok(additem.render(saleInView)); }
+
+
     public Result addItem() {
+
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String action = postAction[0];
+
+        if ("additem".equals(action)) {
+
+            return completeAddItem(request());
+
+        } else if ("cancel".equals(action)) {
+
+            return redirect(routes.HomeController.salePage());
+
+        } else {
+
+            return badRequest("This action is not allowed");
+
+        }
+
+
+    }
+
+    public Result completeAddItem(Http.Request request) {
 
         Item newItem = Form.form(Item.class).bindFromRequest().get();
 
@@ -310,27 +335,10 @@ public class HomeController extends Controller {
         newItem.save();
 
         return ok(additem.render(saleInView));
+
     }
 
-    public Result addItemAndExit() {
 
-        Item newItem = Form.form(Item.class).bindFromRequest().get();
-
-        newItem.setSaleId(saleInView.getId());
-        newItem.save();
-
-        Sale sale = Form.form(Sale.class).bindFromRequest().get();
-        saleInView = sale;
-
-
-        List<Item> itemsfromdb = new ArrayList<>();
-        try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return ok(salepage.render(new Sale(), itemsfromdb));
-    }
 
     public Result updateItem() {
 
@@ -348,8 +356,10 @@ public class HomeController extends Controller {
 
     public Result salePage() {
 
-        Sale sale = Form.form(Sale.class).bindFromRequest().get();
-        saleInView = sale;
+        if (saleInView == null) {
+            Sale sale = Form.form(Sale.class).bindFromRequest().get();
+            saleInView = sale;
+        }
 
 
         List<Item> itemsfromdb = new ArrayList<>();

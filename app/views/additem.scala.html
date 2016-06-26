@@ -124,7 +124,7 @@
     </div>
 
 
-    <form action="@routes.HomeController.addItem()" method="post">
+    <form action="" method="post">
       <div id="additem">
         <input type="text" name="name" id="name" placeholder="name">
         <div id="space"></div>
@@ -144,15 +144,12 @@
       <div id="space"></div>
       <div id="space"></div>
       <div id="buttons">
-        <button type="submit" name="action" value="additems" id="add_button">Save and Add Another</button>
+        <button type="submit" name="action" value="additem" id="add_button">Save Item</button>
+        <button type="submit" name="action" value="cancel" id="cancel_button">Exit</button>
       </div>
     </form>
+
     <div id="space"></div>
-    <form action="@routes.HomeController.addItemAndExit()">
-      <input type="hidden" name="id" id ="id" value="@sale.getId"/>
-      <div id="buttons">
-        <button type="submit" id="cancel_button">Save and Exit</button>
-      </div>
-    </form>
+
   </body>
 </html>

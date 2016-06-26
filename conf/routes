@@ -34,10 +34,8 @@ POST    /allsales/salepage         controllers.HomeController.salePage()
 GET     /allsales/salepage/item    controllers.HomeController.renderItem()
 
 POST    /add                       controllers.HomeController.addItem()
-GET     /add                       controllers.HomeController.addItem()
+GET     /add                       controllers.HomeController.renderAddItem()
 
-POST    /add                       controllers.HomeController.addItemAndExit()
-GET     /add                       controllers.HomeController.addItemAndExit()
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

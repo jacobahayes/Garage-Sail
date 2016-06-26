@@ -389,18 +389,13 @@ class JavaApplicationDatabase extends Controller {
                 returnItem.setBottomPrice(rs.getDouble("bottom_price"));
                 returnItem.setId(rs.getInt("id"));
 
-                //System.out.println(rs.getString("seller"));
-                //System.out.println(rs.getString("seller"));
-                //System.out.println(rs.getString("seller"));
                 if (returnItem != null) {
                     returnList.add(returnItem);
                 }
-                //returnList.add(returnSale);
 
 
             }
-            //System.out.println(returnList);
-            //System.out.println(">>>");
+
             return returnList;
 
         } catch (SQLException e) {
@@ -488,6 +483,7 @@ class JavaApplicationDatabase extends Controller {
                 item.setQuantity(rs.getInt("quantity"));
                 item.setListPrice(rs.getDouble("list_price"));
                 item.setBottomPrice(rs.getDouble("bottom_price"));
+                item.setId(rs.getInt("id"));
 
 
             }

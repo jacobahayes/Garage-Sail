@@ -47,7 +47,8 @@ public class HomeController extends Controller {
      * skeleton to login to the application
      * @return the HTTP response depending if the login was successful or not
      */
-    public static Result login() {
+    public Result login() {
+
         User loginUser = Form.form(User.class).bindFromRequest().get();
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();

@@ -27,7 +27,7 @@
     text-decoration: none;
   }
 
-#heading {
+  #heading {
   text-align: center;
   color: #5cb85c;
 }
@@ -39,6 +39,12 @@
   #iteminfo {
     font-size: 20px;
   }
+
+  #updateitem {
+    font-family: "Poiret One";
+    color: #5cb85c;
+  }
+
 
   #edit-name-form input {
     padding: 10px;
@@ -109,6 +115,27 @@
     height: 128px;
   }
 
+  #updateitem {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #textarea {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #textarea input{
+    white-space: pre-wrap;
+    padding: 10px;
+    margin: auto;
+    width: 250px;
+    height: 250px;
+
+  }
+
 
   </style>
 
@@ -121,6 +148,31 @@
     <div id="heading">
       <p id="title">@item.getName</p>
       <p id="iteminfo">@item.getDescription</p>
+      <p id="iteminfo"><b>Price:</b> $@item.getListPrice</p>
+      <p id="iteminfo"><b>Quantity:</b> @item.getQuantity</p>
+    </div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="updateitem">
+      <h5>Update Item:</h5>
+      <form action="@routes.HomeController.updateItem()" method="post">
+        <input type="hidden" name="id" id ="id" value="@item.getId"/>
+        Name: <input type="text" name="name" id="name" value="@item.getName">
+        <div id="space"></div>
+        List Price: <input type="text" name="listPrice" id="listPrice" value="@item.getListPrice">
+        <div id="space"></div>
+        Bottom Price: <input type="text" name="bottomPrice" id="bottomPrice" value="@item.getBottomPrice">
+        <div id="space"></div>
+        Quantity: <input type="text" name="quantity" id="quantity" value="@item.getQuantity">
+        <div id="space"></div>
+        <div id="textarea">
+          Description: <input type="text-area" wrap="on" name="description" id="description" value="@item.getDescription">
+        </div>
+        <div id="space"></div>
+        <div id="buttons">
+          <button type="submit" name="action" value="additem" id="add_button">Save Changes</button>
+        </div>
+      </form>
     </div>
 
   </body>

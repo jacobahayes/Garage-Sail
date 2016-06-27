@@ -37,7 +37,7 @@ POST    /allsales/salepage         controllers.HomeController.salePage()
 GET     /allsales/salepage         controllers.HomeController.backToSalePage()
 POST    /allsales/salepage         controllers.HomeController.backToSalePage()
 GET     /allsales/salepage/item    controllers.HomeController.renderItem()
-POST    /allsales/salepage/item    controllers.HomeController.renderItem()
+POST    /allsales/salepage/item    controllers.HomeController.updateItem()
 
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()

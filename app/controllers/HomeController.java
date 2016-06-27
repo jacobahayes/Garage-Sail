@@ -25,8 +25,8 @@ import static play.libs.Json.toJson;
 public class HomeController extends Controller {
 
 
-    User loggedInUser = null;
-    Sale saleInView = null;
+    public static User loggedInUser = null;
+    public static Sale saleInView = null;
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -48,6 +48,7 @@ public class HomeController extends Controller {
      * @return the HTTP response depending if the login was successful or not
      */
     public Result login() {
+
         User loginUser = Form.form(User.class).bindFromRequest().get();
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();
@@ -134,7 +135,7 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result profile() {
-        return ok(profile.render());
+        return ok(profile.render(loggedInUser));
     }
 
     /**
@@ -149,12 +150,10 @@ public class HomeController extends Controller {
         String newLastName = updateUser.getLastName();
 
         int result = JavaApplicationDatabase.updateName(loggedInUser, newFirstName, newLastName);
-        System.out.println("RESULT: " + result);
-        if (result == 1) {
 
-            loggedInUser.setFirstName(newFirstName);
-            loggedInUser.setLastName(newLastName);
-            return ok(profile.render());
+        if (result == 1) {
+            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            return ok(profile.render(loggedInUser));
 
         } else {
 
@@ -175,8 +174,8 @@ public class HomeController extends Controller {
         int result = JavaApplicationDatabase.updateEmail(loggedInUser, newEmail);
         System.out.println("RESULT: " + result);
         if (result == 1) {
-            loggedInUser.setEmail(newEmail);
-            return ok(profile.render());
+            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            return ok(profile.render(loggedInUser));
         } else {
             return badRequest("An error occured while saving");
         }
@@ -193,11 +192,10 @@ public class HomeController extends Controller {
         String newUsername = updateUser.getUsername();
 
         int result = JavaApplicationDatabase.updateUsername(loggedInUser, newUsername);
-        System.out.println("RESULT: " + result);
         if (result == 1) {
 
-            loggedInUser.setUsername(newUsername);
-            return ok(profile.render());
+            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            return ok(profile.render(loggedInUser));
 
         } else {
 
@@ -217,10 +215,9 @@ public class HomeController extends Controller {
         String newPassword = updateUser.getPassword();
 
         int result = JavaApplicationDatabase.updatePassword(loggedInUser, newPassword);
-        System.out.println("RESULT: " + result);
         if (result == 1) {
-            loggedInUser.setPassword(newPassword);
-            return ok(profile.render());
+            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            return ok(profile.render(loggedInUser));
         } else {
             return badRequest("An error occured while saving");
         }
@@ -270,6 +267,11 @@ public class HomeController extends Controller {
         return ok(views.html.sales(mysales))
     }*/
 
+
+    /**
+     * renders the sale screen with the user's sales
+     * @return the HTTP response
+     */
     public Result saleScreen(){
         List<Sale> salesfromdb = new ArrayList<>();
 
@@ -284,7 +286,6 @@ public class HomeController extends Controller {
             //System.out.println(loggedInUser.getUsername());
         }
         //System.out.println(JavaApplicationDatabase.getMySales(loggedInUser.getUsername()));
-        System.out.println(loggedInUser.getUsername());
 
         try {
             salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getId());
@@ -298,13 +299,25 @@ public class HomeController extends Controller {
         return ok(sales.render(salesfromdb));
     }
 
+    /**
+     * renders the create sale screen
+     * @return the HTTP response
+     */
     public Result renderCreateSale() {
         return ok(createsale.render());
     }
 
+    /**
+     * renders the add item screen
+     * @return the HTTP response
+     */
     public Result renderAddItem() { return ok(additem.render(saleInView)); }
 
 
+    /**
+     * controls flow when adding an item
+     * @return the HTTP response
+     */
     public Result addItem() {
 
         String[] postAction = request().body().asFormUrlEncoded().get("action");
@@ -327,6 +340,10 @@ public class HomeController extends Controller {
 
     }
 
+    /**
+     * completes the add item process, returns to add item page
+     * @return the HTTP response
+     */
     public Result completeAddItem(Http.Request request) {
 
         Item newItem = Form.form(Item.class).bindFromRequest().get();
@@ -339,13 +356,10 @@ public class HomeController extends Controller {
     }
 
 
-
-    public Result updateItem() {
-
-        return ok(sales.render(new ArrayList<Sale>()));
-    }
-
-
+    /**
+     * allows for searching an item in a sale by name
+     * @return the HTTP response
+     */
     public Result searchItemInSale() {
 
         // ??
@@ -364,6 +378,10 @@ public class HomeController extends Controller {
         return ok(searchitemresults.render(saleInView, itemsfromdb));
     }
 
+    /**
+     * renders the specific sale page
+     * @return the HTTP response
+     */
     public Result salePage() {
 
         Sale sale = Form.form(Sale.class).bindFromRequest().get();
@@ -379,6 +397,10 @@ public class HomeController extends Controller {
         return ok(salepage.render(saleInView, itemsfromdb));
     }
 
+    /**
+     * allows the user to return to the sale page from the add item page
+     * @return the HTTP response
+     */
     public Result backToSalePage() {
 
         List<Item> itemsfromdb = new ArrayList<>();
@@ -390,6 +412,10 @@ public class HomeController extends Controller {
         return ok(salepage.render(saleInView, itemsfromdb));
     }
 
+    /**
+     * renders the specific item page
+     * @return the HTTP response
+     */
     public Result renderItem() {
 
         Item selectedItem = Form.form(Item.class).bindFromRequest().get();
@@ -398,6 +424,27 @@ public class HomeController extends Controller {
         Item itemToRender = JavaApplicationDatabase.getItem(selectedItem.getId());
 
         return ok(item.render(itemToRender));
+    }
+
+    /**
+     * controls flow when updating an item
+     * @return the HTTP response
+     */
+    public Result updateItem() {
+
+        Item updatedItem = Form.form(Item.class).bindFromRequest().get();
+
+        int result = JavaApplicationDatabase.updateItem(updatedItem.getId(), updatedItem);
+        if (result == 1) {
+            Item itemToRender = JavaApplicationDatabase.getItem(updatedItem.getId());
+            return ok(item.render(itemToRender));
+
+        } else {
+
+            return badRequest("An error occurred while saving");
+
+        }
+
     }
 
 

@@ -1,3 +1,5 @@
+@(user: User)
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -125,7 +127,7 @@
       <legend id="legend">Username</legend>
       <div id="edit-form">
       <form action="@routes.HomeController.editUsername()" method="post">
-        <input type="text" name="username" id="username" placeholder="username">
+        <input type="text" name="username" id="username" value="@user.getUsername">
         <div id="space"></div>
         <button type="submit">Save</button>
         <div id="space"></div>
@@ -137,7 +139,7 @@
       <legend>Password</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editPassword()" method="post">
-          <input type="text" name="oldpass" id="oldpass" placeholder="pld password">
+          <input type="text" name="oldpass" id="oldpass" placeholder="old password">
           <div id="space"></div>
           <input type="password" name="password" id="password" placeholder="new password">
           <div id="space"></div>
@@ -153,9 +155,9 @@
       <legend>Name</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editName()" method="post">
-          <input type="text" name="firstName" id="lastName" placeholder="first name">
+          <input type="text" name="firstName" id="lastName" value="@user.getFirstName">
           <div id="space"></div>
-          <input type="text" name="lastName" id="lastName" placeholder="last name">
+          <input type="text" name="lastName" id="lastName" value="@user.getLastName">
           <div id="space"></div>
           <button type="submit">Save</button>
           <div id="space"></div>
@@ -167,7 +169,7 @@
       <legend>Email</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editEmail()" method="post">
-          <input type="text" name="email" id="email" placeholder="new email">
+          <input type="text" name="email" id="email" value="@user.getEmail">
           <div id="space"></div>
           <button type="submit">Save</button>
           <div id="space"></div>

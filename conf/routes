@@ -22,6 +22,7 @@ POST    /profile                   controllers.HomeController.cancel()
 
 GET     /mysales                   controllers.HomeController.saleScreen()
 GET     /mysales/salepage          controllers.HomeController.salePage()
+GET     /mysales/salepage/searchitemresults          controllers.HomeController.searchItemInSale()
 POST    /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/item     controllers.HomeController.renderItem()
 POST    /mysales/salepage/item     controllers.HomeController.renderItem()

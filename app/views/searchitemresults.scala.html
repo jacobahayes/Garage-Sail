@@ -36,7 +36,7 @@
     font-size: 80px;
   }
 
-  #saleinfo {
+  #instructions {
     font-size: 20px;
   }
 
@@ -124,10 +124,9 @@
   </div>
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
-        <p id="title">@sale.getName</p>
-        <p id="saleinfo">@sale.getDescription</p>
-        <p id="saleinfo"><b>Location:</b> @sale.getLocation <b>Date and Time:</b> @sale.getDate <b>from</b> @sale.getStartTime - @sale.getEndTime</p>
+        <p id=title>Search Results</p>
     </div>
+
 
     @for(item <- saleitems) {
       <center>
@@ -138,17 +137,7 @@
       </center>
       <div id="space"></div>
     }
-    <center><button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button></center>
 
-    <div id="space"></div>
-      <div id="edit-form">
-      <form action="@routes.HomeController.searchItemInSale()" method="get">
-        <input type="text" name="name" id="name" placeholder="search for an item">
-        <div id="space"></div>
-        <button type="Submit">Search</a></button>
-        <div id="space"></div>
-      </form>
-    </div>
 
   </body>
 

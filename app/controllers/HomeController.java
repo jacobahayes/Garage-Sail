@@ -363,17 +363,15 @@ public class HomeController extends Controller {
     public Result searchItemInSale() {
 
         // ??
-        Sale sale = Form.form(Sale.class).bindFromRequest().get();
-        saleInView = JavaApplicationDatabase.getSale(sale.getId());
-
+        Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+            itemsfromdb = JavaApplicationDatabase.searchItemInSale(saleInView, searchSale.getName());
         } catch(Exception e) {
             e.printStackTrace();
         }
-        List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, "item_name_search");
+        //List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, searchSale.getName());
 
         return ok(searchitemresults.render(saleInView, itemsfromdb));
     }

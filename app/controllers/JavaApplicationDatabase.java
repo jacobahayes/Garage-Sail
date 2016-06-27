@@ -308,7 +308,7 @@ class JavaApplicationDatabase extends Controller {
 
         ResultSet rs = null;
         Statement stmt = null;
-        List<Item> returnList = null;
+        List<Item> returnList = new ArrayList<Item>();
 
         try {
             stmt = conn.createStatement();

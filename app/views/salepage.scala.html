@@ -109,6 +109,10 @@
     height: 128px;
   }
 
+    #sidebyside {
+      display: flex;
+
+    }
 
   </style>
 
@@ -129,6 +133,19 @@
         <p id="saleinfo"><b>Location:</b> @sale.getLocation <b>Date and Time:</b> @sale.getDate <b>from</b> @sale.getStartTime - @sale.getEndTime</p>
     </div>
 
+    <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.searchItemInSale()" method="get">
+        <div id="sidebyside">
+        <input type="text" name="name" id="name" placeholder="search for an item">
+        <button type="Submit">Search</button>
+        <div id="space"></div>
+        </div>
+      </form>
+    </div>
+    <div id="space"></div>
+    <div id="space"></div>
+
     @for(item <- saleitems) {
       <center>
         <form action="@routes.HomeController.renderItem()">
@@ -138,17 +155,20 @@
       </center>
       <div id="space"></div>
     }
-    <center><button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button></center>
-
     <div id="space"></div>
-      <div id="edit-form">
-      <form action="@routes.HomeController.searchItemInSale()" method="get">
-        <input type="text" name="name" id="name" placeholder="search for an item">
-        <div id="space"></div>
-        <button type="Submit">Search</a></button>
-        <div id="space"></div>
+    <div id="space"></div>
+    <form action="@routes.HomeController.renderAddItem()">
+      <center><button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button></center>
+    </form>
+    <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.cancel()" method="post">
+        <button type="submit">Cancel</button>
       </form>
     </div>
+
+
+
 
   </body>
 

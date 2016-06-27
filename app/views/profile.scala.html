@@ -86,7 +86,8 @@
   }
 
   legend {
-    color: #5cb85c;
+    color: #000000;
+    style: bold;
   }
 
   #edit-form input {
@@ -127,7 +128,7 @@
       <legend id="legend">Username</legend>
       <div id="edit-form">
       <form action="@routes.HomeController.editUsername()" method="post">
-        <input type="text" name="username" id="username" value="@user.getUsername">
+        <input type="text" name="username" id="username" value="@user.getUsername" placeholder="username">
         <div id="space"></div>
         <button type="submit">Save</button>
         <div id="space"></div>
@@ -155,9 +156,9 @@
       <legend>Name</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editName()" method="post">
-          <input type="text" name="firstName" id="lastName" value="@user.getFirstName">
+          <input type="text" name="firstName" id="lastName" value="@user.getFirstName" placeholder="first name">
           <div id="space"></div>
-          <input type="text" name="lastName" id="lastName" value="@user.getLastName">
+          <input type="text" name="lastName" id="lastName" value="@user.getLastName" placeholder="last name">
           <div id="space"></div>
           <button type="submit">Save</button>
           <div id="space"></div>
@@ -169,7 +170,7 @@
       <legend>Email</legend>
       <div id="edit-form">
         <form action="@routes.HomeController.editEmail()" method="post">
-          <input type="text" name="email" id="email" value="@user.getEmail">
+          <input type="text" name="email" id="email" value="@user.getEmail" placeholder="email">
           <div id="space"></div>
           <button type="submit">Save</button>
           <div id="space"></div>

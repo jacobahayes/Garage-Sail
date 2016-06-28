@@ -24,6 +24,8 @@ public class Item extends Model{
     private double sellPrice;
     private double ebayPrice;
 
+    private int transactionId;
+
     //photo?
 
     public String getName() {

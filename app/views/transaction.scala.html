@@ -1,0 +1,157 @@
+@(sale: Sale)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Transaction</title>
+</head>
+
+  <style>
+
+  body {
+    background-color: #0086b3;
+    font-family: "Poiret One";
+  }
+
+  #password, #password_confirm {
+    -webkit-text-security: circle;
+  }
+
+  #logo {
+    text-align: left;
+    text-size: 40px;
+    color: #5cb85c;
+    text-decoration: none;
+  }
+
+  #heading {
+    text-align: center;
+    color: #5cb85c;
+  }
+
+  #title {
+    font-size: 80px;
+  }
+
+
+  #edit-name-form input {
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    width: auto;
+  }
+
+  #edit-password-form input {
+    width: 250px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+  }
+
+  #cancel-form {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #buttons {
+    width: 280px;
+    margin: auto;
+  }
+
+  button {
+    /*background-color: #5cb85c;*/
+    width: 135px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+    background-color: #0086b3;
+    color: #5cb85c;
+    border: 2px solid #5cb85c;
+  }
+
+  #space {
+    height: 5px;
+  }
+
+  legend {
+    color: #5cb85c;
+  }
+
+  #edit-form input {
+    padding: 10px;
+  }
+
+  button:hover {
+    background-color: #5cb85c; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+  #fields fieldset {
+    margin: auto;
+    text-align: center;
+  }
+
+  #boatpicture img{
+    width: 128px;
+    height: 128px;
+  }
+
+  #updateitem {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #textarea {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #textarea input{
+    white-space: pre-wrap;
+    padding: 10px;
+    margin: auto;
+    width: 250px;
+    height: 250px;
+
+  }
+
+  </style>
+
+<body>
+
+  <div id="logo">
+    <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+  </div>
+
+  <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+  <div id="heading">
+    <p id="title">New Transaction</p>
+    <form action="@routes.HomeController.addItemToTransaction()" method="post">
+      Item Number: <input type="text" name="id" id="id">
+      Quantity: <input type="text" name="quantity" id="quantity">
+
+        <div id="buttons">
+          <button type="submit" name="action" value="additem" id="add_button">Finalize</button>
+        </div>
+    </form>
+    <div id="space"></div>
+    <div id="cancel-form">
+      <form action="@routes.HomeController.cancelTransaction()" method="post">
+        <button type="submit">Cancel</button>
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -11,7 +11,8 @@ import java.util.List;
 public class Transaction extends Model {
 
     @Id
-    private int transactionID;
+    private int transactionId;
+    private int saleId;
     private List<Item> items;
     private String date;
     private String time;

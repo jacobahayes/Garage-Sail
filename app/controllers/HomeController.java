@@ -478,4 +478,8 @@ public class HomeController extends Controller {
         }
         return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
     }
+
+    public Result relatedItems() {
+        return TODO;
+    }
 }

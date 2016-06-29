@@ -22,7 +22,10 @@ POST    /profile                   controllers.HomeController.cancel()
 
 GET     /browsesales               controllers.HomeController.browseSales()
 POST    /browsesales               controllers.HomeController.browseSales()
-GET     /browsesales               controllers.HomeController.externalSale()
+GET     /browsesales/externalsale  controllers.HomeController.externalSale()
+GET     /browsesales/externalsale/add  controllers.HomeController.addItemToTransaction()
+POST    /browsesales/externalsale/add  controllers.HomeController.addItemToTransaction()
+
 
 GET     /mysales                   controllers.HomeController.saleScreen()
 GET     /mysales/salepage          controllers.HomeController.salePage()
@@ -48,6 +51,8 @@ GET     /alltags                   controllers.HomeController.printAllTags()
 POST    /alltags                   controllers.HomeController.printAllTags()
 GET     /alltags/basic             controllers.HomeController.basicTags()
 POST    /alltags/basic             controllers.HomeController.basicTags()
+
+GET     /relateditems              controllers.HomeController.relatedItems()
 
 
 # An example controller showing how to use dependency injection

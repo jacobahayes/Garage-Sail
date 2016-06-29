@@ -27,7 +27,7 @@
         <legend id="legend"><b>@sale.getName</b></legend>
       <form action="@routes.HomeController.externalSale()">
         <input type="hidden" name="id" id ="id" value="@sale.getId"/>
-        <button>View Sale</button>
+        <button type="submit">View Sale</button>
         <MARQUEE LOOP="INFINITE"><div id="instructions">Description: @sale.getDescription, Location: @sale.getLocation, From @sale.getStartTime to @sale.getEndTime</div></MARQUEE>
       </form>
       </fieldset>

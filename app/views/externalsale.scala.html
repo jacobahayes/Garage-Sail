@@ -6,7 +6,174 @@
   <meta charset="UTF-8">
   <title>Sale</title>
 </head>
-<body>
+
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
+
+  <style>
+
+  body {
+    background-color: #0086b3;
+    font-family: "Poiret One";
+  }
+
+  #password, #password_confirm {
+    -webkit-text-security: circle;
+  }
+
+  #logo {
+    text-align: left;
+    text-size: 40px;
+    color: #5cb85c;
+    text-decoration: none;
+  }
+
+  #heading {
+    text-align: center;
+    color: #5cb85c;
+  }
+
+  #title {
+    font-size: 80px;
+  }
+
+  #saleinfo {
+    font-size: 20px;
+  }
+
+  #edit-form {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+  }
+
+  #buttons {
+    width: 280px;
+    margin: auto;
+  }
+
+  button {
+    /*background-color: #5cb85c;*/
+    width: 200px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+    background-color: #0086b3;
+    color: #5cb85c;
+    border: 2px solid #5cb85c;
+  }
+
+  #space {
+    height: 5px;
+  }
+
+  legend {
+    color: #000000;
+  }
+
+  #edit-form input {
+    padding: 10px;
+  }
+
+  button:hover {
+    background-color: #5cb85c; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+  #fields fieldset {
+    margin: auto;
+    text-align: center;
+    padding: 2px;
+  }
+
+  #boatpicture img{
+    width: 128px;
+    height: 128px;
+  }
+
+  #sidebyside {
+    display: flex;
+  }
+
+  .itemandtag {
+    float: right;
+  }
+
+  #iteminfo {
+    text-align: center;
+    padding: 1px;
+  }
+
+  #image img {
+    float: left;
+    align: center;
+    margins: auto;
+  }
+
+
+  </style>
+
+
+  <body>
+  <div id="logo">
+    <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+  </div>
+  <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+  <div id="heading">
+    <p id="title">@sale.getName</p>
+    <p id="saleinfo">@sale.getDescription</p>
+    <p id="saleinfo"><b>Location:</b> @sale.getLocation <b>Date and Time:</b> @sale.getDate <b>from</b> @sale.getStartTime - @sale.getEndTime</p>
+  </div>
+
+  <div id="space"></div>
+  <div id="edit-form">
+    <form action="@routes.HomeController.searchItemInSale()" method="get">
+      <div id="sidebyside">
+        <input type="text" name="name" id="name" placeholder="search for an item">
+        <button type="Submit">Search</button>
+        <div id="space"></div>
+      </div>
+    </form>
+  </div>
+  <div id="space"></div>
+  <div id="space"></div>
+
+  @for(item <- items) {
+    <fieldset id="fields">
+      <legend id="legend"><b>@item.getName</b></legend>
+      <img src="@item.getImg" alt="Image not available" id="image">
+      <div id="iteminfo">
+        <p><b>Description:</b> @item.getDescription</p>
+        <p><b>Quantity:</b> @item.getQuantity</p>
+        <p><b>Price:</b> @item.getListPrice</p>
+      </div>
+      <div class="itemandtag">
+        <form action="@routes.HomeController.relatedItems()">
+          <input type="hidden" name="id" id ="id" value="@item.getId"/>
+          <button type="submit">View Related Items</button>
+        </form>
+        <div id="space"></div>
+        <form action="@routes.HomeController.addItemToTransaction()">
+          <input type="hidden" name="id" id ="id" value="@item.getId"/>
+          <button type="submit">Add Item to Cart</button>
+        </form>
+      </div>
+    </fieldset>
+  }
+  <div id="space"></div>
+  <div id="space"></div>
+
+  <div id="edit-form">
+    <form action="@routes.HomeController.browseSales()" method="post">
+      <button type="submit">Cancel</button>
+    </form>
+  </div>
 
 </body>
 </html>

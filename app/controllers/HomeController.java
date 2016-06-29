@@ -394,6 +394,10 @@ public class HomeController extends Controller {
         return TODO;
     }
 
+    public Result searchAllItems() {
+        return TODO;
+    }
+
     /**
      * renders the specific sale page
      * @return the HTTP response

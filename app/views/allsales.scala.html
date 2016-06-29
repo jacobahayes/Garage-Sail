@@ -22,15 +22,27 @@
   </div>
 
   <div id="space"></div>
-  <div id="edit-form">
+  <fieldset id="searchfield">
+  <div id="searchallsales">
     <form action="@routes.HomeController.searchAllSales()" method="get">
       <div id="sidebyside">
-        <input type="text" name="name" id="name" placeholder="search for sales">
+        <input type="text" name="name" id="name" placeholder="search all sales">
         <button type="Submit">Search</button>
         <div id="space"></div>
       </div>
     </form>
   </div>
+  <p id="instructions">or</p>
+    <div id="searchallitems">
+      <form action="@routes.HomeController.searchAllItems()" method="get">
+        <div id="sidebyside">
+          <input type="text" name="name" id="name" placeholder="search all items">
+          <button type="Submit">Search</button>
+          <div id="space"></div>
+        </div>
+      </form>
+    </div>
+  </fieldset>
   <div id="space"></div>
 
   @for(sale <- allsales) {
@@ -39,7 +51,7 @@
         <legend id="legend"><b>@sale.getName</b></legend>
       <form action="@routes.HomeController.externalSale()">
         <input type="hidden" name="id" id ="id" value="@sale.getId"/>
-        <MARQUEE LOOP="INFINITE"><div id="instructions">Description: @sale.getDescription       Location: @sale.getLocation       from @sale.getStartTime to @sale.getEndTime</div></MARQUEE>
+        <MARQUEE LOOP="INFINITE"><div id="instructions">Description: @sale.getDescription       Location: @sale.getLocation       on @sale.getDate       from @sale.getStartTime to @sale.getEndTime</div></MARQUEE>
         <div id="space"></div>
         <button type="submit">View Sale</button>
       </form>
@@ -87,6 +99,19 @@ body {
   margin: auto;
   text-align: center;
   color: #5cb85c;
+}
+
+#searchfield fieldset {
+  margin: auto;
+  text-align: center;
+}
+
+#searchallsales {
+  float: left;
+}
+
+#searchallitems {
+  float: right;
 }
 
 #fields {

@@ -354,6 +354,99 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    public static List<Item> searchAllItems(String name) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Item> returnList = new ArrayList<Item>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM item");
+        buf.append(" WHERE name LIKE '%" + name + "%'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                Item returnItem = new Item();
+                returnItem.setName(rs.getString("name"));
+                returnItem.setListPrice(rs.getDouble("list_price"));
+                returnItem.setBottomPrice(rs.getDouble("bottom_price"));
+                returnItem.setDescription(rs.getString("description"));
+                returnItem.setQuantity(rs.getInt("quantity"));
+                returnItem.setId(rs.getInt("id"));
+
+                returnList.add(returnItem);
+
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+        return returnList;
+    }
+
+    public static List<Sale> searchAllSales(String name) {
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Sale> returnList = new ArrayList<Sale>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM sale");
+        buf.append(" where name LIKE '%" + name + "%'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                Sale returnSale = new Sale();
+                returnSale.setName(rs.getString("name"));
+                returnSale.setLocation(rs.getString("location"));
+                returnSale.setStartTime(rs.getString("start_time"));
+                returnSale.setEndTime(rs.getString("end_time"));
+                returnSale.setDate(rs.getString("date"));
+                returnSale.setId(rs.getInt("id"));
+
+                returnList.add(returnSale);
+
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+        return returnList;
+    }
+
     /**
      * db access to get user's sales
      * @param saleAdminId the id of the user

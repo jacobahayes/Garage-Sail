@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf7f39b0-441a-4d43-bc98-9b4e5fd5ce93" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/allsearchitems.scala.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/searchsalesresults.scala.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/allsales.scala.html" afterPath="$PROJECT_DIR$/app/views/allsales.scala.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/HomeController.java" afterPath="$PROJECT_DIR$/app/controllers/HomeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" afterPath="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/externalsale.scala.html" afterPath="$PROJECT_DIR$/app/views/externalsale.scala.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/searchitemresults.scala.html" afterPath="$PROJECT_DIR$/app/views/searchitemresults.scala.html" />
     </list>
     <ignored path="play-java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,17 +48,45 @@
       <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="813">
-              <caret line="397" column="20" selection-start-line="397" selection-start-column="20" selection-end-line="397" selection-end-column="20" />
+            <state relative-caret-position="1138">
+              <caret line="411" column="0" selection-start-line="411" selection-start-column="0" selection-end-line="411" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11035#11036#0" expanded="true" />
-                <element signature="e#11062#11063#0" expanded="true" />
-                <element signature="e#14644#14645#0" expanded="true" />
-                <element signature="e#14671#14672#0" expanded="true" />
-                <element signature="e#14715#14716#0" expanded="true" />
-                <element signature="e#14742#14743#0" expanded="true" />
+                <element signature="e#15235#15236#0" expanded="true" />
+                <element signature="e#15262#15263#0" expanded="true" />
+                <element signature="e#15306#15307#0" expanded="true" />
+                <element signature="e#15333#15334#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchitemresults.scala.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/searchitemresults.scala.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="829">
+              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="allsearchitems.scala.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/allsearchitems.scala.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1787">
+              <caret line="116" column="3" selection-start-line="116" selection-start-column="3" selection-end-line="116" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchsalesresults.scala.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/searchsalesresults.scala.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1429">
+              <caret line="134" column="40" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -61,8 +94,40 @@
       <file leaf-file-name="JavaApplicationDatabase.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5112">
-              <caret line="354" column="5" selection-start-line="354" selection-start-column="5" selection-end-line="354" selection-end-column="5" />
+            <state relative-caret-position="963">
+              <caret line="433" column="60" selection-start-line="433" selection-start-column="60" selection-end-line="433" selection-end-column="60" />
+              <folding>
+                <element signature="e#11515#11521#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="1.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/evolutions/default/1.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="650">
+              <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sale.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/Sale.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="salepage.scala.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/salepage.scala.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="704">
+              <caret line="137" column="26" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -71,8 +136,8 @@
       <file leaf-file-name="externalsale.scala.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/externalsale.scala.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="738">
-              <caret line="137" column="26" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
+            <state relative-caret-position="329">
+              <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -83,16 +148,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="625">
               <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="allsales.scala.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/allsales.scala.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1200">
-              <caret line="156" column="15" selection-start-line="156" selection-start-column="15" selection-end-line="156" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -139,11 +194,14 @@
         <option value="$PROJECT_DIR$/app/models/Transaction.java" />
         <option value="$PROJECT_DIR$/app/models/Item.java" />
         <option value="$PROJECT_DIR$/app/views/salepage.scala.html" />
-        <option value="$PROJECT_DIR$/app/views/externalsale.scala.html" />
         <option value="$PROJECT_DIR$/conf/routes" />
-        <option value="$PROJECT_DIR$/app/controllers/HomeController.java" />
-        <option value="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" />
         <option value="$PROJECT_DIR$/app/views/allsales.scala.html" />
+        <option value="$PROJECT_DIR$/app/views/searchitemresults.scala.html" />
+        <option value="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" />
+        <option value="$PROJECT_DIR$/app/views/searchsalesresults.scala.html" />
+        <option value="$PROJECT_DIR$/app/controllers/HomeController.java" />
+        <option value="$PROJECT_DIR$/app/views/externalsale.scala.html" />
+        <option value="$PROJECT_DIR$/app/views/allsearchitems.scala.html" />
       </list>
     </option>
   </component>
@@ -894,7 +952,7 @@
       <workItem from="1467068575069" duration="286000" />
       <workItem from="1467151589835" duration="826000" />
       <workItem from="1467212909273" duration="9024000" />
-      <workItem from="1467230520086" duration="11135000" />
+      <workItem from="1467230520086" duration="13842000" />
     </task>
     <task id="LOCAL-00001" summary="db backend to save sales">
       <created>1466718503349</created>
@@ -977,7 +1035,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86107000" />
+    <option name="totallyTimeSpent" value="88814000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="204" y="0" width="3646" height="2110" extended-state="0" />
@@ -1049,9 +1107,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.sale" />
-    <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.sale" />
-    <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.item" />
     <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.item" />
     <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.item" />
     <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.item" />
@@ -1151,25 +1206,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/evolutions/default/1.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/Sale.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-          <folding>
-            <element signature="e#1347#1348#0" expanded="true" />
-            <element signature="e#1379#1380#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/createsale.scala.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1454">
@@ -1248,42 +1284,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/salepage.scala.html">
+    <entry file="file://$PROJECT_DIR$/app/views/allsales.scala.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2879">
-          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="30" />
+        <state relative-caret-position="3575">
+          <caret line="149" column="19" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/Sale.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/evolutions/default/1.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5112">
-          <caret line="354" column="5" selection-start-line="354" selection-start-column="5" selection-end-line="354" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/externalsale.scala.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="137" column="26" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="813">
-          <caret line="397" column="20" selection-start-line="397" selection-start-column="20" selection-end-line="397" selection-end-column="20" />
+        <state relative-caret-position="963">
+          <caret line="433" column="60" selection-start-line="433" selection-start-column="60" selection-end-line="433" selection-end-column="60" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#11035#11036#0" expanded="true" />
-            <element signature="e#11062#11063#0" expanded="true" />
-            <element signature="e#14644#14645#0" expanded="true" />
-            <element signature="e#14671#14672#0" expanded="true" />
-            <element signature="e#14715#14716#0" expanded="true" />
-            <element signature="e#14742#14743#0" expanded="true" />
+            <element signature="e#11515#11521#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1296,10 +1326,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/allsales.scala.html">
+    <entry file="file://$PROJECT_DIR$/app/views/searchsalesresults.scala.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="156" column="15" selection-start-line="156" selection-start-column="15" selection-end-line="156" selection-end-column="15" />
+        <state relative-caret-position="1429">
+          <caret line="134" column="40" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/searchitemresults.scala.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="829">
+          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1138">
+          <caret line="411" column="0" selection-start-line="411" selection-start-column="0" selection-end-line="411" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#15235#15236#0" expanded="true" />
+            <element signature="e#15262#15263#0" expanded="true" />
+            <element signature="e#15306#15307#0" expanded="true" />
+            <element signature="e#15333#15334#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/salepage.scala.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="704">
+          <caret line="137" column="26" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/externalsale.scala.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/allsearchitems.scala.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1787">
+          <caret line="116" column="3" selection-start-line="116" selection-start-column="3" selection-end-line="116" selection-end-column="3" />
           <folding />
         </state>
       </provider>

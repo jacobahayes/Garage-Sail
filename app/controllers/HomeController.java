@@ -382,20 +382,32 @@ public class HomeController extends Controller {
         return ok(searchitemresults.render(saleInView, itemsfromdb));
     }
 
-    public Result searchAllSales() {
-        Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
-        List<Sale> salesfromdb = new ArrayList<>();
-//        try {
-//            salesfromdb = JavaApplicationDatabase.searchItemInSale(searchSale.);
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//        }
+    public Result searchAllItems() {
 
-        return TODO;
+        // ??
+        Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.searchAllItems(searchSale.getName());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        //List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, searchSale.getName());
+
+        return ok(allsearchitems.render(saleInView, itemsfromdb));
     }
 
-    public Result searchAllItems() {
-        return TODO;
+    public Result searchAllSales() {
+        Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
+        List<Sale> foundSales = new ArrayList<>();
+        try {
+            foundSales = JavaApplicationDatabase.searchAllSales(searchSale.getName());
+            return ok(searchsalesresults.render(saleInView, foundSales));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(searchsalesresults.render(saleInView, foundSales));
     }
 
     /**

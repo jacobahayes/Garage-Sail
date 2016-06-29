@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cf7f39b0-441a-4d43-bc98-9b4e5fd5ce93" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/HomeController.java" afterPath="$PROJECT_DIR$/app/controllers/HomeController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/allsales.scala.html" afterPath="$PROJECT_DIR$/app/views/allsales.scala.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/externalsale.scala.html" afterPath="$PROJECT_DIR$/app/views/externalsale.scala.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/routes" afterPath="$PROJECT_DIR$/conf/routes" />
     </list>
     <ignored path="play-java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -94,8 +91,8 @@
       <file leaf-file-name="allsales.scala.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/allsales.scala.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="875">
-              <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+            <state relative-caret-position="1200">
+              <caret line="156" column="15" selection-start-line="156" selection-start-column="15" selection-end-line="156" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -897,7 +894,7 @@
       <workItem from="1467068575069" duration="286000" />
       <workItem from="1467151589835" duration="826000" />
       <workItem from="1467212909273" duration="9024000" />
-      <workItem from="1467230520086" duration="9797000" />
+      <workItem from="1467230520086" duration="11135000" />
     </task>
     <task id="LOCAL-00001" summary="db backend to save sales">
       <created>1466718503349</created>
@@ -980,7 +977,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84769000" />
+    <option name="totallyTimeSpent" value="86107000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="204" y="0" width="3646" height="2110" extended-state="0" />
@@ -1301,8 +1298,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/allsales.scala.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="35" column="29" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+        <state relative-caret-position="1200">
+          <caret line="156" column="15" selection-start-line="156" selection-start-column="15" selection-end-line="156" selection-end-column="15" />
           <folding />
         </state>
       </provider>

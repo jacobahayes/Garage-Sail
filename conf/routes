@@ -20,24 +20,22 @@ POST    /profile/username          controllers.HomeController.editUsername()
 POST    /profile/password          controllers.HomeController.editPassword()
 POST    /profile                   controllers.HomeController.cancel()
 
+GET     /browsesales               controllers.HomeController.browseSales()
+POST    /browsesales               controllers.HomeController.browseSales()
+GET     /browsesales               controllers.HomeController.externalSale()
+
 GET     /mysales                   controllers.HomeController.saleScreen()
 GET     /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/searchitemresults          controllers.HomeController.searchItemInSale()
 POST    /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/item     controllers.HomeController.renderItem()
 POST    /mysales/salepage/item     controllers.HomeController.renderItem()
+GET     /mysales/salepage/item     controllers.HomeController.renderItem()
+POST    /mysales/salepage/item     controllers.HomeController.updateItem()
 
 GET     /mysales/createsale        controllers.HomeController.renderCreateSale()
 
 POST    /mysales/createsale/add    controllers.HomeController.addSale()
-
-GET     /allsales                  controllers.HomeController.browseScreen()
-GET     /allsales/salepage         controllers.HomeController.salePage()
-POST    /allsales/salepage         controllers.HomeController.salePage()
-GET     /allsales/salepage         controllers.HomeController.backToSalePage()
-POST    /allsales/salepage         controllers.HomeController.backToSalePage()
-GET     /allsales/salepage/item    controllers.HomeController.renderItem()
-POST    /allsales/salepage/item    controllers.HomeController.updateItem()
 
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()

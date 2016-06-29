@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Sale extends Model {
 
     @Id
+    @Column(unique=true)
     private int id;
 
     private String name;

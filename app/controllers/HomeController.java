@@ -226,10 +226,28 @@ public class HomeController extends Controller {
     /**
      * shows all sales from all users
      */
-    public Result browseScreen() {
+    public Result browseSales() {
+        List<Sale> salesfromdb = new ArrayList<>();
+        try {
+            salesfromdb = JavaApplicationDatabase.getAllSales();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(allsales.render(salesfromdb));
+    }
+
+    public Result externalSale() {
+        Sale sale = Form.form(Sale.class).bindFromRequest().get();
+        saleInView = JavaApplicationDatabase.getSale(sale.getId());
 
 
-        return ok(allsales.render());
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(externalsale.render(saleInView, itemsfromdb));
     }
 
     /**
@@ -472,5 +490,4 @@ public class HomeController extends Controller {
         }
         return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
     }
-
 }

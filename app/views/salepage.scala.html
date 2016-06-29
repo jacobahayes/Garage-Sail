@@ -151,7 +151,7 @@
     </form>
     <div id="space"></div>
     <div id="space"></div>
-    
+
     @for(item <- saleitems) {
       <fieldset id="fields">
         <legend id="legend"><b>@item.getName</b></legend>
@@ -165,7 +165,7 @@
           <button type="submit">Edit Item</button>
         </form>
         <div id="space"></div>
-        <form action="@routes.HomeController.printTag()">
+        <form action="@routes.HomeController.singleBasicTag()" target="_blank">
           <input type="hidden" name="id" value="@item.getId"/>
           <button>View Tag</button>
         </form>

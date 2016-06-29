@@ -21,14 +21,27 @@
     <p id="instructions">browse what others are selling near you</p>
   </div>
 
+  <div id="space"></div>
+  <div id="edit-form">
+    <form action="@routes.HomeController.searchAllSales()" method="get">
+      <div id="sidebyside">
+        <input type="text" name="name" id="name" placeholder="search for sales">
+        <button type="Submit">Search</button>
+        <div id="space"></div>
+      </div>
+    </form>
+  </div>
+  <div id="space"></div>
+
   @for(sale <- allsales) {
     <center>
       <fieldset id="fields">
         <legend id="legend"><b>@sale.getName</b></legend>
       <form action="@routes.HomeController.externalSale()">
         <input type="hidden" name="id" id ="id" value="@sale.getId"/>
+        <MARQUEE LOOP="INFINITE"><div id="instructions">Description: @sale.getDescription       Location: @sale.getLocation       from @sale.getStartTime to @sale.getEndTime</div></MARQUEE>
+        <div id="space"></div>
         <button type="submit">View Sale</button>
-        <MARQUEE LOOP="INFINITE"><div id="instructions">Description: @sale.getDescription, Location: @sale.getLocation, From @sale.getStartTime to @sale.getEndTime</div></MARQUEE>
       </form>
       </fieldset>
     </center>
@@ -78,6 +91,16 @@ body {
 
 #fields {
   width: 500px;
+}
+
+#edit-form {
+  text-align: center;
+  margin: auto;
+  width: 280px;
+}
+
+#sidebyside {
+  display: flex;
 }
 
 legend {

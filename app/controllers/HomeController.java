@@ -382,6 +382,18 @@ public class HomeController extends Controller {
         return ok(searchitemresults.render(saleInView, itemsfromdb));
     }
 
+    public Result searchAllSales() {
+        Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
+        List<Sale> salesfromdb = new ArrayList<>();
+//        try {
+//            salesfromdb = JavaApplicationDatabase.searchItemInSale(searchSale.);
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+
+        return TODO;
+    }
+
     /**
      * renders the specific sale page
      * @return the HTTP response
@@ -451,12 +463,30 @@ public class HomeController extends Controller {
 
     }
 
-    public Result addItemToTransaction() {
-        return TODO;
+    public Result printTag() {
+        Item item = Form.form(Item.class).bindFromRequest().get();
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            Item itemInView = JavaApplicationDatabase.getItem(item.getId());
+            itemsfromdb.add(itemInView);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(tag.render(itemsfromdb, saleInView, loggedInUser));
     }
 
-    public Result printTag() {
-        return TODO;
+    public Result singleBasicTag() {
+        Item item = Form.form(Item.class).bindFromRequest().get();
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            Item itemInView = JavaApplicationDatabase.getItem(item.getId());
+            itemsfromdb.add(itemInView);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
     }
 
     public Result printAllTags() {
@@ -480,6 +510,10 @@ public class HomeController extends Controller {
     }
 
     public Result relatedItems() {
+        return TODO;
+    }
+
+    public Result addItemToTransaction() {
         return TODO;
     }
 }

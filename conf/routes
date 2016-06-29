@@ -22,6 +22,7 @@ POST    /profile                   controllers.HomeController.cancel()
 
 GET     /browsesales               controllers.HomeController.browseSales()
 POST    /browsesales               controllers.HomeController.browseSales()
+GET     /browsesales/searach       controllers.HomeController.searchAllSales()
 GET     /browsesales/externalsale  controllers.HomeController.externalSale()
 GET     /browsesales/externalsale/add  controllers.HomeController.addItemToTransaction()
 POST    /browsesales/externalsale/add  controllers.HomeController.addItemToTransaction()
@@ -47,6 +48,7 @@ POST    /transaction               controllers.HomeController.addItemToTransacti
 
 GET     /tag                       controllers.HomeController.printTag()
 POST    /tag                       controllers.HomeController.printTag()
+GET     /tag/itemtag               controllers.HomeController.singleBasicTag()
 GET     /alltags                   controllers.HomeController.printAllTags()
 POST    /alltags                   controllers.HomeController.printAllTags()
 GET     /alltags/basic             controllers.HomeController.basicTags()

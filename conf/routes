@@ -42,6 +42,15 @@ POST    /allsales/salepage/item    controllers.HomeController.updateItem()
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()
 
+POST    /transaction               controllers.HomeController.addItemToTransaction()
+
+GET     /tag                       controllers.HomeController.printTag()
+POST    /tag                       controllers.HomeController.printTag()
+GET     /alltags                   controllers.HomeController.printAllTags()
+POST    /alltags                   controllers.HomeController.printAllTags()
+GET     /alltags/basic             controllers.HomeController.basicTags()
+POST    /alltags/basic             controllers.HomeController.basicTags()
+
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

@@ -445,5 +445,32 @@ public class HomeController extends Controller {
 
     }
 
+    public Result addItemToTransaction() {
+        return TODO;
+    }
+
+    public Result printTag() {
+        return TODO;
+    }
+
+    public Result printAllTags() {
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(tag.render(itemsfromdb, saleInView, loggedInUser));
+    }
+
+    public Result basicTags() {
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
+    }
 
 }

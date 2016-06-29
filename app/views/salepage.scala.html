@@ -47,13 +47,6 @@
     width: auto;
   }
 
-  #edit-password-form input {
-    width: 250px;
-    margin: auto;
-    padding: 10px;
-    text-align: left;
-  }
-
   #edit-form {
     text-align: center;
     margin: auto;
@@ -86,7 +79,7 @@
   }
 
   legend {
-    color: #5cb85c;
+    color: #000000;
   }
 
   #edit-form input {
@@ -102,6 +95,7 @@
     #fields fieldset {
       margin: auto;
       text-align: center;
+      padding: 2px;
     }
 
   #boatpicture img{
@@ -111,8 +105,23 @@
 
     #sidebyside {
       display: flex;
-
     }
+
+    .itemandtag {
+      float: right;
+    }
+
+    #iteminfo {
+      text-align: center;
+      padding: 1px;
+    }
+
+    #image img {
+      float: left;
+      align: center;
+      margins: auto;
+    }
+
 
   </style>
 
@@ -147,19 +156,38 @@
     <div id="space"></div>
 
     @for(item <- saleitems) {
-      <center>
+      <fieldset id="fields">
+        <legend id="legend"><b>@item.getName</b></legend>
+        <img src="@item.getImg" alt="Image not available" id="image">
+        <div id="iteminfo">
+          <p>Description: @item.getDescription</p>
+          <p>Quantity: @item.getQuantity</p>
+          <p>Item ID: @item.getId</p>
+        </div>
+      <div class="itemandtag">
         <form action="@routes.HomeController.renderItem()">
           <input type="hidden" name="id" id ="id" value="@item.getId"/>
-          <button>@item.getName</button>
+          <button type="submit">Edit Item</button>
         </form>
-      </center>
-      <div id="space"></div>
+        <div id="space"></div>
+        <form action="@routes.HomeController.printTag()">
+          <input type="hidden" name="id" value="@item.getId"/>
+          <button>View Tag</button>
+        </form>
+      </div>
+      </fieldset>
     }
     <div id="space"></div>
     <div id="space"></div>
     <form action="@routes.HomeController.renderAddItem()">
       <center><button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button></center>
     </form>
+    <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.printAllTags()">
+        <button type="submit">View All Tags</button>
+      </form>
+    </div>
     <div id="space"></div>
     <div id="edit-form">
       <form action="@routes.HomeController.cancel()" method="post">

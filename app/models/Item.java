@@ -4,6 +4,7 @@ import com.avaje.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by spencer on 6/22/2016.
@@ -23,6 +24,8 @@ public class Item extends Model{
     private double bottomPrice;
     private double sellPrice;
     private double ebayPrice;
+
+    private BufferedImage img;
 
     private int transactionId;
 
@@ -91,5 +94,9 @@ public class Item extends Model{
 
     public void setSaleId(int saleId) {
         this.saleId = saleId;
+    }
+
+    public BufferedImage getImg() {
+        return img;
     }
 }

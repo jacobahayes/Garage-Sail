@@ -1,0 +1,18 @@
+@(saleitems: List[Item], sale: Sale, user: User)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Tags</title>
+</head>
+<body>
+  @for(item <- saleitems) {
+    <p>Description: @item.getDescription</p>
+    <p>Price: @item.getListPrice</p>
+    <p>Quantity: @item.getQuantity</p>
+    <p>ID: @item.getId</p>
+    <p></p>
+  }
+</body>
+</html>

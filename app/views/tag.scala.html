@@ -1,0 +1,151 @@
+@(saleitems: List[Item], sale: Sale, user: User)
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8">
+    <title>Tag</title>
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
+  </head>
+  <body>
+
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
+
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+
+      <div id="heading">
+        <p id="title">Tags for @sale.getName</p>
+      </div>
+
+    @for(item <- saleitems) {
+      <center>
+        <fieldset id="fields">
+          <legend><b>@item.getName</b></legend>
+          <div id="iteminfo">
+            <p>Description: @item.getDescription</p>
+            <p>Price: @item.getListPrice</p>
+            <p>Quantity: @item.getQuantity</p>
+            <p>ID: @item.getId</p>
+          </div>
+        </fieldset>
+      </center>
+      <div id="space"></div>
+      <div id="space"></div>
+    }
+
+    <div id="space"></div>
+    <div id="space"></div>
+
+    <div id="edit-form">
+      <form action="javascript:window.print()">
+        <button type="submit">Print</button>
+      </form>
+    </div>
+    <div id="space"></div>
+
+    <div id="edit-form">
+      <form action="@routes.HomeController.basicTags()" taget="_blank">
+        <button type="submit">Printer View</button>
+      </form>
+    </div>
+    <div id="space"></div>
+
+    <div id="edit-form">
+      <form action="mailto:@user.getEmail">
+        @for(item <- saleitems) {
+          <input type="hidden" name="name" value="Name: @item.getName">
+          <input type="hidden" name="description" value="Description: @item.getDescription">
+          <input type="hidden" name="price" value="Price: @item.getListPrice">
+          <input type="hidden" name="quantity" value="Quantity: @item.getQuantity">
+          <input type="hidden" name="id" value="ID: @item.getId">
+        }
+        <button type="submit">Email Me</button>
+      </form>
+    </div>
+
+    <div id="edit-form">
+      <form action="@routes.HomeController.cancel()" method="post">
+        <button type="submit">Cancel</button>
+      </form>
+    </div>
+
+  </body>
+</html>
+
+<style>
+
+body {
+  background-color: #0086b3;
+  font-family: "Poiret One";
+}
+
+#boatpicture img{
+  width: 128px;
+  height: 128px;
+}
+
+#logo {
+  text-align: left;
+  text-size: 40px;
+  color: #5cb85c;
+  text-decoration: none;
+}
+
+#heading {
+  text-align: center;
+  color: #5cb85c;
+}
+
+#title {
+  font-size: 80px;
+}
+
+#instructions {
+  font-size: 20px;
+}
+
+button {
+  /*background-color: #5cb85c;*/
+  /*width: 175px;*/
+  padding: 10px;
+
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  width: 600px;
+
+  background-color: #0086b3;
+  color: #5cb85c;
+  border: 1px solid #5cb85c;
+}
+
+#space {
+  height: 5px;
+}
+
+legend {
+  color: #000000;
+  text-style: bold;
+  text-align:center;
+}
+
+#fields fieldset {
+  margin: auto;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #5cb85c; /* Green */
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+</style>

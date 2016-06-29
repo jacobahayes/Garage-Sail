@@ -40,13 +40,6 @@
     font-size: 20px;
   }
 
-  #edit-name-form input {
-    padding: 10px;
-    text-align: center;
-    margin: auto;
-    width: auto;
-  }
-
   #edit-form {
     text-align: center;
     margin: auto;
@@ -153,16 +146,17 @@
       </form>
     </div>
     <div id="space"></div>
+    <form action="@routes.HomeController.renderAddItem()">
+      <center><button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button></center>
+    </form>
     <div id="space"></div>
-
+    <div id="space"></div>
     @for(item <- saleitems) {
       <fieldset id="fields">
         <legend id="legend"><b>@item.getName</b></legend>
         <img src="@item.getImg" alt="Image not available" id="image">
         <div id="iteminfo">
           <p>Description: @item.getDescription</p>
-          <p>Quantity: @item.getQuantity</p>
-          <p>Item ID: @item.getId</p>
         </div>
       <div class="itemandtag">
         <form action="@routes.HomeController.renderItem()">
@@ -178,10 +172,6 @@
       </fieldset>
     }
     <div id="space"></div>
-    <div id="space"></div>
-    <form action="@routes.HomeController.renderAddItem()">
-      <center><button><a href="@routes.HomeController.renderAddItem()" id="logo">Add Item</a></button></center>
-    </form>
     <div id="space"></div>
     <div id="edit-form">
       <form action="@routes.HomeController.printAllTags()">

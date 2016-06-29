@@ -50,7 +50,7 @@
 
     <div id="edit-form">
       <form action="@routes.HomeController.basicTags()" target="_blank">
-        <button type="submit">Printer View</button>
+        <button type="submit">View Plain Text</button>
       </form>
     </div>
     <div id="space"></div>
@@ -67,12 +67,12 @@
         <button type="submit">Email Me</button>
       </form>
     </div>
-
-    <div id="edit-form">
+    <div id="space"></div>
+    <center><div id="edit-form">
       <form action="@routes.HomeController.cancel()" method="post">
-        <button type="submit">Cancel</button>
+        <center><button type="submit">Cancel</button></center>
       </form>
-    </div>
+    </div></center>
 
   </body>
 </html>
@@ -103,10 +103,6 @@ body {
 
 #title {
   font-size: 80px;
-}
-
-#instructions {
-  font-size: 20px;
 }
 
 button {
@@ -146,6 +142,13 @@ button:hover {
   background-color: #5cb85c; /* Green */
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+#edit-form {
+  text-align: center;
+  margin: auto;
+  width: 280px;
 }
 
 </style>

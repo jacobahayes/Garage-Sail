@@ -16,6 +16,7 @@ import java.util.List;
 public class User extends Model{
 
     @Id
+    @Column(unique=true)
     private int id;
 
     @Column(unique=true)

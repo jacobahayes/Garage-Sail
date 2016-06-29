@@ -29,7 +29,6 @@ public class Item extends Model{
 
     private int transactionId;
 
-    //photo?
 
     public String getName() {
         return name;

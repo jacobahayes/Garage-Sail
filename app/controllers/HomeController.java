@@ -293,18 +293,6 @@ public class HomeController extends Controller {
     public Result saleScreen(){
         List<Sale> salesfromdb = new ArrayList<>();
 
-
-        //FOR TESTING IT DEFAULTS TO USERNAME STUART. ** REMOVE LATER **
-        if (loggedInUser == null) {
-            System.out.println("no username");
-            this.loggedInUser = new User();
-            this.loggedInUser.setUsername("stuart");
-            //System.out.println(loggedInUser.getUsername());
-        } else {
-            //System.out.println(loggedInUser.getUsername());
-        }
-        //System.out.println(JavaApplicationDatabase.getMySales(loggedInUser.getUsername()));
-
         try {
             salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getId());
             

@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class Transaction extends Model {
 
     @Id
+    @Column(unique=true)
     private int transactionId;
     private int saleId;
     private List<Item> items;

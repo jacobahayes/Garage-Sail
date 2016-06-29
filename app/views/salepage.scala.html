@@ -151,12 +151,13 @@
     </form>
     <div id="space"></div>
     <div id="space"></div>
+    
     @for(item <- saleitems) {
       <fieldset id="fields">
         <legend id="legend"><b>@item.getName</b></legend>
         <img src="@item.getImg" alt="Image not available" id="image">
         <div id="iteminfo">
-          <p>Description: @item.getDescription</p>
+          <p><b>Description:</b> @item.getDescription</p>
         </div>
       <div class="itemandtag">
         <form action="@routes.HomeController.renderItem()">

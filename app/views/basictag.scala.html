@@ -8,6 +8,7 @@
 </head>
 <body>
   @for(item <- saleitems) {
+    <p><b>@item.getName</b></p>
     <p>Description: @item.getDescription</p>
     <p>Price: @item.getListPrice</p>
     <p>Quantity: @item.getQuantity</p>

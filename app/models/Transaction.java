@@ -13,7 +13,7 @@ public class Transaction extends Model {
 
     @Id
     @Column(unique=true)
-    private int transactionId;
+    private int id;
     private int saleId;
     private List<Item> items;
     private String date;
@@ -22,12 +22,12 @@ public class Transaction extends Model {
     private String receipt;
     private String paymentMethod;
 
-    public int getTransactionId() {
-        return transactionId;
+    public int getId() {
+        return id;
     }
 
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getSaleId() {

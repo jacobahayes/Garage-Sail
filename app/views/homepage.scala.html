@@ -30,7 +30,7 @@
     font-size: 20px;
   }
   .home-menu li{
-    width: 35%;
+    width: 70%;
     height: 100px;
     overflow: hidden;
     display: block;
@@ -67,14 +67,14 @@
     left: 120px;
     width: 370px;
     height: 60px;
-    top: 20px;
+    top: 42px;
   }
   .content-main{
-    font-size: 30px;
+    font-size: 42px;
     transition: all 300ms linear;
   }
   .content-sub{
-    font-size: 14px;
+    font-size: 20px;
     color: #0086b3;
     transition: all 300ms linear;
   }
@@ -87,14 +87,14 @@
   }
   .home-menu li:hover .content-main{
     color: #0086b3;
-    font-size: 16px;
+    font-size: 25px;
   }
   .content-menu li:hover .content-sub{
     color: #fff;
     font-size: 50px;
   }
   #space {
-    height: 10px;
+    height: 3px;
   }
   .image {
     height: 100px;
@@ -118,44 +118,50 @@
       <p id="instructions">see if you can sail our superior sea of sails</p>
     </div>
 
-    <ul class="home-menu">
-      <li>
-        <a href="profile">
-          <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
-          <div class="menu-content">
-            <h2 class="content-main">My Profile</h2>
-            <h3 class="content-sub">view & change your profile information</h3>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="mysales">
-          <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
-          <div class="menu-content">
-            <h2 class="content-main">My Sales</h2>
-            <h3 class="content-sub">view and create your own garage sales</h3>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="browsesales">
-          <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
-          <div class="menu-content">
-            <h2 class="content-main">Browse</h2>
-            <h3 class="content-sub">view all garage sales</h3>
-          </div>
-        </a>
-      </li>
-      <li>
-        <a href="logout">
-          <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
-          <div class="menu-content">
-            <h2 class="content-main">Logout</h2>
-            <h3 class="content-sub">SEA you later!</h3>
-          </div>
-        </a>
-      </li>
-    </ul>
+    <center>
+      <ul class="home-menu">
+        <li>
+          <a href="profile">
+            <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+            <div class="menu-content">
+              <div class="content-main"><b>My Profile</b></div>
+              <div id="space"></div>
+              <div class="content-sub">view & change your profile information</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="mysales">
+            <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+            <div class="menu-content">
+              <div class="content-main"><b>My Sales</b></div>
+              <div id="space"></div>
+              <div class="content-sub">view and create your own garage sales</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="browsesales">
+            <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+            <div class="menu-content">
+              <div class="content-main"><b>Browse</b></div>
+              <div id="space"></div>
+              <div class="content-sub">view all garage sales</div>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="logout">
+            <div><img class="image" src="@routes.Assets.versioned("images/sailboat.png")"></div>
+            <div class="menu-content">
+              <div class="content-main"><b>Logout</b></div>
+              <div id="space"></div>
+              <div class="content-sub">SEA you later!</div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </center>
 
   </body>
 

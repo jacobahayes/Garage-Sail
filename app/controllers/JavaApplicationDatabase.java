@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import models.Item;
 import models.Sale;
+import models.Transaction;
 import models.User;
 import play.mvc.*;
 import play.db.*;
@@ -321,6 +322,7 @@ class JavaApplicationDatabase extends Controller {
         buf.append("SELECT * FROM item");
         buf.append(" WHERE sale_id='" + sale.getId() + "'");
         buf.append(" AND name LIKE '%" + name + "%'");
+        buf.append(" OR description LIKE '%" + name + "%'");
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -369,6 +371,7 @@ class JavaApplicationDatabase extends Controller {
         StringBuffer buf = new StringBuffer();
         buf.append("SELECT * FROM item");
         buf.append(" WHERE name LIKE '%" + name + "%'");
+        buf.append(" OR description LIKE '%" + name + "%'");
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -414,7 +417,12 @@ class JavaApplicationDatabase extends Controller {
 
         StringBuffer buf = new StringBuffer();
         buf.append("SELECT * FROM sale");
-        buf.append(" where name LIKE '%" + name + "%'");
+        buf.append(" WHERE name LIKE '%" + name + "%'");
+        buf.append(" OR description LIKE '%" + name + "%'");
+        buf.append(" OR date LIKE '%" + name + "%'");
+        buf.append(" OR location LIKE '%" + name + "%'");
+        buf.append(" OR start_time LIKE '%" + name + "%'");
+        buf.append(" OR end_time LIKE '%" + name + "%'");
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -668,6 +676,52 @@ class JavaApplicationDatabase extends Controller {
         }
 
         return item;
+    }
+
+    public static Result getTransactions(User user) {
+        /**
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Transaction> trans = new Transaction<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM transaction");
+        but.append(" WHERE ")
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                item.setSaleId(rs.getInt("sale_id"));
+                item.setDate(rs.getString("date"));
+                item.setTotalPrice(rs.getDouble("total_price"));
+                item.setTotalPrice(rs.getDouble("total_price"));
+                item.setPaymentMethod(rs.getString("payment_method"));
+                item.setId(rs.getInt("id"));
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the item");
+        }
+
+        return item;
+         */
+        return TODO;
     }
 
     public static List<Sale> getAllSales() {

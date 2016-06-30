@@ -45,7 +45,9 @@ POST    /mysales/createsale/add    controllers.HomeController.addSale()
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()
 
-POST    /transaction               controllers.HomeController.addItemToTransaction()
+GET     /transactions               controllers.HomeController.renderTransaction()
+GET     /transactions/add            controllers.HomeController.addTransactions()
+POST    /transactions/item          controllers.HomeController.addItemToTransaction()
 
 GET     /tag                       controllers.HomeController.printTag()
 POST    /tag                       controllers.HomeController.printTag()

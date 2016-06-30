@@ -8,6 +8,7 @@ import com.avaje.ebean.RawSqlBuilder;
 import models.Item;
 import models.Sale;
 import models.User;
+import models.Transaction;
 import play.data.Form;
 import play.mvc.*;
 import play.db.*;
@@ -530,6 +531,26 @@ public class HomeController extends Controller {
     }
 
     public Result addItemToTransaction() {
+        return TODO;
+    }
+
+
+
+    public Result renderTransaction() {
+        /**
+        List<Transaction> transList = new ArrayList<>();
+        try {
+            transList = JavaApplicationDatabase.getTransactions(loggedInUser);
+            return Ok(transaction.render(transList, loggedInUser));
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return Ok(transaction.render(transList, loggedInUser));
+         */
+        return TODO;
+    }
+
+    public Result addTransactions() {
         return TODO;
     }
 }

@@ -22,9 +22,24 @@
   </div>
 
   <center>
-  <div id="wrapper">
-    <div class="cell">
-      <div class="content">
+    <div id="wrapper">
+      <div class="cell">
+        <div class="content">
+          <p id="instructions">Search All Sales</p>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="content2">
+          <p id="instructions">Search All Items</p>
+        </div>
+      </div>
+    </div>
+  </center>
+
+  <center>
+  <div id="wrapper1">
+    <div class="cell1">
+      <div class="content1">
         <form action="@routes.HomeController.searchAllSales()" method="get">
           <div id="sidebyside">
             <input type="text" name="name" id="name" placeholder="search all sales">
@@ -40,8 +55,8 @@
         <p id="instructions">or</p>
       </div>
     </div>
-    <div class="cell">
-      <div class="content2">
+    <div class="cell1">
+      <div class="content21">
         <form action="@routes.HomeController.searchAllItems()" method="get">
           <div id="sidebyside">
             <input type="text" name="name" id="name" placeholder="search all items">
@@ -181,18 +196,41 @@ button:hover {
 
 
 
+#wrapper1 {
+  text-align: center;
+  margins: auto;
+  display: table;
+  border: none;
+  width: 600px;
+}
+
+.cell1 {
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+}
+
+.content1 {
+  float: left;
+}
+
+.content21{
+  float: right;
+}
+
+
 #wrapper {
   text-align: center;
   margins: auto;
   display: table;
   border: none;
-  width: 600px;;
+  width: 500px;;
 }
 
 .cell {
   display: table-cell;
   vertical-align: middle;
-  height: 200px;
+  height: 20px;
 }
 
 .content {

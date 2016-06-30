@@ -34,8 +34,6 @@ GET     /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/searchitemresults          controllers.HomeController.searchItemInSale()
 POST    /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/item     controllers.HomeController.renderItem()
-POST    /mysales/salepage/item     controllers.HomeController.renderItem()
-GET     /mysales/salepage/item     controllers.HomeController.renderItem()
 POST    /mysales/salepage/item     controllers.HomeController.updateItem()
 
 GET     /mysales/createsale        controllers.HomeController.renderCreateSale()

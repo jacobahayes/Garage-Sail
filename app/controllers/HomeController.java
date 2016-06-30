@@ -469,8 +469,10 @@ public class HomeController extends Controller {
 
         int result = JavaApplicationDatabase.updateItem(updatedItem.getId(), updatedItem);
         if (result == 1) {
-            Item itemToRender = JavaApplicationDatabase.getItem(updatedItem.getId());
-            return ok(item.render(itemToRender));
+            //Item itemToRender = JavaApplicationDatabase.getItem(updatedItem.getId());
+            List<Item> itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+            //return ok(item.render(itemToRender));
+            return ok(salepage.render(saleInView, itemsfromdb));
 
         } else {
 

@@ -288,7 +288,6 @@ class JavaApplicationDatabase extends Controller {
         buf.append(", list_price='" + newItem.getListPrice() + "'");
         buf.append(", bottom_price='" + newItem.getBottomPrice() + "'");
         buf.append(" WHERE id=" + itemId);
-        buf.append(" WHERE img=" + newItem.getImg() + "'");
 
         System.out.println("Execute Query: " + buf.toString());
         try {

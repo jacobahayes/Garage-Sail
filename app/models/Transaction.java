@@ -3,12 +3,14 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.List;
 
 /**
  * Created by spencer on 6/22/2016.
  */
+@Entity
 public class Transaction extends Model {
 
     @Id

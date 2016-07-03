@@ -450,7 +450,7 @@ public class HomeController extends Controller {
     }
 
     public Result relatedItems() {
-        return TODO;
+        return ok(similaritems.render());
     }
 
 
@@ -564,6 +564,7 @@ public class HomeController extends Controller {
     //---------------------------------------------------Transaction logic----------------------------------------------------------------------
 
     public Result addItemToTransaction() {
+        Item item = Form.form(Item.class).bindFromRequest().get();
         return TODO;
     }
 

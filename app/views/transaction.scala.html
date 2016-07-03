@@ -4,9 +4,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>New Transaction</title>
+  <title>Transactions</title>
 </head>
-
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <style>
 
   body {
@@ -14,15 +14,12 @@
     font-family: "Poiret One";
   }
 
-  #password, #password_confirm {
-    -webkit-text-security: circle;
-  }
-
   #logo {
     text-align: left;
     text-size: 40px;
     color: #5cb85c;
     text-decoration: none;
+    font-family: "Poiret One";
   }
 
   #heading {
@@ -88,6 +85,10 @@
     padding: 10px;
   }
 
+  #edit-form {
+    text-align: center;
+  }
+
   button:hover {
     background-color: #5cb85c; /* Green */
     color: white;
@@ -136,7 +137,7 @@
   <div id="heading">
     <p id="title">Transactions</p>
     <p id="instruction">view your open or closed transactions</p>
-
+  </div>
     @for(trans <- transaction) {
       <center>
         <fieldset id="fields">
@@ -151,6 +152,16 @@
       </center>
     }
 
+  <div id="edit-form">
+    <form action="@routes.HomeController.viewSingleTransaction()" method="post">
+      <button type="submit">Sample Transaction</button>
+    </form>
+  </div>
+  <div id="space"></div>
+  <div id="edit-form">
+    <form action="@routes.HomeController.cancel()" method="post">
+      <button type="submit">Cancel</button>
+    </form>
   </div>
 
 </body>

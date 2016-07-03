@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Process Sale</title>
+  </head>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <body>
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
+
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+
+
+
+    <div id="heading">
+      <p id="title">Process Sale</p>
+      <p id="instructions"><b>select payment method</b></p>
+    </div>
+
+    <center>
+      <div id="wrapper">
+      <div class="cell">
+        <div class="content">
+          <form action="" method="post">
+            <button type="submit">Credit/Debit Card</button>
+          </form>
+        </div>
+      </div>
+        <div class="cell">
+          <div class="content1">
+            <div id="coindesk-widget" data-align="center"></div>
+            <script type="text/javascript" src="//widget.coindesk.com/bpiticker/coindesk-widget.min.js?b6542b"></script>
+            <div id="space"></div>
+            <form action="" method="post">
+              <button type="submit">Bitcoin</button>
+            </form>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="content2">
+            <form action="" method="post">
+              <button type="submit">Cash</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </center>
+
+
+
+
+
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.cancel()" method="post">
+        <button type="submit">Cancel</button>
+      </form>
+    </div>
+
+  </body>
+</html>
+
+<style>
+
+body {
+  background-color: #0086b3;
+  font-family: "Poiret One";
+}
+
+#logo {
+  text-align: left;
+  text-size: 40px;
+  color: #5cb85c;
+  text-decoration: none;
+}
+
+#heading {
+  text-align: center;
+  color: #5cb85c;
+}
+
+#title {
+  font-size: 80px;
+}
+
+#saleinfo {
+  font-size: 20px;
+}
+
+#edit-form {
+  text-align: center;
+  margin: auto;
+  width: 280px;
+}
+
+#buttons {
+  width: 280px;
+  margin: auto;
+}
+
+button {
+  /*background-color: #5cb85c;*/
+  width: 135px;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+
+  background-color: #0086b3;
+  color: #5cb85c;
+  border: 2px solid #5cb85c;
+}
+
+#space {
+  height: 5px;
+}
+
+legend {
+  color: #000000;
+}
+
+#edit-form input {
+  padding: 10px;
+}
+
+button:hover {
+  background-color: #5cb85c; /* Green */
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#fields fieldset {
+  margin: auto;
+  text-align: center;
+  padding: 2px;
+}
+
+#boatpicture img{
+  width: 128px;
+  height: 128px;
+}
+
+#sidebyside {
+  display: flex;
+}
+
+.itemandtag {
+  float: right;
+}
+
+#iteminfo {
+  text-align: center;
+  padding: 1px;
+}
+
+#image img {
+  float: left;
+  align: center;
+  margins: auto;
+}
+
+#wrapper {
+  text-align: center;
+  margins: auto;
+  display: table;
+  border: none;
+  width: 700px;;
+}
+
+.cell {
+  display: table-cell;
+  vertical-align: middle;
+  height: 20px;
+}
+
+.content {
+  float: left;
+}
+
+.content2{
+  float: right;
+}
+
+</style>

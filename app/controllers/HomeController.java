@@ -567,23 +567,27 @@ public class HomeController extends Controller {
         return TODO;
     }
 
-
-
     public Result renderTransaction() {
-        /**
         List<Transaction> transList = new ArrayList<>();
         try {
-            transList = JavaApplicationDatabase.getTransactions(loggedInUser);
-            return Ok(transaction.render(transList, loggedInUser));
-        } catch(Exception e) {
+//          transList = JavaApplicationDatabase.getTransactions(loggedInUser.getId(), saleInView.getId());
+            return ok(transaction.render(transList, loggedInUser));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return Ok(transaction.render(transList, loggedInUser));
-         */
-        return TODO;
+        return ok(transaction.render(transList, loggedInUser));
+    }
+
+    public Result viewSingleTransaction() {
+        List<Item> itemsfromdb = new ArrayList<>(); //change later
+        return ok(singletransaction.render(itemsfromdb));
     }
 
     public Result addTransactions() {
         return TODO;
+    }
+
+    public Result processSale() {
+        return ok(processsale.render());
     }
 }

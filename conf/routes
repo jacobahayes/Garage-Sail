@@ -46,6 +46,11 @@ GET     /add                       controllers.HomeController.renderAddItem()
 GET     /transactions               controllers.HomeController.renderTransaction()
 GET     /transactions/add            controllers.HomeController.addTransactions()
 POST    /transactions/item          controllers.HomeController.addItemToTransaction()
+GET     /transactions/view         controllers.HomeController.viewSingleTransaction()
+POST    /transactions/view         controllers.HomeController.viewSingleTransaction()
+
+POST     /processsale               controllers.HomeController.processSale()
+GET     /processsale               controllers.HomeController.processSale()
 
 GET     /tag                       controllers.HomeController.printTag()
 POST    /tag                       controllers.HomeController.printTag()

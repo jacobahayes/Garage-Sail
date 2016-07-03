@@ -29,6 +29,9 @@ public class HomeController extends Controller {
     public static User loggedInUser = null;
     public static Sale saleInView = null;
 
+
+    //------------------------------------------Homepage-ish logic--------------------------------------------------------------
+
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
@@ -131,6 +134,11 @@ public class HomeController extends Controller {
         return ok(homepage.render());
     }
 
+
+
+
+    //------------------------------------------Profile logic--------------------------------------------------------------
+
     /**
      * renders the my profile page
      * @return the HTTP response
@@ -224,6 +232,11 @@ public class HomeController extends Controller {
         }
     }
 
+
+
+
+    //------------------------------------------Sale logic--------------------------------------------------------------
+
     /**
      * shows all sales from all users
      */
@@ -315,6 +328,45 @@ public class HomeController extends Controller {
     }
 
     /**
+     * renders the specific sale page
+     * @return the HTTP response
+     */
+    public Result salePage() {
+
+        Sale sale = Form.form(Sale.class).bindFromRequest().get();
+        saleInView = JavaApplicationDatabase.getSale(sale.getId());
+
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(salepage.render(saleInView, itemsfromdb));
+    }
+
+    /**
+     * allows the user to return to the sale page from the add item page
+     * @return the HTTP response
+     */
+    public Result backToSalePage() {
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(salepage.render(saleInView, itemsfromdb));
+    }
+
+
+
+
+    //------------------------------------------Item logic--------------------------------------------------------------
+
+    /**
      * renders the add item screen
      * @return the HTTP response
      */
@@ -343,8 +395,6 @@ public class HomeController extends Controller {
             return badRequest("This action is not allowed");
 
         }
-
-
     }
 
     /**
@@ -362,6 +412,50 @@ public class HomeController extends Controller {
 
     }
 
+    /**
+     * renders the specific item page
+     * @return the HTTP response
+     */
+    public Result renderItem() {
+
+        Item selectedItem = Form.form(Item.class).bindFromRequest().get();
+        System.out.println(selectedItem.getId());
+        System.out.println(selectedItem.getName());
+        Item itemToRender = JavaApplicationDatabase.getItem(selectedItem.getId());
+
+        return ok(item.render(itemToRender));
+    }
+
+    /**
+     * controls flow when updating an item
+     * @return the HTTP response
+     */
+    public Result updateItem() {
+
+        Item updatedItem = Form.form(Item.class).bindFromRequest().get();
+
+        int result = JavaApplicationDatabase.updateItem(updatedItem.getId(), updatedItem);
+        if (result == 1) {
+            //Item itemToRender = JavaApplicationDatabase.getItem(updatedItem.getId());
+            List<Item> itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+            //return ok(item.render(itemToRender));
+            return ok(salepage.render(saleInView, itemsfromdb));
+
+        } else {
+
+            return badRequest("An error occurred while saving");
+
+        }
+
+    }
+
+    public Result relatedItems() {
+        return TODO;
+    }
+
+
+
+    //----------------------------------------------Search logic------------------------------------------------------------------
 
     /**
      * allows for searching an item in a sale by name
@@ -411,76 +505,11 @@ public class HomeController extends Controller {
         return ok(searchsalesresults.render(saleInView, foundSales));
     }
 
-    /**
-     * renders the specific sale page
-     * @return the HTTP response
-     */
-    public Result salePage() {
-
-        Sale sale = Form.form(Sale.class).bindFromRequest().get();
-        saleInView = JavaApplicationDatabase.getSale(sale.getId());
 
 
-        List<Item> itemsfromdb = new ArrayList<>();
-        try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return ok(salepage.render(saleInView, itemsfromdb));
-    }
 
-    /**
-     * allows the user to return to the sale page from the add item page
-     * @return the HTTP response
-     */
-    public Result backToSalePage() {
 
-        List<Item> itemsfromdb = new ArrayList<>();
-        try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return ok(salepage.render(saleInView, itemsfromdb));
-    }
-
-    /**
-     * renders the specific item page
-     * @return the HTTP response
-     */
-    public Result renderItem() {
-
-        Item selectedItem = Form.form(Item.class).bindFromRequest().get();
-        System.out.println(selectedItem.getId());
-        System.out.println(selectedItem.getName());
-        Item itemToRender = JavaApplicationDatabase.getItem(selectedItem.getId());
-
-        return ok(item.render(itemToRender));
-    }
-
-    /**
-     * controls flow when updating an item
-     * @return the HTTP response
-     */
-    public Result updateItem() {
-
-        Item updatedItem = Form.form(Item.class).bindFromRequest().get();
-
-        int result = JavaApplicationDatabase.updateItem(updatedItem.getId(), updatedItem);
-        if (result == 1) {
-            //Item itemToRender = JavaApplicationDatabase.getItem(updatedItem.getId());
-            List<Item> itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-            //return ok(item.render(itemToRender));
-            return ok(salepage.render(saleInView, itemsfromdb));
-
-        } else {
-
-            return badRequest("An error occurred while saving");
-
-        }
-
-    }
+    //----------------------------------------------Tag logic------------------------------------------------------------------
 
     public Result printTag() {
         Item item = Form.form(Item.class).bindFromRequest().get();
@@ -528,9 +557,11 @@ public class HomeController extends Controller {
         return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
     }
 
-    public Result relatedItems() {
-        return TODO;
-    }
+
+
+
+
+    //---------------------------------------------------Transaction logic----------------------------------------------------------------------
 
     public Result addItemToTransaction() {
         return TODO;

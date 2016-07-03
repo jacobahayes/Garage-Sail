@@ -23,6 +23,9 @@ class JavaApplicationDatabase extends Controller {
     
     static Connection conn = db.getConnection();
 
+
+    //-----------------------------------------Profile logic----------------------------------------------------------------
+
     /**
      * db access to attempt login
      * @param username the username to attempt
@@ -263,6 +266,12 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
+
+
+
+
+    //-----------------------------------------Item logic----------------------------------------------------------------
+
     /**
      * db access to update item
      * @param itemId the id of the item to be updated
@@ -298,6 +307,69 @@ class JavaApplicationDatabase extends Controller {
 
         return result;
     }
+
+    /**
+     * db access to get items within a sale
+     * @param saleID the id of the sale
+     * @return a list of items
+     */
+    public static List<Item> getSaleItems(int saleID) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Item> returnList = new ArrayList<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM item");
+        buf.append(" WHERE sale_id='" + saleID + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs!=null && rs.next()) {
+
+                Item returnItem = new Item();
+
+
+                returnItem.setName(rs.getString("name"));
+                returnItem.setDescription(rs.getString("description"));
+                returnItem.setSaleId(rs.getInt("sale_id"));
+                returnItem.setQuantity(rs.getInt("quantity"));
+                returnItem.setListPrice(rs.getDouble("list_price"));
+                returnItem.setBottomPrice(rs.getDouble("bottom_price"));
+                returnItem.setId(rs.getInt("id"));
+
+                if (returnItem != null) {
+                    returnList.add(returnItem);
+                }
+
+
+            }
+
+            return returnList;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
+        }
+        return returnList;
+    }
+
+
+
+
+    //-----------------------------------------Search logic----------------------------------------------------------------
 
     /**
      * db access search item by name in a sale
@@ -455,6 +527,62 @@ class JavaApplicationDatabase extends Controller {
     }
 
     /**
+     * db access to get item by its id
+     * @param itemId the id of the item
+     * @return the found item (if any)
+     */
+    public static Item getItem(int itemId) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        Item item = new Item();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM item");
+        buf.append(" WHERE id='" + itemId + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                item.setName(rs.getString("name"));
+                item.setDescription(rs.getString("description"));
+                item.setSaleId(rs.getInt("sale_id"));
+                item.setQuantity(rs.getInt("quantity"));
+                item.setListPrice(rs.getDouble("list_price"));
+                item.setBottomPrice(rs.getDouble("bottom_price"));
+                item.setId(rs.getInt("id"));
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the item");
+        }
+
+        return item;
+    }
+
+
+
+
+
+    //------------------------------------------------Sale logic-----------------------------------------------------------
+
+    /**
      * db access to get user's sales
      * @param saleAdminId the id of the user
      * @return a list of matching sales
@@ -519,64 +647,6 @@ class JavaApplicationDatabase extends Controller {
     }
 
     /**
-     * db access to get items within a sale
-     * @param saleID the id of the sale
-     * @return a list of items
-     */
-    public static List<Item> getSaleItems(int saleID) {
-
-        ResultSet rs = null;
-        Statement stmt = null;
-        List<Item> returnList = new ArrayList<>();
-
-        try {
-            stmt = conn.createStatement();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        StringBuffer buf = new StringBuffer();
-        buf.append("SELECT * FROM item");
-        buf.append(" WHERE sale_id='" + saleID + "'");
-
-        System.out.println("Execute Query: " + buf.toString());
-        try {
-            rs = stmt.executeQuery(buf.toString());
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + "Query Execute fail");
-        }
-
-        try {
-
-            while (rs!=null && rs.next()) {
-
-                Item returnItem = new Item();
-
-
-                returnItem.setName(rs.getString("name"));
-                returnItem.setDescription(rs.getString("description"));
-                returnItem.setSaleId(rs.getInt("sale_id"));
-                returnItem.setQuantity(rs.getInt("quantity"));
-                returnItem.setListPrice(rs.getDouble("list_price"));
-                returnItem.setBottomPrice(rs.getDouble("bottom_price"));
-                returnItem.setId(rs.getInt("id"));
-
-                if (returnItem != null) {
-                    returnList.add(returnItem);
-                }
-
-
-            }
-
-            return returnList;
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
-        }
-        return returnList;
-    }
-
-    /**
      * db access to find a sale by its id
      * @param saleId the id of the sale
      * @return the found sale (if any)
@@ -627,102 +697,6 @@ class JavaApplicationDatabase extends Controller {
         return sale;
     }
 
-    /**
-     * db access to get item by its id
-     * @param itemId the id of the item
-     * @return the found item (if any)
-     */
-    public static Item getItem(int itemId) {
-
-        ResultSet rs = null;
-        Statement stmt = null;
-        Item item = new Item();
-
-        try {
-            stmt = conn.createStatement();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        StringBuffer buf = new StringBuffer();
-        buf.append("SELECT * FROM item");
-        buf.append(" WHERE id='" + itemId + "'");
-
-        System.out.println("Execute Query: " + buf.toString());
-        try {
-            rs = stmt.executeQuery(buf.toString());
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + "Query Execute fail");
-        }
-
-        try {
-
-            while (rs.next()) {
-
-                item.setName(rs.getString("name"));
-                item.setDescription(rs.getString("description"));
-                item.setSaleId(rs.getInt("sale_id"));
-                item.setQuantity(rs.getInt("quantity"));
-                item.setListPrice(rs.getDouble("list_price"));
-                item.setBottomPrice(rs.getDouble("bottom_price"));
-                item.setId(rs.getInt("id"));
-
-
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the item");
-        }
-
-        return item;
-    }
-
-    public static Result getTransactions(User user) {
-        /**
-        ResultSet rs = null;
-        Statement stmt = null;
-        List<Transaction> trans = new Transaction<>();
-
-        try {
-            stmt = conn.createStatement();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        StringBuffer buf = new StringBuffer();
-        buf.append("SELECT * FROM transaction");
-        but.append(" WHERE ")
-
-        System.out.println("Execute Query: " + buf.toString());
-        try {
-            rs = stmt.executeQuery(buf.toString());
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + "Query Execute fail");
-        }
-
-        try {
-
-            while (rs.next()) {
-
-                item.setSaleId(rs.getInt("sale_id"));
-                item.setDate(rs.getString("date"));
-                item.setTotalPrice(rs.getDouble("total_price"));
-                item.setTotalPrice(rs.getDouble("total_price"));
-                item.setPaymentMethod(rs.getString("payment_method"));
-                item.setId(rs.getInt("id"));
-
-
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the item");
-        }
-
-        return item;
-         */
-        return TODO;
-    }
-
     public static List<Sale> getAllSales() {
 
         ResultSet rs = null;
@@ -771,5 +745,56 @@ class JavaApplicationDatabase extends Controller {
             System.out.println(e.getMessage() + "Fail to get the sales from the resultset");
         }
         return returnList;
+    }
+
+
+
+
+    //--------------------------------------------------Transaction logic------------------------------------------------------
+
+    public static Result getTransactions(User user) {
+        /**
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Transaction> trans = new Transaction<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM transaction");
+        but.append(" WHERE ")
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                item.setSaleId(rs.getInt("sale_id"));
+                item.setDate(rs.getString("date"));
+                item.setTotalPrice(rs.getDouble("total_price"));
+                item.setTotalPrice(rs.getDouble("total_price"));
+                item.setPaymentMethod(rs.getString("payment_method"));
+                item.setId(rs.getInt("id"));
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the item");
+        }
+
+        return item;
+         */
+        return TODO;
     }
 }

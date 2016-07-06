@@ -139,14 +139,15 @@
   </div>
   <div id="space"></div>
   <div id="space"></div>
+    <center>
     <div id="edit-form">
       <form action="@routes.HomeController.addTransaction()">
-        <div id="sidebyside">
+          <input type="hidden" id="sale_id" name="sale_id" value="@sale.getId"/>
           <button type="Submit">start transaction</button>
           <div id="space"></div>
-        </div>
       </form>
     </div>
+    </center>
     <div id="space"></div>
     <div id="space"></div>
     <div id="space"></div>

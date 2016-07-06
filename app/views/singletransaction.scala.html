@@ -21,27 +21,20 @@
       <p id="instructions">items in the current transaction</p>
     </div>
 
-
+    <fieldset id="fields">
     @for(item <- transactionitems) {
-      <fieldset id="fields">
+
         <legend id="legend"><b>@item.getName</b></legend>
         <img src="@item.getImg" alt="Image not available" id="image">
         <div id="iteminfo">
           <p><b>Description:</b> @item.getDescription</p>
         </div>
-        <div class="itemandtag">
-          <form action="@routes.HomeController.renderItem()">
-            <input type="hidden" name="id" id ="id" value="@item.getId"/>
-            <button type="submit">Edit Item</button>
-          </form>
-          <div id="space"></div>
-          <form action="@routes.HomeController.singleBasicTag()" target="_blank">
-            <input type="hidden" name="id" value="@item.getId"/>
-            <button>View Tag</button>
-          </form>
-        </div>
-      </fieldset>
+      <div>
+        <input id="option" type="checkbox" name="field" value="option">
+        <label for="option">Value</label>
+      </div>
     }
+    </fieldset>
 
     <div id="space"></div>
     <div id="space"></div>
@@ -166,6 +159,22 @@ button:hover {
   float: left;
   align: center;
   margins: auto;
+}
+
+input[type=checkbox]:not(old) + label > span{
+  display          : inline-block;
+  width            : 0.875em;
+  height           : 0.875em;
+  margin           : 0.25em 0.5em 0.25em 0.25em;
+  border           : 0.0625em solid rgb(192,192,192);
+  border-radius    : 0.25em;
+  background       : rgb(224,224,224);
+  background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  vertical-align   : bottom;
 }
 
 </style>

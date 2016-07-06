@@ -89,6 +89,18 @@
     text-align: center;
   }
 
+  #transaction-form input {
+    display: flex;
+    padding: 10px;
+    float: right;
+  }
+
+  #transaction-form {
+    display: flex;
+    text-align: center;
+    float: right;
+  }
+
   button:hover {
     background-color: #5cb85c; /* Green */
     color: white;
@@ -98,6 +110,11 @@
   #fields fieldset {
     margin: auto;
     text-align: center;
+    width: 500px;
+  }
+
+  #fields {
+    width: 500px;
   }
 
   #boatpicture img{
@@ -141,39 +158,22 @@
     @for(trans <- transaction) {
       <center>
         <fieldset id="fields">
-          <legend><b>@trans.getSaleId</b></legend>
+          <legend><b>Sale: @trans.getSaleId</b></legend>
           <div id="iteminfo">
             <p>Date: @trans.getDate</p>
             <p>Teime: @trans.getTime</p>
             <p>Total: $@trans.getTotalPrice</p>
             <p>ID: @trans.getId</p>
           </div>
+          <div id="transaction-form">
+            <form action="@routes.HomeController.viewSingleTransaction()">
+              <button type="submit">View Transaction</button>
+            </form>
+          </div>
         </fieldset>
       </center>
     }
-
-  <div id="heading">
-    <p id="instruction"><b>past transactions</b></p>
-  </div>
-  @for(trans <- transaction) {
-    <center>
-      <fieldset id="fields">
-        <legend><b>@trans.getSaleId</b></legend>
-        <div id="iteminfo">
-          <p>Date: @trans.getDate</p>
-          <p>Teime: @trans.getTime</p>
-          <p>Total: $@trans.getTotalPrice</p>
-          <p>ID: @trans.getId</p>
-        </div>
-      </fieldset>
-    </center>
-  }
-
-  <div id="edit-form">
-    <form action="@routes.HomeController.viewSingleTransaction()" method="post">
-      <button type="submit">Sample Transaction</button>
-    </form>
-  </div>
+  <div id="space"></div>
   <div id="space"></div>
   <div id="edit-form">
     <form action="@routes.HomeController.cancel()" method="post">

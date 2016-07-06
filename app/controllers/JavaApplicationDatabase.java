@@ -792,6 +792,51 @@ class JavaApplicationDatabase extends Controller {
 
     return transaction;
     }
+
+    public static List<Transaction> viewTransactions(int userId) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Transaction> returnList = new ArrayList<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM transaction");
+        buf.append(" WHERE user_id='" + userId + "'");
+
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+                Transaction transaction = new Transaction();
+
+                transaction.setSaleId(rs.getInt("sale_id"));
+                transaction.setUserId(rs.getInt("user_id"));
+                transaction.setId(rs.getInt("id"));
+                transaction.setDate(rs.getString("date"));
+                transaction.setTime(rs.getString("time"));
+
+                if (transaction != null) {
+                    returnList.add(transaction);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the item");
+        }
+        return returnList;
+    }
 /**
     public static List<Item> getItemsInTransaction(int saleId, int userId) {
 

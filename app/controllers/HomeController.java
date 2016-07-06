@@ -566,6 +566,7 @@ public class HomeController extends Controller {
 
     //---------------------------------------------------Transaction logic----------------------------------------------------------------------
 
+    /**
     public Result addItemToTransaction(int item) {
         //Item item = Form.form(Item.class).bindFromRequest().get();
         String itemId = Integer.toString(item);
@@ -584,17 +585,20 @@ public class HomeController extends Controller {
         }
         return ok(singletransaction.render(itemsfromdb));
     }
+    */
+
+    public Result viewTransactions() {
+        List<Transaction> transactionsList = JavaApplicationDatabase.viewTransactions(loggedInUser.getId());
+        return ok(transaction.render(transactionsList, loggedInUser));
+    }
 
     public Result viewSingleTransaction() {
-        List<Item> itemsfromdb = new ArrayList<>(); //change later
-        return ok(singletransaction.render(itemsfromdb));
+        return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
     }
 
     public Result addTransaction() {
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
-
+        Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
         if (JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId()) == null) {
-            Transaction transaction = new Transaction();
             transaction.setSaleId(saleInView.getId());
             transaction.setUserId(loggedInUser.getId());
             transaction.save();
@@ -602,8 +606,7 @@ public class HomeController extends Controller {
         } else {
             currentTransaction = JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId());
         }
-        List<Item> itemsfromdb = new ArrayList<>(); //change later
-        return ok(singletransaction.render(itemsfromdb));
+        return viewSingleTransaction();
     }
 
     public Result processSale() {

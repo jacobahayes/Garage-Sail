@@ -42,9 +42,11 @@ POST    /mysales/createsale/add    controllers.HomeController.addSale()
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()
 
+GET    /transactions               controllers.HomeController.viewTransactions()
+POST   /transactions               controllers.HomeController.viewTransactions()
+
 GET    /transactions/add          controllers.HomeController.addTransaction()
 POST   /transactions/add          controllers.HomeController.addTransaction()
-
 
 GET     /transactions/view         controllers.HomeController.viewSingleTransaction()
 POST    /transactions/view         controllers.HomeController.viewSingleTransaction()

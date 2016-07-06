@@ -8,6 +8,8 @@ import models.Transaction;
 import models.User;
 import play.mvc.*;
 import play.db.*;
+import views.html.item;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -752,11 +754,11 @@ class JavaApplicationDatabase extends Controller {
 
     //--------------------------------------------------Transaction logic------------------------------------------------------
 
-    public static Result getTransactions(User user) {
-        /**
+    public static Transaction getTransaction(int userId, int saleId) {
+
         ResultSet rs = null;
         Statement stmt = null;
-        List<Transaction> trans = new Transaction<>();
+        Transaction transaction = null;
 
         try {
             stmt = conn.createStatement();
@@ -766,7 +768,48 @@ class JavaApplicationDatabase extends Controller {
 
         StringBuffer buf = new StringBuffer();
         buf.append("SELECT * FROM transaction");
-        but.append(" WHERE ")
+        buf.append(" WHERE user_id='" + userId + "'");
+        buf.append(" AND sale_id='" + saleId + "'");
+
+
+         System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+                transaction.setSaleId(rs.getInt("sale_id"));
+                transaction.setUserId(rs.getInt("user_id"));
+                transaction.setId(rs.getInt("id"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the item");
+        }
+
+    return transaction;
+    }
+/**
+    public static List<Item> getItemsInTransaction(int saleId, int userId) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Item> returnList = new ArrayList<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM item");
+        buf.append(" WHERE sale_id='" + saleId + "'");
+        buf.append(" AND user_id='" + userId + "'");
+
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -777,24 +820,32 @@ class JavaApplicationDatabase extends Controller {
 
         try {
 
-            while (rs.next()) {
+            while (rs!=null && rs.next()) {
 
-                item.setSaleId(rs.getInt("sale_id"));
-                item.setDate(rs.getString("date"));
-                item.setTotalPrice(rs.getDouble("total_price"));
-                item.setTotalPrice(rs.getDouble("total_price"));
-                item.setPaymentMethod(rs.getString("payment_method"));
-                item.setId(rs.getInt("id"));
+                Item returnItem = new Item();
+
+
+                returnItem.setName(rs.getString("name"));
+                returnItem.setDescription(rs.getString("description"));
+                returnItem.setSaleId(rs.getInt("sale_id"));
+                returnItem.setQuantity(rs.getInt("quantity"));
+                returnItem.setListPrice(rs.getDouble("list_price"));
+                returnItem.setBottomPrice(rs.getDouble("bottom_price"));
+                returnItem.setId(rs.getInt("id"));
+
+                if (returnItem != null) {
+                    returnList.add(returnItem);
+                }
 
 
             }
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the item");
-        }
+            return returnList;
 
-        return item;
-         */
-        return TODO;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
+        }
+        return returnList;
     }
+ */
 }

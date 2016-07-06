@@ -17,6 +17,8 @@ import java.util.*;
 import views.html.*;
 
 import java.util.List;
+import java.util.logging.Logger;
+
 import static play.libs.Json.toJson;
 
 /**
@@ -28,6 +30,7 @@ public class HomeController extends Controller {
 
     public static User loggedInUser = null;
     public static Sale saleInView = null;
+    public static Transaction currentTransaction = null;
 
 
     //------------------------------------------Homepage-ish logic--------------------------------------------------------------
@@ -563,20 +566,23 @@ public class HomeController extends Controller {
 
     //---------------------------------------------------Transaction logic----------------------------------------------------------------------
 
-    public Result addItemToTransaction() {
-        Item item = Form.form(Item.class).bindFromRequest().get();
-        return TODO;
-    }
+    public Result addItemToTransaction(int item) {
+        //Item item = Form.form(Item.class).bindFromRequest().get();
+        String itemId = Integer.toString(item);
+        currentTransaction.addItem(itemId);
+        currentTransaction.save();
+        String items = currentTransaction.getItems();
+        List<Item> itemsfromdb = new ArrayList<>();
+        while (items != null) {
+            if (items.charAt(0) == ',') {
+                items = items.substring(1);
+            }
+            int currentId = Integer.parseInt(items.substring(0, items.indexOf(',')));
+            items = items.substring(items.indexOf(',') + 1);
 
-    public Result renderTransaction() {
-        List<Transaction> transList = new ArrayList<>();
-        try {
-//          transList = JavaApplicationDatabase.getTransactions(loggedInUser.getId(), saleInView.getId());
-            return ok(transaction.render(transList, loggedInUser));
-        } catch (Exception e) {
-            e.printStackTrace();
+            itemsfromdb.add(JavaApplicationDatabase.getItem(currentId));
         }
-        return ok(transaction.render(transList, loggedInUser));
+        return ok(singletransaction.render(itemsfromdb));
     }
 
     public Result viewSingleTransaction() {
@@ -584,8 +590,20 @@ public class HomeController extends Controller {
         return ok(singletransaction.render(itemsfromdb));
     }
 
-    public Result addTransactions() {
-        return TODO;
+    public Result addTransaction() {
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+
+        if (JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId()) == null) {
+            Transaction transaction = new Transaction();
+            transaction.setSaleId(saleInView.getId());
+            transaction.setUserId(loggedInUser.getId());
+            transaction.save();
+            currentTransaction = transaction;
+        } else {
+            currentTransaction = JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId());
+        }
+        List<Item> itemsfromdb = new ArrayList<>(); //change later
+        return ok(singletransaction.render(itemsfromdb));
     }
 
     public Result processSale() {

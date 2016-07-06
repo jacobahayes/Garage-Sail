@@ -139,6 +139,16 @@
   </div>
   <div id="space"></div>
   <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.addTransaction()">
+        <div id="sidebyside">
+          <button type="Submit">start transaction</button>
+          <div id="space"></div>
+        </div>
+      </form>
+    </div>
+    <div id="space"></div>
+    <div id="space"></div>
     <div id="space"></div>
 
   @for(item <- items) {
@@ -154,11 +164,6 @@
         <form action="@routes.HomeController.relatedItems()">
           <input type="hidden" name="id" id ="id" value="@item.getId"/>
           <button type="submit">View Related Items</button>
-        </form>
-        <div id="space"></div>
-        <form action="@routes.HomeController.addItemToTransaction()">
-          <input type="hidden" name="id" id ="id" value="@item.getId"/>
-          <button type="submit">Add Item to Cart</button>
         </form>
       </div>
     </fieldset>

@@ -17,7 +17,8 @@ public class Transaction extends Model {
     @Column(unique=true)
     private int id;
     private int saleId;
-    private List<Item> items;
+    private int userId;
+    private String items;
     private String date;
     private String time;
     private double totalPrice;
@@ -40,12 +41,20 @@ public class Transaction extends Model {
         this.saleId = saleId;
     }
 
-    public List<Item> getItems() {
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void addItem(String item) {
+        items = items + "," + item;
     }
 
     public String getDate() {

@@ -25,8 +25,7 @@ POST    /browsesales               controllers.HomeController.browseSales()
 GET     /browsesales/search        controllers.HomeController.searchAllSales()
 GET     /browsesales/search/items  controllers.HomeController.searchAllItems()
 GET     /browsesales/externalsale  controllers.HomeController.externalSale()
-GET     /browsesales/externalsale/add  controllers.HomeController.addItemToTransaction()
-POST    /browsesales/externalsale/add  controllers.HomeController.addItemToTransaction()
+
 
 
 GET     /mysales                   controllers.HomeController.saleScreen()
@@ -43,9 +42,10 @@ POST    /mysales/createsale/add    controllers.HomeController.addSale()
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()
 
-GET     /transactions               controllers.HomeController.renderTransaction()
-GET     /transactions/add            controllers.HomeController.addTransactions()
-POST    /transactions/item          controllers.HomeController.addItemToTransaction()
+GET    /transactions/add          controllers.HomeController.addTransaction()
+POST   /transactions/add          controllers.HomeController.addTransaction()
+
+
 GET     /transactions/view         controllers.HomeController.viewSingleTransaction()
 POST    /transactions/view         controllers.HomeController.viewSingleTransaction()
 

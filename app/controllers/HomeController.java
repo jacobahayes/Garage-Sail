@@ -67,12 +67,28 @@ public class HomeController extends Controller {
         User foundUser = JavaApplicationDatabase.attemptLogin(username, password);
 
 
-        if (foundUser != null && !foundUser.getLocked() && foundUser.getLoginAtempts() < 4) {
+        if (foundUser != null && !foundUser.getLocked() && loginCount < 3) {
             loggedInUser = foundUser;
-            if(foundUser.getAdmin().equalsIgnoreCase("true")) { loggedInUser.setAdmin("true"); }
+            loginCount = 0;
+            if(foundUser.getAdmin().equalsIgnoreCase("true")) {
+                loggedInUser.setAdmin("true");
+            } else {
+                loggedInUser.setAdmin("false");
+            }
             return ok(homepage.render());
+        } else if (loginCount > 3) {
+
+            User user = JavaApplicationDatabase.getUser(username);
+            user.setLocked(true);
+            JavaApplicationDatabase.lockUnlockUser(user);
+            loginCount = 0;
+            return ok(index.render("Garage Sail"));
+
         } else {
-            return ok(index.render("Your new application is ready."));
+
+            loginCount++;
+
+            return ok(index.render("Garage Sail"));
         }
     }
 
@@ -658,17 +674,51 @@ public class HomeController extends Controller {
 
     public Result lockUnlock() {
         User user = Form.form(User.class).bindFromRequest().get();
-        if (user.getLocked()) { user.setLocked(false); }
-        else if (!user.getLocked()) { user.setLocked(true); }
-        user.save();
+
+        User foundUser = JavaApplicationDatabase.getUser(user.getId());
+
+        if (foundUser.getLocked()) {
+            foundUser.setLocked(false);
+        } else {
+            foundUser.setLocked(true);
+        }
+
+        int result = JavaApplicationDatabase.lockUnlockUser(foundUser);
+        if (result == 1) {
+
+            ok(adminpage.render(JavaApplicationDatabase.getUsers()));
+
+        } else {
+
+            return badRequest("An error occurred while saving");
+
+        }
+
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 
     public Result toggleAdmin() {
         User user = Form.form(User.class).bindFromRequest().get();
-        if (user.getAdmin().equalsIgnoreCase("false")) { user.setAdmin("true"); }
-        else if (user.getAdmin().equalsIgnoreCase("true")) { user.setAdmin("false"); }
-        user.save();
+
+        User foundUser = JavaApplicationDatabase.getUser(user.getId());
+
+        if (foundUser.getAdmin().equalsIgnoreCase("false")) {
+            foundUser.setAdmin("true");
+        } else if (foundUser.getAdmin().equalsIgnoreCase("true")) {
+            foundUser.setAdmin("false");
+        }
+
+        int result = JavaApplicationDatabase.toggleAdmin(foundUser);
+        if (result == 1) {
+
+            ok(adminpage.render(JavaApplicationDatabase.getUsers()));
+
+        } else {
+
+            return badRequest("An error occurred while saving");
+
+        }
+
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 }

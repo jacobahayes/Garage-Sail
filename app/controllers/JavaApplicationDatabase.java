@@ -69,6 +69,8 @@ class JavaApplicationDatabase extends Controller {
                 returnUser.setEmail(rs.getString("email"));
                 returnUser.setPassword(rs.getString("password"));
                 returnUser.setId(rs.getInt("id"));
+                returnUser.setAdmin(rs.getString("admin"));
+                returnUser.setLocked(rs.getBoolean("locked"));
 
             }
 
@@ -121,6 +123,62 @@ class JavaApplicationDatabase extends Controller {
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setId(rs.getInt("id"));
+                user.setAdmin(rs.getString("admin"));
+                if (rs.getInt("locked") == 1) {
+                    user.setLocked(true);
+                } else {
+                    user.setLocked(false);
+                }
+
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the user");
+        }
+
+        return user;
+    }
+
+    public static User getUser(String username) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        User user = new User();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM user");
+        buf.append(" WHERE username='" + username + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setId(rs.getInt("id"));
+                user.setAdmin(rs.getString("admin"));
+                if (rs.getInt("locked") == 1) {
+                    user.setLocked(true);
+                } else {
+                    user.setLocked(false);
+                }
 
 
             }
@@ -301,6 +359,13 @@ class JavaApplicationDatabase extends Controller {
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setId(rs.getInt("id"));
+                user.setAdmin(rs.getString("admin"));
+                if (rs.getInt("locked") == 1) {
+                    user.setLocked(true);
+                } else {
+                    user.setLocked(false);
+                }
+                user.setLocked(rs.getBoolean("locked"));
 
                 if (user != null) {
                     returnList.add(user);
@@ -884,7 +949,8 @@ class JavaApplicationDatabase extends Controller {
         }
         return returnList;
     }
-/**
+
+    /**
     public static List<Item> getItemsInTransaction(int saleId, int userId) {
 
         ResultSet rs = null;
@@ -939,5 +1005,66 @@ class JavaApplicationDatabase extends Controller {
         }
         return returnList;
     }
- */
+    */
+
+
+//--------------------------------------------------Admin logic------------------------------------------------------
+
+    public static int lockUnlockUser(User user) {
+
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE user");
+        if (user.getLocked()) {
+            buf.append(" SET locked=1");
+        } else {
+            buf.append(" SET locked=0");
+        }
+        buf.append(" WHERE id=" + user.getId());
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+
+    }
+
+    public static int toggleAdmin(User user) {
+
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE user");
+        buf.append(" SET admin='" + user.getAdmin() + "'");
+        buf.append(" WHERE id=" + user.getId());
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+
+    }
 }

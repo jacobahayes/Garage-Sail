@@ -268,6 +268,53 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
+    public static List<User> getUsers() {
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<User> returnList = new ArrayList<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM user");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs!=null && rs.next()) {
+
+                User user = new User();
+
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setId(rs.getInt("id"));
+
+                if (user != null) {
+                    returnList.add(user);
+                }
+            }
+
+            return returnList;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
+        }
+        return returnList;
+    }
+
 
 
 

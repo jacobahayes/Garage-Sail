@@ -15,6 +15,10 @@ import java.util.List;
 @Entity
 public class User extends Model{
 
+    public User() {
+        admin = "false";
+    }
+
     @Id
     @Column(unique=true)
     private int id;
@@ -30,7 +34,26 @@ public class User extends Model{
 
     private String lastName;
 
+    private int loginAtempts;
+
+    private String admin;
+    private boolean locked;
+
     private List<Sale> sales;
+
+    public int getLoginAtempts(){ return loginAtempts; }
+    public void resetLoginAtempts() { loginAtempts = 0; }
+    public void addLoginAtempt() { loginAtempts = loginAtempts + 1; }
+
+    public String getAdmin() {
+        return admin;
+    }
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+
+    public boolean getLocked() { return locked; }
+    public void setLocked(boolean locked) { this.locked = locked; }
 
     public int getId() {
         return id;

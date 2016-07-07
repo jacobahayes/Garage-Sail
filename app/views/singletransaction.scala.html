@@ -23,15 +23,15 @@
 
     <fieldset id="fields">
     @for(item <- transactionitems) {
-
         <legend id="legend"><b>@item.getName</b></legend>
         <img src="@item.getImg" alt="Image not available" id="image">
         <div id="iteminfo">
           <p><b>Description:</b> @item.getDescription</p>
+          <p><b>Price:</b> $@item.getListPrice</p>
         </div>
-      <div>
-        <input id="option" type="checkbox" name="field" value="option">
-        <label for="option">Value</label>
+      <div id="right">
+        <label for="option">Add item to transaction</label>
+        <input id="transactionitems" type="checkbox" name="transactionitems" value="@item.getId">
       </div>
     }
     </fieldset>
@@ -64,6 +64,10 @@ body {
 
 #password, #password_confirm {
   -webkit-text-security: circle;
+}
+
+#right {
+  float: right;
 }
 
 #logo {

@@ -31,6 +31,7 @@ public class HomeController extends Controller {
     public static User loggedInUser = null;
     public static Sale saleInView = null;
     public static Transaction currentTransaction = null;
+    public static int loginCount = 0;
 
 
     //------------------------------------------Homepage-ish logic--------------------------------------------------------------
@@ -57,6 +58,7 @@ public class HomeController extends Controller {
     public Result login() {
 
         User loginUser = Form.form(User.class).bindFromRequest().get();
+        loginUser.addLoginAtempt();
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();
 
@@ -64,8 +66,10 @@ public class HomeController extends Controller {
 
         User foundUser = JavaApplicationDatabase.attemptLogin(username, password);
 
-        if (foundUser != null) {
+
+        if (foundUser != null && !foundUser.getLocked() && foundUser.getLoginAtempts() < 4) {
             loggedInUser = foundUser;
+            if(foundUser.getAdmin().equalsIgnoreCase("true")) { loggedInUser.setAdmin("true"); }
             return ok(homepage.render());
         } else {
             return ok(index.render("Your new application is ready."));
@@ -112,6 +116,8 @@ public class HomeController extends Controller {
     public Result completeRegister(Http.Request request) {
 
         User registerUser = Form.form(User.class).bindFromRequest().get();
+        registerUser.setLocked(false);
+
         registerUser.save();
 
         loggedInUser = registerUser;
@@ -610,6 +616,45 @@ public class HomeController extends Controller {
     }
 
     public Result processSale() {
+        String[] postAction = request().body().asFormUrlEncoded().get("transactionitems");
+        String items = postAction[0];
+        System.out.println(items);
+        System.out.println(postAction);
+
+//        while (!items.isEmpty()) {
+//
+//        }
         return ok(processsale.render());
+    }
+
+
+
+
+
+
+    //-----------------------------------------------------Admin logic----------------------------------------------------------
+
+    public Result adminPage() {
+        if (loggedInUser.getAdmin().equalsIgnoreCase("true")) {
+            return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
+        } else {
+            return ok(homepage.render());
+        }
+    }
+
+    public Result lockUnlock() {
+        User user = Form.form(User.class).bindFromRequest().get();
+        if (user.getLocked()) { user.setLocked(false); }
+        else if (!user.getLocked()) { user.setLocked(true); }
+        user.save();
+        return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
+    }
+
+    public Result toggleAdmin() {
+        User user = Form.form(User.class).bindFromRequest().get();
+        if (user.getAdmin().equalsIgnoreCase("false")) { user.setAdmin("true"); }
+        else if (user.getAdmin().equalsIgnoreCase("true")) { user.setAdmin("false"); }
+        user.save();
+        return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 }

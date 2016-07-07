@@ -51,8 +51,8 @@ POST   /transactions/add          controllers.HomeController.addTransaction()
 GET     /transactions/view         controllers.HomeController.viewSingleTransaction()
 POST    /transactions/view         controllers.HomeController.viewSingleTransaction()
 
-POST     /processsale               controllers.HomeController.processSale()
 GET     /processsale               controllers.HomeController.processSale()
+POST    /processsale               controllers.HomeController.processSale()
 
 GET     /tag                       controllers.HomeController.printTag()
 POST    /tag                       controllers.HomeController.printTag()
@@ -63,6 +63,13 @@ GET     /alltags/basic             controllers.HomeController.basicTags()
 POST    /alltags/basic             controllers.HomeController.basicTags()
 
 GET     /relateditems              controllers.HomeController.relatedItems()
+
+GET     /admin                     controllers.HomeController.adminPage()
+POST    /admin                     controllers.HomeController.adminPage()
+GET     /admin/lock                controllers.HomeController.lockUnlock()
+POST    /admin/lock                controllers.HomeController.lockUnlock()
+GET     /admin/toggle              controllers.HomeController.toggleAdmin()
+POST    /admin/toggle              controllers.HomeController.toggleAdmin()
 
 
 # An example controller showing how to use dependency injection

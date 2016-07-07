@@ -88,7 +88,7 @@ class JavaApplicationDatabase extends Controller {
     /**
      * db access to get user by id
      * @param userId the id of the user
-     * @return the found item (if any)
+     * @return the found user (if any)
      */
     public static User getUser(int userId) {
 
@@ -140,6 +140,11 @@ class JavaApplicationDatabase extends Controller {
         return user;
     }
 
+    /**
+     * db access to get user by username
+     * @param username the username of the user
+     * @return the found user (if any)
+     */
     public static User getUser(String username) {
 
         ResultSet rs = null;
@@ -326,6 +331,10 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
+    /**
+     * db access to get list of all users
+     * @return list of the found users (if any)
+     */
     public static List<User> getUsers() {
         ResultSet rs = null;
         Statement stmt = null;
@@ -541,6 +550,11 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    /**
+     * db access to search all items
+     * @param name the desired name of the item
+     * @return the found items (if any)
+     */
     public static List<Item> searchAllItems(String name) {
 
         ResultSet rs = null;
@@ -589,6 +603,11 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    /**
+     * db access to search all sales
+     * @param name the desired name of the sale
+     * @return the found sales (if any)
+     */
     public static List<Sale> searchAllSales(String name) {
         ResultSet rs = null;
         Statement stmt = null;
@@ -740,18 +759,13 @@ class JavaApplicationDatabase extends Controller {
                 returnSale.setName(rs.getString("name"));
                 returnSale.setId(rs.getInt("id"));
 
-                //System.out.println(rs.getString("seller"));
-                //System.out.println(rs.getString("seller"));
-                //System.out.println(rs.getString("seller"));
                 if (returnSale != null) {
                     returnList.add(returnSale);
                 }
-                //returnList.add(returnSale);
 
 
             }
-            //System.out.println(returnList);
-            //System.out.println(">>>");
+
             return returnList;
 
         } catch (SQLException e) {
@@ -811,6 +825,10 @@ class JavaApplicationDatabase extends Controller {
         return sale;
     }
 
+    /**
+     * db access to get all sales in the system
+     * @return the found sales (if any)
+     */
     public static List<Sale> getAllSales() {
 
         ResultSet rs = null;
@@ -866,6 +884,12 @@ class JavaApplicationDatabase extends Controller {
 
     //--------------------------------------------------Transaction logic------------------------------------------------------
 
+    /**
+     * db access to get transaction for a user within a sale
+     * @param userId the user id
+     * @param saleId the sale id
+     * @return the found transaction (if any)
+     */
     public static Transaction getTransaction(int userId, int saleId) {
 
         ResultSet rs = null;
@@ -905,6 +929,11 @@ class JavaApplicationDatabase extends Controller {
     return transaction;
     }
 
+    /**
+     * db access to get all transactions for a user
+     * @param userId the user id
+     * @return the found transactions (if any)
+     */
     public static List<Transaction> viewTransactions(int userId) {
 
         ResultSet rs = null;
@@ -1010,6 +1039,11 @@ class JavaApplicationDatabase extends Controller {
 
 //--------------------------------------------------Admin logic------------------------------------------------------
 
+    /**
+     * db access to lock or unlock a user
+     * @param user the user to lock/unlock
+     * @return the number of rows affected
+     */
     public static int lockUnlockUser(User user) {
 
         int result = 0;
@@ -1041,6 +1075,11 @@ class JavaApplicationDatabase extends Controller {
 
     }
 
+    /**
+     * db access to toggle admin rights for a user
+     * @param user the user to toggle admin rights for
+     * @return the number of rows affected
+     */
     public static int toggleAdmin(User user) {
 
         int result = 0;

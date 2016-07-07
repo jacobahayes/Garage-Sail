@@ -62,8 +62,6 @@ public class HomeController extends Controller {
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();
 
-        //List<User> dbList = User.find().where().eq("username", username).where().eq("password", password).findList();
-
         User foundUser = JavaApplicationDatabase.attemptLogin(username, password);
 
 
@@ -263,7 +261,8 @@ public class HomeController extends Controller {
     //------------------------------------------Sale logic--------------------------------------------------------------
 
     /**
-     * shows all sales from all users
+     * browse all sales in thes system
+     * @return the HTTP response
      */
     public Result browseSales() {
         List<Sale> salesfromdb = new ArrayList<>();
@@ -275,6 +274,10 @@ public class HomeController extends Controller {
         return ok(allsales.render(salesfromdb));
     }
 
+    /**
+     * render a sale that doesn't belong to the user
+     * @return the HTTP response
+     */
     public Result externalSale() {
         Sale sale = Form.form(Sale.class).bindFromRequest().get();
         saleInView = JavaApplicationDatabase.getSale(sale.getId());
@@ -313,16 +316,6 @@ public class HomeController extends Controller {
 
         return ok(salepage.render(saleInView, new ArrayList<>()));
     }
-
-    /*
-    public Result saleScreen() {
-
-        List<String> mysales = new ArrayList<String>();
-        mysales.add("Hello");
-        mysales.add("biotch");
-        //return ok(sales.render(mysales));
-        return ok(views.html.sales(mysales))
-    }*/
 
 
     /**
@@ -474,6 +467,10 @@ public class HomeController extends Controller {
 
     }
 
+    /**
+     * adds a new item by its id number
+     * @return the HTTP response
+     */
     public Result addItemById() {
         String[] postAction = request().body().asFormUrlEncoded().get("action");
         String action = postAction[0];
@@ -517,6 +514,10 @@ public class HomeController extends Controller {
         return ok(searchitemresults.render(saleInView, itemsfromdb));
     }
 
+    /**
+     * allows for searching all items in the system
+     * @return the HTTP response
+     */
     public Result searchAllItems() {
 
         // ??
@@ -533,6 +534,10 @@ public class HomeController extends Controller {
         return ok(allsearchitems.render(saleInView, itemsfromdb));
     }
 
+    /**
+     * allows for searching all sales in the system
+     * @return the HTTP response
+     */
     public Result searchAllSales() {
         Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
         List<Sale> foundSales = new ArrayList<>();
@@ -551,6 +556,10 @@ public class HomeController extends Controller {
 
     //----------------------------------------------Tag logic------------------------------------------------------------------
 
+    /**
+     * renders the pring tage page for an item
+     * @return the HTTP response
+     */
     public Result printTag() {
         Item item = Form.form(Item.class).bindFromRequest().get();
 
@@ -564,6 +573,10 @@ public class HomeController extends Controller {
         return ok(tag.render(itemsfromdb, saleInView, loggedInUser));
     }
 
+    /**
+     * renders a single basic tag for an item
+     * @return the HTTP response
+     */
     public Result singleBasicTag() {
         Item item = Form.form(Item.class).bindFromRequest().get();
 
@@ -577,6 +590,10 @@ public class HomeController extends Controller {
         return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
     }
 
+    /**
+     * renders a list of tags for all items in a sale
+     * @return the HTTP response
+     */
     public Result printAllTags() {
         List<Item> itemsfromdb = new ArrayList<>();
         try {
@@ -587,6 +604,10 @@ public class HomeController extends Controller {
         return ok(tag.render(itemsfromdb, saleInView, loggedInUser));
     }
 
+    /**
+     * renders all tags for all items in the sale
+     * @return the HTTP response
+     */
     public Result basicTags() {
         List<Item> itemsfromdb = new ArrayList<>();
         try {
@@ -624,15 +645,28 @@ public class HomeController extends Controller {
     }
     */
 
+
+    /**
+     * renders the transactions page
+     * @return the HTTP response
+     */
     public Result viewTransactions() {
         List<Transaction> transactionsList = JavaApplicationDatabase.viewTransactions(loggedInUser.getId());
         return ok(transaction.render(transactionsList, loggedInUser));
     }
 
+    /**
+     * allows the user to view a single transaction
+     * @return the HTTP response
+     */
     public Result viewSingleTransaction() {
         return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
     }
 
+    /**
+     * allows the user to add a transaction
+     * @return the HTTP response
+     */
     public Result addTransaction() {
         Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
         if (JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId()) == null) {
@@ -646,6 +680,10 @@ public class HomeController extends Controller {
         return viewSingleTransaction();
     }
 
+    /**
+     * allows a user to process a transaction within a sale
+     * @return the HTTP response
+     */
     public Result processSale() {
         String[] postAction = request().body().asFormUrlEncoded().get("transactionitems");
         String items = postAction[0];
@@ -664,6 +702,10 @@ public class HomeController extends Controller {
 
     //-----------------------------------------------------Admin logic----------------------------------------------------------
 
+    /**
+     * renders the admin page if a user is an admin type
+     * @return the HTTP response
+     */
     public Result adminPage() {
         if (loggedInUser.getAdmin().equalsIgnoreCase("true")) {
             return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
@@ -672,6 +714,10 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * allows an admin to lock or unlock any user
+     * @return the HTTP response
+     */
     public Result lockUnlock() {
         User user = Form.form(User.class).bindFromRequest().get();
 
@@ -697,6 +743,10 @@ public class HomeController extends Controller {
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 
+    /**
+     * allows an admin to give or take away admin rights for any user
+     * @return the HTTP response
+     */
     public Result toggleAdmin() {
         User user = Form.form(User.class).bindFromRequest().get();
 

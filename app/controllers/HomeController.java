@@ -430,7 +430,14 @@ public class HomeController extends Controller {
     public Result completeAddItem(Http.Request request) {
 
         Item newItem = Form.form(Item.class).bindFromRequest().get();
-
+        int quantity = newItem.getQuantity();
+        newItem.setQuantity(1);
+        while (quantity > 1) {
+            Item repeatItem = newItem;
+            repeatItem.setSaleId(saleInView.getId());
+            repeatItem.save();
+            quantity--;
+        }
         newItem.setSaleId(saleInView.getId());
         newItem.save();
 
@@ -633,34 +640,21 @@ public class HomeController extends Controller {
     //---------------------------------------------------Transaction logic----------------------------------------------------------------------
 
     /**
-    public Result addItemToTransaction(int item) {
-        //Item item = Form.form(Item.class).bindFromRequest().get();
-        String itemId = Integer.toString(item);
-        currentTransaction.addItem(itemId);
-        currentTransaction.save();
-        String items = currentTransaction.getItems();
-        List<Item> itemsfromdb = new ArrayList<>();
-        while (items != null) {
-            if (items.charAt(0) == ',') {
-                items = items.substring(1);
-            }
-            int currentId = Integer.parseInt(items.substring(0, items.indexOf(',')));
-            items = items.substring(items.indexOf(',') + 1);
-
-            itemsfromdb.add(JavaApplicationDatabase.getItem(currentId));
-        }
-        return ok(singletransaction.render(itemsfromdb));
-    }
-    */
-
-
-    /**
      * renders the transactions page
      * @return the HTTP response
      */
     public Result viewTransactions() {
         List<Transaction> transactionsList = JavaApplicationDatabase.viewTransactions(loggedInUser.getId());
-        return ok(transaction.render(transactionsList, loggedInUser));
+        List<Transaction> open = new ArrayList<>();
+        List<Transaction> closed = new ArrayList<>();
+        for (Transaction transaction : transactionsList) {
+            if (transaction.getClosed()) {
+                closed.add(transaction);
+            } else {
+                open.add(transaction);
+            }
+        }
+        return ok(transaction.render(open, closed, loggedInUser));
     }
 
     public Result completeViewTransaction(Http.Request request) {
@@ -668,6 +662,7 @@ public class HomeController extends Controller {
     }
 
     public Result renderTransaction() {
+        currentTransaction = JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId());
         return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
     }
 
@@ -688,33 +683,42 @@ public class HomeController extends Controller {
      */
     public Result addTransaction() {
         Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
-        if (JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId()) == null) {
-            transaction.setSaleId(saleInView.getId());
-            transaction.setUserId(loggedInUser.getId());
-            transaction.save();
-            currentTransaction = transaction;
-        } else {
-            currentTransaction = JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId());
+        try {
+            if (JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId()).getUserId() == loggedInUser.getId()) {
+                transaction.setSaleId(saleInView.getId());
+                transaction.setUserId(loggedInUser.getId());
+                transaction.setClosed(false);
+                transaction.save();
+            }
+        } catch(Exception e) {
+            return viewTransactions();
         }
+
         return viewTransactions();
     }
+
+
+
+
+
+
+    //---------------------------------------------Processing logic------------------------------------------------------------
 
     /**
      * allows a user to process a transaction within a sale
      * @return the HTTP response
      */
     public Result processSale() {
+
         String[] postAction = request().body().asFormUrlEncoded().get("transactionitems");
+        String[] paymentAction = request().body().asFormUrlEncoded().get("paymentmethod");
+
         List<Item> itemsfromdb = new ArrayList<>();
-        Transaction transaction = new Transaction();
-        int[] itemIds = new int[postAction.length - 1];
+        Transaction transaction = currentTransaction;
 
-        for (int i = 0; i < postAction.length - 1; i++) {
-            int itemId = Integer.parseInt(postAction[i]);
-            itemIds[i] = itemId;
-        }
+        String paymentMethod = paymentAction[0];
+        System.out.println(paymentMethod);
 
-        String paymentMethod = postAction[postAction.length - 1];
         if (paymentMethod.equalsIgnoreCase("creditdebit")) {
             transaction.setPaymentMethod("creditdebit");
         } else if (paymentMethod.equalsIgnoreCase("bitcoin")) {
@@ -724,10 +728,11 @@ public class HomeController extends Controller {
         }
 
         double totalPrice = 0.0;
-        for (int itemId : itemIds) {
+
+        for (String itemId : postAction) {
             System.out.println(itemId);
-            itemsfromdb.add(JavaApplicationDatabase.getItem(itemId));
-            totalPrice = totalPrice + JavaApplicationDatabase.getItem(itemId).getListPrice();
+            itemsfromdb.add(JavaApplicationDatabase.getItem(Integer.parseInt(itemId))); //bug?
+            totalPrice = totalPrice + JavaApplicationDatabase.getItem(Integer.parseInt(itemId)).getListPrice();
         }
 
         Calendar currentDate = Calendar.getInstance();
@@ -741,21 +746,16 @@ public class HomeController extends Controller {
         transaction.setTime(timeNow);
         transaction.setItems(itemsfromdb);
         transaction.setTotalPrice(totalPrice);
-        transaction.setUserId(loggedInUser.getId());
-        transaction.setSaleId(saleInView.getId());
         transaction.setClosed(true);
-        transaction.save();
+        transaction.update();
 
-        for (String itemId : postAction) {
-            System.out.println(itemId);
-        }
-        
         currentTransaction = transaction;
-        return renderReceipt();
+        return ok(receipt.render(currentTransaction, itemsfromdb));
     }
 
     public Result renderReceipt() {
-        return ok(receipt.render(currentTransaction, currentTransaction.getItems()));
+        List<Item> items = new ArrayList<>(); //change
+        return ok(receipt.render(currentTransaction, items)); //bug?
     }
 
 

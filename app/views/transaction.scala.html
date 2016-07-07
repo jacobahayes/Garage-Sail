@@ -1,4 +1,4 @@
-@(transaction: List[Transaction], user: User)
+@(open: List[Transaction], closed: List[Transaction], user: User)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -155,7 +155,8 @@
     <p id="title">Transactions</p>
     <p id="instruction"><b>open transactions</b></p>
   </div>
-    @for(trans <- transaction) {
+
+    @for(trans <- open) {
       <center>
         <fieldset id="fields">
 
@@ -170,7 +171,7 @@
           </div>
 
           <div id="transaction-form">
-            <form action="/transactions/view" method="post">
+            <form action="/transactions/transaction/view" method="post">
               <input type="hidden" id="action" name="action" value="@trans.getSaleId()">
               <button type="submit">View Transaction</button>
             </form>
@@ -179,6 +180,28 @@
         </fieldset>
       </center>
     }
+  <div id="space"></div>
+  <div id="space"></div>
+
+  <div id="heading">
+  <p id="instruction"><b>closed transactions</b></p>
+  </div>
+  @for(trans <- closed) {
+    <center>
+      <fieldset id="fields">
+
+        <legend><b>Sale: @trans.getSaleId</b></legend>
+        <div id="iteminfo">
+          <p>Date: @trans.getDate</p>
+          <p>Time: @trans.getTime</p>
+          <p>ID: @trans.getId</p>
+          <p>Payment Method: @trans.getPaymentMethod</p>
+          <p>Total Price: $@trans.getTotalPrice</p>
+          <p>Closed: @trans.getClosed</p>
+        </div>
+      </fieldset>
+    </center>
+  }
   <div id="space"></div>
   <div id="space"></div>
   <div id="edit-form">

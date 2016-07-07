@@ -28,83 +28,70 @@
           </div>
           <div id="space"></div>
           <div id="space"></div>
-          <button type="Submit">Search</button>
+          <button type="Submit">Add Item</button>
           <div id="space"></div>
       </form>
     </div>
 
     <div id="edit-form">
-      <form action="@routes.HomeController.processSale()" method="post">
-    <fieldset id="fields">
-    @for(item <- transactionitems) {
-        <legend id="legend"><b>@item.getName</b></legend>
-        <img src="@item.getImg" alt="Image not available" id="image">
-        <div id="iteminfo">
-          <p><b>Description:</b> @item.getDescription</p>
-          <p><b>Price:</b> $@item.getListPrice</p>
-        </div>
-      <div id="right">
-        <label for="option">Add item to transaction</label>
-        <input id="transactionitems" type="checkbox" name="transactionitems" value="@item.getId">
-      </div>
-    }
-    </fieldset>
-
-    <div id="space"></div>
-    <div id="space"></div>
-
-
-      <div id="wrapper">
-        <div class="cell">
-          <div class="content">
-              <div>
-                <input id="transactionitems" type="radio" name="transactionitems" value="creditdebit">
+        <fieldset id="fields">
+        @for(item <- transactionitems) {
+            <legend id="legend"><b>@item.getName</b></legend>
+            <img src="@item.getImg" alt="Image not available" id="image">
+            <div id="iteminfo">
+              <p><b>Description:</b> @item.getDescription</p>
+              <p><b>Price:</b> $@item.getListPrice</p>
+            </div>
+          <div id="right">
+            <label for="option">Add item to transaction</label>
+            <input id="transactionitems" type="checkbox" name="transactionitems" value="@item.getId">
+          </div>
+        }
+        </fieldset>
+        <div id="space"></div>
+        <div id="space"></div>
+        <div id="wrapper">
+          <div class="cell">
+            <div class="content">
+              <input id="paymentmethod" type="radio" name="paymentmethod" value="creditdebit">
+              <div id="space"></div>
+              <label for="paymentmethod">Credit/Debit</label>
+            </div>
+          </div>
+          <div class="cell">
+            <center>
+            <div class="content1">
+              <div id="coindesk-widget" data-align="center"></div>
+              <script type="text/javascript" src="//widget.coindesk.com/bpiticker/coindesk-widget.min.js?b6542b"></script>
+              <div id="space"></div>
+                <input id="paymentmethod" type="radio" name="paymentmethod" value="bitcoin">
                 <div id="space"></div>
-                <label for="transactionitems">Credit/Debit</label>
-              </div>
-          </div>
-        </div>
-        <div class="cell">
-          <center>
-          <div class="content1">
-            <div id="coindesk-widget" data-align="center"></div>
-            <script type="text/javascript" src="//widget.coindesk.com/bpiticker/coindesk-widget.min.js?b6542b"></script>
-            <div id="space"></div>
-            <div>
-              <input id="transactionitems" type="radio" name="transactionitems" value="bitcoin">
-              <div id="space"></div>
-              <label for="transactionitems">Bitcoin</label>
+                <label for="paymentmethod">Bitcoin</label>
             </div>
+            </center>
           </div>
-          </center>
-        </div>
-        <div class="cell">
-          <div class="content2">
-            <div>
-              <input id="transactionitems" type="radio" name="transactionitems" value="cash">
-              <div id="space"></div>
-              <label for="transactionitems">Cash</label>
+          <div class="cell">
+            <div class="content2">
+                <input id="paymentmethod" type="radio" name="paymentmethod" value="cash">
+                <div id="space"></div>
+                <label for="paymentmethod">Cash</label>
             </div>
           </div>
         </div>
-      </div>
-
-
         <div id="space"></div>
         <div id="space"></div>
-
+      <form action="@routes.HomeController.processSale()" method="post">
         <button type="submit">Process Transaction</button>
       </form>
     </div>
 
-    <div id="space"></div>
-    <div id="space"></div>
-    <div id="edit-form">
-      <form action="@routes.HomeController.cancel()" method="post">
-        <button type="submit">Cancel</button>
-      </form>
-    </div>
-
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="edit-form">
+        <form action="@routes.HomeController.cancel()" method="post">
+          <button type="submit">Cancel</button>
+    </form>
+  </div>
   </body>
 </html>
 

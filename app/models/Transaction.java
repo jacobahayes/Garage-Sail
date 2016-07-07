@@ -16,14 +16,17 @@ public class Transaction extends Model {
     @Id
     @Column(unique=true)
     private int id;
+
     private int saleId;
     private int userId;
+
+    private List<Item> items;
+    private String paymentmethod;
+
     private String date;
     private String time;
     private double totalPrice;
     private String receipt;
-    private String paymentmethod;
-    private List<Item> items;
     private boolean closed;
 
     public boolean getClosed() { return closed; }

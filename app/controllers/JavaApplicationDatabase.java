@@ -890,7 +890,7 @@ class JavaApplicationDatabase extends Controller {
      * @param saleId the sale id
      * @return the found transaction (if any)
      */
-    public static Transaction getTransaction(int userId, int saleId) {
+    public static Transaction getOpenTransaction(int userId, int saleId) {
 
         ResultSet rs = null;
         Statement stmt = null;
@@ -906,6 +906,7 @@ class JavaApplicationDatabase extends Controller {
         buf.append("SELECT * FROM transaction");
         buf.append(" WHERE user_id='" + userId + "'");
         buf.append(" AND sale_id='" + saleId + "'");
+        buf.append(" AND closed<>'" + true + "'");
 
 
          System.out.println("Execute Query: " + buf.toString());

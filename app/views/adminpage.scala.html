@@ -202,6 +202,7 @@
       <p id="instruction"><b>manage users, sales, and transactions</b></p>
     </div>
     <div id="space"></div>
+
     @for(user <- users) {
       <center>
         <fieldset id="fields">
@@ -209,6 +210,7 @@
           <div id="iteminfo">
             <p>Email: @user.getEmail()</p>
             <p>User Type: @user.getId</p>
+            <p>User Created: @user.getDate</p>
             <center>
               <div id="wrapper">
                 <div class="cell">

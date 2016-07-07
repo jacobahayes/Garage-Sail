@@ -41,6 +41,14 @@ public class User extends Model{
 
     private List<Sale> sales;
 
+    private String dateCreated;
+
+    public void setDate(String date) {
+        dateCreated = date;
+    }
+
+    public String getDate() { return dateCreated; }
+
     public int getLoginAtempts(){ return loginAtempts; }
     public void resetLoginAtempts() { loginAtempts = 0; }
     public void addLoginAtempt() { loginAtempts = loginAtempts + 1; }

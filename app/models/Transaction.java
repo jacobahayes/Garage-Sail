@@ -18,12 +18,16 @@ public class Transaction extends Model {
     private int id;
     private int saleId;
     private int userId;
-    private String items;
     private String date;
     private String time;
     private double totalPrice;
     private String receipt;
-    private String paymentMethod;
+    private String paymentmethod;
+    private List<Item> items;
+    private boolean closed;
+
+    public boolean getClosed() { return closed; }
+    public void setClosed(boolean closed) { this.closed = closed; }
 
     public int getId() {
         return id;
@@ -49,12 +53,12 @@ public class Transaction extends Model {
         this.userId = userId;
     }
 
-    public String getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void addItem(String item) {
-        items = items + "," + item;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public String getDate() {
@@ -90,10 +94,10 @@ public class Transaction extends Model {
     }
 
     public String getPaymentMethod() {
-        return paymentMethod;
+        return paymentmethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setPaymentMethod(String paymentmethod) {
+        this.paymentmethod = paymentmethod;
     }
 }

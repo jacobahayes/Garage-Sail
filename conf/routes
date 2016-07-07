@@ -47,14 +47,20 @@ POST     /add/item                  controllers.HomeController.addItemById()
 GET    /transactions               controllers.HomeController.viewTransactions()
 POST   /transactions               controllers.HomeController.viewTransactions()
 
+POST   /transaction/processsale    controllers.HomeController.processSale()
+GET    /transaction/processsale    controllers.HomeController.processSale()
+
+
+
+
+
 GET    /transactions/add          controllers.HomeController.addTransaction()
 POST   /transactions/add          controllers.HomeController.addTransaction()
 
-GET     /transactions/view         controllers.HomeController.viewSingleTransaction()
 POST    /transactions/view         controllers.HomeController.viewSingleTransaction()
+GET     /transactions/view         controllers.HomeController.renderReceipt()
 
-GET     /processsale               controllers.HomeController.processSale()
-POST    /processsale               controllers.HomeController.processSale()
+
 
 GET     /tag                       controllers.HomeController.printTag()
 POST    /tag                       controllers.HomeController.printTag()

@@ -158,18 +158,24 @@
     @for(trans <- transaction) {
       <center>
         <fieldset id="fields">
+
           <legend><b>Sale: @trans.getSaleId</b></legend>
           <div id="iteminfo">
             <p>Date: @trans.getDate</p>
-            <p>Teime: @trans.getTime</p>
-            <p>Total: $@trans.getTotalPrice</p>
+            <p>Time: @trans.getTime</p>
             <p>ID: @trans.getId</p>
+            <p>Payment Method: @trans.getPaymentMethod</p>
+            <p>Total Price: $@trans.getTotalPrice</p>
+            <p>Closed: @trans.getClosed</p>
           </div>
+
           <div id="transaction-form">
-            <form action="@routes.HomeController.viewSingleTransaction()">
+            <form action="/transactions/view" method="post">
+              <input type="hidden" id="action" name="action" value="@trans.getSaleId()">
               <button type="submit">View Transaction</button>
             </form>
           </div>
+
         </fieldset>
       </center>
     }

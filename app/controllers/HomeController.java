@@ -21,6 +21,9 @@ import java.util.logging.Logger;
 
 import static play.libs.Json.toJson;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
@@ -129,9 +132,14 @@ public class HomeController extends Controller {
      */
     public Result completeRegister(Http.Request request) {
 
+        Calendar currentDate = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
+
+        String dateNow = formatter.format(currentDate.getTime());
+
         User registerUser = Form.form(User.class).bindFromRequest().get();
         registerUser.setLocked(false);
-
+        registerUser.setDate(dateNow);
         registerUser.save();
 
         loggedInUser = registerUser;
@@ -655,12 +663,23 @@ public class HomeController extends Controller {
         return ok(transaction.render(transactionsList, loggedInUser));
     }
 
+    public Result completeViewTransaction(Http.Request request) {
+        return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
+    }
+
+    public Result renderTransaction() {
+        return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
+    }
+
     /**
      * allows the user to view a single transaction
      * @return the HTTP response
      */
     public Result viewSingleTransaction() {
-        return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        int action = Integer.parseInt(postAction[0]);
+        saleInView = JavaApplicationDatabase.getSale(action);
+        return completeViewTransaction(request());
     }
 
     /**
@@ -677,7 +696,7 @@ public class HomeController extends Controller {
         } else {
             currentTransaction = JavaApplicationDatabase.getTransaction(loggedInUser.getId(), saleInView.getId());
         }
-        return viewSingleTransaction();
+        return viewTransactions();
     }
 
     /**
@@ -686,13 +705,57 @@ public class HomeController extends Controller {
      */
     public Result processSale() {
         String[] postAction = request().body().asFormUrlEncoded().get("transactionitems");
-        String items = postAction[0];
-        System.out.println(items);
-        System.out.println(postAction);
-//        while (!items.isEmpty()) {
-//
-//        }
-        return ok(processsale.render());
+        List<Item> itemsfromdb = new ArrayList<>();
+        Transaction transaction = new Transaction();
+        int[] itemIds = new int[postAction.length - 1];
+
+        for (int i = 0; i < postAction.length - 1; i++) {
+            int itemId = Integer.parseInt(postAction[i]);
+            itemIds[i] = itemId;
+        }
+
+        String paymentMethod = postAction[postAction.length - 1];
+        if (paymentMethod.equalsIgnoreCase("creditdebit")) {
+            transaction.setPaymentMethod("creditdebit");
+        } else if (paymentMethod.equalsIgnoreCase("bitcoin")) {
+            transaction.setPaymentMethod("bitcoin");
+        } else {
+            transaction.setPaymentMethod("cash");
+        }
+
+        double totalPrice = 0.0;
+        for (int itemId : itemIds) {
+            System.out.println(itemId);
+            itemsfromdb.add(JavaApplicationDatabase.getItem(itemId));
+            totalPrice = totalPrice + JavaApplicationDatabase.getItem(itemId).getListPrice();
+        }
+
+        Calendar currentDate = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
+        SimpleDateFormat formattertime = new SimpleDateFormat("hh:mm:ss");
+
+        String dateNow = formatter.format(currentDate.getTime());
+        String timeNow = formattertime.format(currentDate.getTime());
+
+        transaction.setDate(dateNow);
+        transaction.setTime(timeNow);
+        transaction.setItems(itemsfromdb);
+        transaction.setTotalPrice(totalPrice);
+        transaction.setUserId(loggedInUser.getId());
+        transaction.setSaleId(saleInView.getId());
+        transaction.setClosed(true);
+        transaction.save();
+
+        for (String itemId : postAction) {
+            System.out.println(itemId);
+        }
+        
+        currentTransaction = transaction;
+        return renderReceipt();
+    }
+
+    public Result renderReceipt() {
+        return ok(receipt.render(currentTransaction, currentTransaction.getItems()));
     }
 
 

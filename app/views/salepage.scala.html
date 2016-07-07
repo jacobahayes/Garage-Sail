@@ -115,6 +115,14 @@
       margins: auto;
     }
 
+  #share-buttons img {
+    width: 50px;
+    padding: 0px;
+    border: 0;
+    box-shadow: 0;
+    display: inline;
+  }
+
 
   </style>
 
@@ -179,6 +187,18 @@
         <button type="submit">View All Tags</button>
       </form>
     </div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <center>
+    <div id="share-buttons">
+      <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+        <p id="instructions">Advertise on Facebook</p>
+      </a>
+    </div>
+    </center>
+    <div id="space"></div>
+    <div id="space"></div>
     <div id="space"></div>
     <div id="edit-form">
       <form action="@routes.HomeController.cancel()" method="post">

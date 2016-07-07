@@ -18,7 +18,19 @@
 
     <div id="heading">
       <p id="title">Items in Transaction</p>
-      <p id="instructions">items in the current transaction</p>
+      <p id="instructions">add items to transaction</p>
+    </div>
+
+    <div id="edit-form">
+      <form action="@routes.HomeController.addItemById()">
+          <div id="iteminput">
+          <input type="text" name="id" id="id" placeholder="add items by id, seperated by commas" width="150px">
+          </div>
+          <div id="space"></div>
+          <div id="space"></div>
+          <button type="Submit">Search</button>
+          <div id="space"></div>
+      </form>
     </div>
 
     <fieldset id="fields">
@@ -62,10 +74,6 @@ body {
   font-family: "Poiret One";
 }
 
-#password, #password_confirm {
-  -webkit-text-security: circle;
-}
-
 #right {
   float: right;
 }
@@ -94,6 +102,10 @@ body {
   text-align: center;
   margin: auto;
   width: 280px;
+}
+
+#iteminput {
+  width: 150px;
 }
 
 #buttons {
@@ -147,7 +159,7 @@ button:hover {
 }
 
 #sidebyside {
-  display: flex;
+  width: 300px;;
 }
 
 .itemandtag {

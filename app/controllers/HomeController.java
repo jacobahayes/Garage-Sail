@@ -458,6 +458,21 @@ public class HomeController extends Controller {
 
     }
 
+    public Result addItemById() {
+        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String action = postAction[0];
+        List<Item> itemsToAdd = new ArrayList<>();
+        while (!action.isEmpty()) {
+            Item item = JavaApplicationDatabase.getItem(Integer.parseInt(action.substring(0, action.indexOf(','))));
+            action = action.substring(action.indexOf(',') + 1);
+            itemsToAdd.add(item);
+            if (action.equals(",")) {
+                action = "";
+            }
+        }
+        return TODO;
+    }
+
     public Result relatedItems() {
         return ok(similaritems.render());
     }
@@ -620,7 +635,6 @@ public class HomeController extends Controller {
         String items = postAction[0];
         System.out.println(items);
         System.out.println(postAction);
-
 //        while (!items.isEmpty()) {
 //
 //        }

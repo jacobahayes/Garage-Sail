@@ -25,6 +25,7 @@ public class Transaction extends Model {
 
     private String date;
     private String time;
+    private String startDate;
     private double totalPrice;
     private String receipt;
     private boolean closed;
@@ -70,6 +71,14 @@ public class Transaction extends Model {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getTime() {

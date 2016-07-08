@@ -713,10 +713,13 @@ public class HomeController extends Controller {
         String[] paymentAction = request().body().asFormUrlEncoded().get("paymentmethod");
 
         List<Item> itemsfromdb = new ArrayList<>();
-        Transaction transaction = currentTransaction;
+        for (String itemId : postAction) {
+            System.out.println(itemId);
+        }
+        Transaction transaction = new Transaction();
+        System.out.println(paymentAction[0]);
 
         String paymentMethod = paymentAction[0];
-        System.out.println(paymentMethod);
 
         if (paymentMethod.equalsIgnoreCase("creditdebit")) {
             transaction.setPaymentMethod("creditdebit");
@@ -727,13 +730,13 @@ public class HomeController extends Controller {
         }
 
         double totalPrice = 0.0;
-
+        /**
         for (String itemId : postAction) {
             System.out.println(itemId);
             itemsfromdb.add(JavaApplicationDatabase.getItem(Integer.parseInt(itemId))); //bug?
             totalPrice = totalPrice + JavaApplicationDatabase.getItem(Integer.parseInt(itemId)).getListPrice();
         }
-
+         */
         Calendar currentDate = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
         SimpleDateFormat formattertime = new SimpleDateFormat("hh:mm:ss");
@@ -746,10 +749,12 @@ public class HomeController extends Controller {
         transaction.setItems(itemsfromdb);
         transaction.setTotalPrice(totalPrice);
         transaction.setClosed(true);
+        transaction.setPaymentMethod(paymentMethod);
         transaction.update();
 
-        currentTransaction = transaction;
-        return ok(receipt.render(currentTransaction, itemsfromdb));
+        //currentTransaction = transaction;
+
+        return ok(receipt.render(transaction, itemsfromdb));
     }
 
     public Result renderReceipt() {

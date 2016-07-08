@@ -52,7 +52,6 @@ GET    /transactions/add            controllers.HomeController.addTransaction()
 POST   /transactions/transaction/view         controllers.HomeController.viewSingleTransaction()
 
 POST   /transactions/transaction/processsale    controllers.HomeController.processSale()
-GET    /transactions/transaction/processsale    controllers.HomeController.processSale()
 GET    /receipt                    controllers.HomeController.renderReceipt()
 POST   /receipt                    controllers.HomeController.renderReceipt()
 

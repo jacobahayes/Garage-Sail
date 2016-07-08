@@ -684,7 +684,7 @@ public class HomeController extends Controller {
     public Result addTransaction() {
         Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
         try {
-            if (JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId()).getUserId() == loggedInUser.getId()) {
+            if (JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId()) == null) { //if empty (not already a transaction), save it.  else, go to transaction page.
                 transaction.setSaleId(saleInView.getId());
                 transaction.setUserId(loggedInUser.getId());
                 transaction.setClosed(false);

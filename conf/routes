@@ -47,6 +47,7 @@ POST     /add/item                  controllers.HomeController.addItemById()
 GET    /transactions                controllers.HomeController.viewTransactions()
 POST   /transactions                controllers.HomeController.viewTransactions()
 POST   /transactions/add            controllers.HomeController.addTransaction()
+GET    /transactions/add            controllers.HomeController.addTransaction()
 
 POST   /transactions/transaction/view         controllers.HomeController.viewSingleTransaction()
 

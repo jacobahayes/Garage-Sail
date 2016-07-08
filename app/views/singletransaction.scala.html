@@ -21,11 +21,9 @@
       <p id="instructions">add items to transaction</p>
     </div>
 
-    <div id="edit-form">
+    <div id="search-form">
       <form action="@routes.HomeController.addItemById()">
-          <div id="iteminput">
-          <input type="text" name="id" id="id" placeholder="add items by id, seperated by commas" width="150px">
-          </div>
+          <input type="text" name="id" class="textbox" placeholder="add items by id, seperated by commas">
           <div id="space"></div>
           <div id="space"></div>
           <button type="Submit">Add Item</button>
@@ -46,44 +44,45 @@
             <label for="option">Add item to transaction</label>
             <input id="transactionitems" type="checkbox" name="transactionitems" value="@item.getId">
           </div>
+          <div id="space"></div>
+          <div id="space"></div>
+          <div id="space"></div>
+          <div id="space"></div>
         }
         </fieldset>
         <div id="space"></div>
         <div id="space"></div>
-        <div id="wrapper">
-          <div class="cell">
-            <div class="content">
+      <div id="coindesk-widget" data-align="center"></div>
+      <script type="text/javascript" src="//widget.coindesk.com/bpiticker/coindesk-widget.min.js?b6542b"></script>
+
+
+      <center>
+        <div id="wrapper1">
+          <div class="cell1">
+            <div class="content1">
               <input id="paymentmethod" type="radio" name="paymentmethod" value="creditdebit">
               <div id="space"></div>
               <label for="paymentmethod">Credit/Debit</label>
             </div>
           </div>
           <div class="cell">
-            <center>
-            <div class="content1">
-              <div id="coindesk-widget" data-align="center"></div>
-              <script type="text/javascript" src="//widget.coindesk.com/bpiticker/coindesk-widget.min.js?b6542b"></script>
+            <div class="content">
               <div id="space"></div>
-                <input id="paymentmethod" type="radio" name="paymentmethod" value="bitcoin">
-                <div id="space"></div>
-                <label for="paymentmethod">Bitcoin</label>
+              <input id="paymentmethod" type="radio" name="paymentmethod" value="bitcoin">
+              <div id="space"></div>
+              <label for="paymentmethod">Bitcoin</label>
             </div>
-            </center>
           </div>
-          <div class="cell">
-            <div class="content2">
-                <input id="paymentmethod" type="radio" name="paymentmethod" value="cash">
-                <div id="space"></div>
-                <label for="paymentmethod">Cash</label>
+          <div class="cell1">
+            <div class="content21">
+              <div id="space"></div>
+              <input id="paymentmethod" type="radio" name="paymentmethod" value="cash">
+              <div id="space"></div>
+              <label for="paymentmethod">Cash</label>
             </div>
           </div>
         </div>
-        <div id="space"></div>
-        <div id="space"></div>
-      <form action="@routes.HomeController.processSale()" method="post">
-        <button type="submit">Process Transaction</button>
-      </form>
-    </div>
+      </center>
 
       <div id="space"></div>
       <div id="space"></div>
@@ -127,9 +126,15 @@ body {
 }
 
 #edit-form {
+   text-align: center;
+   margin: auto;
+   width: 420px;
+ }
+
+#search-form {
   text-align: center;
   margin: auto;
-  width: 280px;
+  width: 420px;
 }
 
 #iteminput {
@@ -163,6 +168,12 @@ button {
 
 legend {
   color: #000000;
+}
+
+.textbox {
+  text-align: center;
+  width: 420px;
+  height: 30px;
 }
 
 #edit-form input {
@@ -221,12 +232,28 @@ input[type=checkbox]:not(old) + label > span{
   vertical-align   : bottom;
 }
 
-#wrapper {
+#wrapper1 {
+  text-align: center;
   margins: auto;
   display: table;
   border: none;
-  width: 700px;;
+  width: 370px;
 }
+
+.cell1 {
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+}
+
+.content1 {
+  float: left;
+}
+
+.content21{
+  float: right;
+}
+
 
 .cell {
   display: table-cell;
@@ -235,15 +262,11 @@ input[type=checkbox]:not(old) + label > span{
 }
 
 .content {
-  float: left;
+  text-align: center;
 }
 
 .content2{
   float: right;
-}
-
-.content1{
-
 }
 
 input[type=radio   ]:not(old){

@@ -693,7 +693,6 @@ public class HomeController extends Controller {
         } catch(Exception e) {
             return viewTransactions();
         }
-
         return viewTransactions();
     }
 

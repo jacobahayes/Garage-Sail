@@ -20,7 +20,7 @@ public class Transaction extends Model {
     private int saleId;
     private int userId;
 
-    private List<Item> items;
+    private String items;
     private String paymentmethod;
 
     private String date;
@@ -57,11 +57,11 @@ public class Transaction extends Model {
         this.userId = userId;
     }
 
-    public List<Item> getItems() {
+    public String getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(String items) {
         this.items = items;
     }
 

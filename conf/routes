@@ -42,7 +42,7 @@ POST    /mysales/createsale/add    controllers.HomeController.addSale()
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()
 
-POST     /add/item                  controllers.HomeController.addItemById()
+POST   /add/item                   controllers.HomeController.addItemById()
 
 GET    /transactions                controllers.HomeController.viewTransactions()
 POST   /transactions                controllers.HomeController.viewTransactions()
@@ -76,6 +76,10 @@ GET     /admin/lock                controllers.HomeController.lockUnlock()
 POST    /admin/lock                controllers.HomeController.lockUnlock()
 GET     /admin/toggle              controllers.HomeController.toggleAdmin()
 POST    /admin/toggle              controllers.HomeController.toggleAdmin()
+GET     /admin/bookkeeper          controllers.HomeController.toggleBookkeeper()
+POST    /admin/bookkeeper          controllers.HomeController.toggleBookkeeper()
+GET     /bookkeep                  controllers.HomeController.bookPage()
+POST    /bookkeep                  controllers.HomeController.bookPage()
 
 
 # An example controller showing how to use dependency injection

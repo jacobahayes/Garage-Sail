@@ -20,7 +20,7 @@
       <p id="title">Transaction: @transaction.getId</p>
       <p id="instructions"><b>Date: @transaction.getDate</b></p>
       <p id="instructions"><b>Time: @transaction.getTime</b></p>
-      <p id="instructions"><b>Total Price: @transaction.getTotalPrice</b></p>
+      <p id="instructions"><b>Total Price: $@transaction.getTotalPrice</b></p>
       <p id="instructions"><b>Payment Method: @transaction.getPaymentMethod</b></p>
     </div>
 
@@ -46,7 +46,8 @@
         <button type="submit">Print</button>
       </form>
     </div>
-
+    <div id="space"></div>
+    <div id="space"></div>
     <div id="edit-form">
       <form action="@routes.HomeController.cancel()" method="post">
         <button type="submit">Return Home</button>

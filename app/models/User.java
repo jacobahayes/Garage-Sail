@@ -39,6 +39,8 @@ public class User extends Model{
     private String admin;
     private boolean locked;
 
+    private boolean bookkeeper;
+
     private List<Sale> sales;
 
     private String dateCreated;
@@ -62,6 +64,13 @@ public class User extends Model{
 
     public boolean getLocked() { return locked; }
     public void setLocked(boolean locked) { this.locked = locked; }
+
+    public boolean isBookkeeper() {
+        return bookkeeper;
+    }
+    public void setBookkeeper(boolean bookkeeper) {
+        this.bookkeeper = bookkeeper;
+    }
 
     public int getId() {
         return id;

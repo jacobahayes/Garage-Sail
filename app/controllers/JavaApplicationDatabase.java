@@ -980,6 +980,138 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    public static void deleteTransaction(int transId) {
+        ResultSet rs = null;
+        Statement stmt = null;
+        Transaction transaction = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("DELETE * FROM transaction");
+        buf.append(" WHERE id='" + transId + "'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+    }
+
+    /**
+    public static int processSale(int transactionId, Transaction newTransaction) {
+
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE transaction");
+        buf.append(", items='" + newTransaction.getItems() + "'");
+        buf.append(", total_price='" + newTransaction.getTotalPrice() + "'");
+        buf.append(", date='" + newTransaction.getDate() + "'");
+        buf.append(", time='" + newTransaction.getTime() + "'");
+        buf.append(", closed='" + 1 + "'");
+        buf.append(" WHERE id=" + transactionId);
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        //remove items from sale
+
+        return result;
+    }
+    */
+
+    public static int updateTransaction(int transId, Transaction newTransaction) {
+
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE transaction");
+        buf.append(" SET payment_method='" + newTransaction.getPaymentMethod() + "'");
+        buf.append(" AND date='" + newTransaction.getDate() + "'");
+        buf.append(" AND time='" + newTransaction.getTime() + "'");
+        buf.append(" AND items='" + newTransaction.getItems() + "'");
+        buf.append(" AND closed='" + 1 + "'");
+        buf.append(" WHERE id=" + transId);
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public static List<Transaction> getAllTransactions() {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Transaction> returnList = new ArrayList<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM transaction");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+                Transaction transaction = new Transaction();
+
+                transaction.setSaleId(rs.getInt("sale_id"));
+                transaction.setUserId(rs.getInt("user_id"));
+                transaction.setId(rs.getInt("id"));
+                transaction.setDate(rs.getString("date"));
+                transaction.setTime(rs.getString("time"));
+                transaction.setPaymentMethod(rs.getString("payment_method"));
+                transaction.setTotalPrice(rs.getDouble("total_price"));
+                transaction.setClosed(rs.getBoolean("closed"));
+
+                if (transaction != null) {
+                    returnList.add(transaction);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the item");
+        }
+        return returnList;
+    }
+
     /**
     public static List<Item> getItemsInTransaction(int saleId, int userId) {
 
@@ -1103,8 +1235,35 @@ class JavaApplicationDatabase extends Controller {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
         return result;
+    }
 
+    public static int toggleBookkeeper(User user) {
+
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE user");
+        if (user.isBookkeeper()) {
+            buf.append(" SET bookkeeper=0");
+        } else {
+            buf.append(" SET bookkeeper=1");
+        }
+        buf.append(" WHERE id=" + user.getId());
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 }

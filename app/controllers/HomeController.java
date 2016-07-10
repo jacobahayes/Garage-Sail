@@ -433,7 +433,11 @@ public class HomeController extends Controller {
         int quantity = newItem.getQuantity();
         newItem.setQuantity(1);
         while (quantity > 1) {
-            Item repeatItem = newItem;
+            Item repeatItem = new Item();
+            repeatItem.setBottomPrice(newItem.getBottomPrice());
+            repeatItem.setDescription(newItem.getDescription());
+            repeatItem.setName(newItem.getName());
+            repeatItem.setListPrice(newItem.getListPrice());
             repeatItem.setSaleId(saleInView.getId());
             repeatItem.save();
             quantity--;
@@ -712,15 +716,11 @@ public class HomeController extends Controller {
         String[] postAction = request().body().asFormUrlEncoded().get("transactionitems");
         String[] paymentAction = request().body().asFormUrlEncoded().get("paymentmethod");
 
+        String itemString = "";
         List<Item> itemsfromdb = new ArrayList<>();
-        for (String itemId : postAction) {
-            System.out.println(itemId);
-        }
         Transaction transaction = new Transaction();
-        System.out.println(paymentAction[0]);
 
         String paymentMethod = paymentAction[0];
-
         if (paymentMethod.equalsIgnoreCase("creditdebit")) {
             transaction.setPaymentMethod("creditdebit");
         } else if (paymentMethod.equalsIgnoreCase("bitcoin")) {
@@ -730,13 +730,13 @@ public class HomeController extends Controller {
         }
 
         double totalPrice = 0.0;
-        /**
+
         for (String itemId : postAction) {
-            System.out.println(itemId);
             itemsfromdb.add(JavaApplicationDatabase.getItem(Integer.parseInt(itemId))); //bug?
+            itemString = itemString + "," + itemId;
             totalPrice = totalPrice + JavaApplicationDatabase.getItem(Integer.parseInt(itemId)).getListPrice();
         }
-         */
+
         Calendar currentDate = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
         SimpleDateFormat formattertime = new SimpleDateFormat("hh:mm:ss");
@@ -744,15 +744,17 @@ public class HomeController extends Controller {
         String dateNow = formatter.format(currentDate.getTime());
         String timeNow = formattertime.format(currentDate.getTime());
 
+        transaction.setSaleId(currentTransaction.getSaleId());
+        transaction.setUserId(currentTransaction.getUserId());
+
         transaction.setDate(dateNow);
         transaction.setTime(timeNow);
-        transaction.setItems(itemsfromdb);
+        transaction.setItems(itemString);
         transaction.setTotalPrice(totalPrice);
         transaction.setClosed(true);
         transaction.setPaymentMethod(paymentMethod);
-        transaction.update();
 
-        //currentTransaction = transaction;
+        JavaApplicationDatabase.updateTransaction(currentTransaction.getId(), transaction);
 
         return ok(receipt.render(transaction, itemsfromdb));
     }
@@ -837,5 +839,32 @@ public class HomeController extends Controller {
         }
 
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
+    }
+
+    public Result toggleBookkeeper() {
+        User user = Form.form(User.class).bindFromRequest().get();
+
+        User foundUser = JavaApplicationDatabase.getUser(user.getId());
+
+        int result = JavaApplicationDatabase.toggleBookkeeper(foundUser);
+        if (result == 1) {
+
+            ok(adminpage.render(JavaApplicationDatabase.getUsers()));
+
+        } else {
+
+            return badRequest("An error occurred while saving");
+
+        }
+
+        return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
+    }
+
+    public Result bookPage() {
+        if (loggedInUser.isBookkeeper()) {
+            return ok(bookkeeper.render(JavaApplicationDatabase.getAllTransactions()));
+        } else {
+            return ok(homepage.render());
+        }
     }
 }

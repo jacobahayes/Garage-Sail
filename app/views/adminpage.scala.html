@@ -226,6 +226,26 @@
                   </div>
                 </div>
               </div>
+              </div>
+            </center>
+            <center>
+              <div id="wrapper">
+                <div class="cell">
+                  <div class="content">
+                    <p id="instructions">Bookkeeper: @user.isBookkeeper</p>
+                  </div>
+                </div>
+                <div class="cell">
+                  <div class="content2">
+                    <div id="edit-form">
+                      <form action="@routes.HomeController.toggleBookkeeper()" method="post">
+                        <input type="hidden" id="id" name="id" value="@user.getId">
+                        <button type="submit">Toggle Bookkeeper</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </center>
             <center>
               <div id="wrapper">
@@ -243,6 +263,7 @@
                       </form>
                     </div>
                   </div>
+                </div>
                 </div>
             </center>
             <p>Admin: @user.getAdmin()</p>

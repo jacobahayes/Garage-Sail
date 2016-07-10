@@ -207,8 +207,10 @@
           <legend><b>User: @user.getFirstName @user.getLastName</b></legend>
           <div id="iteminfo">
             <p>Email: @user.getEmail()</p>
-            <p>User Type: @user.getId</p>
+            <p>User ID: @user.getId</p>
             <p>User Created: @user.getDate</p>
+            <p>Username: @user.getUsername</p>
+            <p>Password: @user.getPassword</p>
             <center>
               <div id="wrapper">
                 <div class="cell">
@@ -266,14 +268,15 @@
                 </div>
                 </div>
             </center>
-            <p>Admin: @user.getAdmin()</p>
-            <p>Locked: @user.getLocked()</p>
-            <p>ID: @user.getId</p>
-          </div>
-          <div id="transaction-form">
-            <form action="@routes.HomeController.viewSingleTransaction()">
-              <button type="submit">View User</button>
-            </form>
+            <div id="edit-form">
+              <form action="@routes.HomeController.adminChangePassword()" method="post">
+                <input type="hidden" name="id" id="id" value="@user.getId">
+                <input type="password" name="password" id="password" placeholder="new password">
+                <div id="space"></div>
+                <button type="submit">Save</button>
+                <div id="space"></div>
+              </form>
+            </div>
           </div>
         </fieldset>
       </center>

@@ -139,6 +139,7 @@ public class HomeController extends Controller {
 
         User registerUser = Form.form(User.class).bindFromRequest().get();
         registerUser.setLocked(false);
+        registerUser.setBookkeeper(false);
         registerUser.setDate(dateNow);
         registerUser.save();
 
@@ -845,7 +846,11 @@ public class HomeController extends Controller {
         User user = Form.form(User.class).bindFromRequest().get();
 
         User foundUser = JavaApplicationDatabase.getUser(user.getId());
-
+        if (foundUser.isBookkeeper()) {
+            foundUser.setBookkeeper(false);
+        } else {
+            foundUser.setBookkeeper(true);
+        }
         int result = JavaApplicationDatabase.toggleBookkeeper(foundUser);
         if (result == 1) {
 
@@ -864,7 +869,16 @@ public class HomeController extends Controller {
         if (loggedInUser.isBookkeeper()) {
             return ok(bookkeeper.render(JavaApplicationDatabase.getAllTransactions()));
         } else {
-            return ok(homepage.render());
+            return viewTransactions();
         }
+    }
+
+    public Result adminChangePassword() {
+        String[] postAction = request().body().asFormUrlEncoded().get("password");
+        String[] postAction1 = request().body().asFormUrlEncoded().get("id");
+        String password = postAction[0];
+        int id = Integer.parseInt(postAction1[0]);
+        JavaApplicationDatabase.updatePassword(JavaApplicationDatabase.getUser(id), password);
+        return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 }

@@ -17,6 +17,7 @@ public class User extends Model{
 
     public User() {
         admin = "false";
+        bookkeeper = false;
     }
 
     @Id
@@ -38,7 +39,6 @@ public class User extends Model{
 
     private String admin;
     private boolean locked;
-
     private boolean bookkeeper;
 
     private List<Sale> sales;

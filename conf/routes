@@ -19,6 +19,7 @@ POST    /profile/email             controllers.HomeController.editEmail()
 POST    /profile/username          controllers.HomeController.editUsername()
 POST    /profile/password          controllers.HomeController.editPassword()
 POST    /profile                   controllers.HomeController.cancel()
+POST    /admin                     controllers.HomeController.adminChangePassword()
 
 GET     /browsesales               controllers.HomeController.browseSales()
 POST    /browsesales               controllers.HomeController.browseSales()

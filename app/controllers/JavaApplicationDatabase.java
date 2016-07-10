@@ -71,6 +71,7 @@ class JavaApplicationDatabase extends Controller {
                 returnUser.setId(rs.getInt("id"));
                 returnUser.setAdmin(rs.getString("admin"));
                 returnUser.setLocked(rs.getBoolean("locked"));
+                returnUser.setBookkeeper(rs.getBoolean("bookkeeper"));
 
             }
 
@@ -129,6 +130,11 @@ class JavaApplicationDatabase extends Controller {
                 } else {
                     user.setLocked(false);
                 }
+                if (rs.getInt("bookkeeper") == 1) {
+                    user.setBookkeeper(true);
+                } else {
+                    user.setBookkeeper(false);
+                }
 
 
             }
@@ -184,7 +190,11 @@ class JavaApplicationDatabase extends Controller {
                 } else {
                     user.setLocked(false);
                 }
-
+                if (rs.getInt("bookkeeper") == 1) {
+                    user.setBookkeeper(true);
+                } else {
+                    user.setBookkeeper(false);
+                }
 
             }
 
@@ -375,7 +385,12 @@ class JavaApplicationDatabase extends Controller {
                     user.setLocked(false);
                 }
                 user.setLocked(rs.getBoolean("locked"));
-
+                if (rs.getInt("bookkeeper") == 1) {
+                    user.setBookkeeper(true);
+                } else {
+                    user.setBookkeeper(false);
+                }
+                user.setBookkeeper(rs.getBoolean("bookkeeper"));
                 if (user != null) {
                     returnList.add(user);
                 }
@@ -1252,9 +1267,9 @@ class JavaApplicationDatabase extends Controller {
         StringBuffer buf = new StringBuffer();
         buf.append("UPDATE user");
         if (user.isBookkeeper()) {
-            buf.append(" SET bookkeeper=0");
-        } else {
             buf.append(" SET bookkeeper=1");
+        } else {
+            buf.append(" SET bookkeeper=0");
         }
         buf.append(" WHERE id=" + user.getId());
 
@@ -1264,6 +1279,7 @@ class JavaApplicationDatabase extends Controller {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
         return result;
     }
 }

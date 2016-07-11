@@ -2,10 +2,10 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Sale</title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sale</title>
+  </head>
 
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
@@ -117,66 +117,67 @@
 
 
   <body>
-  <div id="logo">
-    <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
-  </div>
-  <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
-  <div id="heading">
-    <p id="title">@sale.getName</p>
-    <p id="saleinfo">@sale.getDescription</p>
-    <p id="saleinfo"><b>Location:</b> @sale.getLocation <b>Date and Time:</b> @sale.getDate <b>from</b> @sale.getStartTime - @sale.getEndTime</p>
-  </div>
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+    <div id="heading">
+      <p id="title">@sale.getName</p>
+      <p id="saleinfo">@sale.getDescription</p>
+      <p id="saleinfo"><b>Location:</b> @sale.getLocation <b>Date and Time:</b> @sale.getDate <b>from</b> @sale.getStartTime - @sale.getEndTime</p>
+    </div>
 
-  <div id="space"></div>
-  <div id="edit-form">
-    <form action="@routes.HomeController.searchItemInSale()" method="get">
-      <div id="sidebyside">
-        <input type="text"placeholder="search for an item">
-        <button type="Submit">Search</button>
-        <div id="space"></div>
-      </div>
-    </form>
-  </div>
-  <div id="space"></div>
-  <div id="space"></div>
-    <center>
+    <div id="space"></div>
     <div id="edit-form">
-      <form action="@routes.HomeController.addTransaction()">
+      <form action="@routes.HomeController.searchItemInSale()" method="get">
+        <div id="sidebyside">
+          <input type="text"placeholder="search for an item">
+          <button type="Submit">Search</button>
+          <div id="space"></div>
+        </div>
+      </form>
+    </div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <center>
+      <div id="edit-form">
+        <form action="@routes.HomeController.addTransaction()">
           <input type="hidden" id="sale_id" name="sale_id" value="@sale.getId"/>
           <button type="Submit">start transaction</button>
           <div id="space"></div>
-      </form>
-    </div>
+        </form>
+      </div>
     </center>
     <div id="space"></div>
     <div id="space"></div>
     <div id="space"></div>
 
-  @for(item <- items) {
-    <fieldset id="fields">
-      <legend id="legend"><b>@item.getName</b></legend>
-      <img src="@item.getImg" alt="Image not available" id="image">
-      <div id="iteminfo">
-        <p><b>Description:</b> @item.getDescription</p>
-        <p><b>Quantity:</b> @item.getQuantity</p>
-        <p><b>Price:</b> $@item.getListPrice</p>
-      </div>
-      <div class="itemandtag">
-        <form action="@routes.HomeController.relatedItems()">
-          <input type="hidden" name="id" id ="id" value="@item.getId"/>
-          <button type="submit">View Related Items</button>
-        </form>
-      </div>
-    </fieldset>
-  }
-  <div id="space"></div>
-  <div id="space"></div>
+    @for(item <- items) {
+      <fieldset id="fields">
+        <legend id="legend"><b>@item.getName</b></legend>
+        <img src="@item.getImg" alt="Image not available" id="image">
+        <div id="iteminfo">
+          <p><b>Description:</b> @item.getDescription</p>
+          <p><b>Quantity:</b> @item.getQuantity</p>
+          <p><b>Price:</b> $@item.getListPrice</p>
+          <p><b>Sold:</b> @item.isSold</p>
+        </div>
+        <div class="itemandtag">
+          <form action="@routes.HomeController.relatedItems()">
+            <input type="hidden" name="id" id ="id" value="@item.getId"/>
+            <button type="submit">View Related Items</button>
+          </form>
+        </div>
+      </fieldset>
+    }
+    <div id="space"></div>
+    <div id="space"></div>
 
-  <div id="edit-form">
-    <form action="@routes.HomeController.browseSales()" method="post">
-      <button type="submit">Cancel</button>
-    </form>
-  </div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.browseSales()" method="post">
+        <button type="submit">Cancel</button>
+      </form>
+    </div>
 
-</body>
+  </body>
 </html>

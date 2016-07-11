@@ -2,10 +2,10 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Transactions</title>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title>Transactions</title>
+  </head>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <style>
 
@@ -149,17 +149,17 @@
 
   </style>
 
-<body>
+  <body>
 
-  <div id="logo">
-    <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
-  </div>
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
 
-  <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
-  <div id="heading">
-    <p id="title">Transactions</p>
-    <p id="instruction"><b>open transactions</b></p>
-  </div>
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+    <div id="heading">
+      <p id="title">Transactions</p>
+      <p id="instruction"><b>open transactions</b></p>
+    </div>
 
     @for(trans <- open) {
       <center>
@@ -178,6 +178,7 @@
           <div id="transaction-form">
             <form action="/transactions/transaction/view" method="post">
               <input type="hidden" id="action" name="action" value="@trans.getSaleId()">
+              <input type="hidden" id="action" name="action" value="@trans.getId()">
               <button type="submit">View Transaction</button>
             </form>
           </div>
@@ -185,40 +186,40 @@
         </fieldset>
       </center>
     }
-  <div id="space"></div>
-  <div id="space"></div>
+    <div id="space"></div>
+    <div id="space"></div>
 
-  <div id="heading">
-  <p id="instruction"><b>closed transactions</b></p>
-  </div>
-  @for(trans <- closed) {
-    <center>
-      <fieldset id="fields">
+    <div id="heading">
+      <p id="instruction"><b>closed transactions</b></p>
+    </div>
+    @for(trans <- closed) {
+      <center>
+        <fieldset id="fields">
 
-        <legend><b>Sale: @trans.getSaleId</b></legend>
-        <div id="iteminfo">
-          <p>Date: @trans.getDate</p>
-          <p>Time: @trans.getTime</p>
-          <p>ID: @trans.getId</p>
-          <p>Payment Method: @trans.getPaymentMethod</p>
-          <p>Total Price: $@trans.getTotalPrice</p>
-          <p>Closed: @trans.getClosed</p>
-        </div>
-      </fieldset>
-    </center>
-  }
-  <div id="space"></div>
-  <div id="space"></div>
-  <div id="edit-form">
-    <form action="@routes.HomeController.cancel()" method="post">
-      <button type="submit">Cancel</button>
-    </form>
-  </div>
+          <legend><b>Sale: @trans.getSaleId</b></legend>
+          <div id="iteminfo">
+            <p>Date: @trans.getDate</p>
+            <p>Time: @trans.getTime</p>
+            <p>ID: @trans.getId</p>
+            <p>Payment Method: @trans.getPaymentMethod</p>
+            <p>Total Price: $@trans.getTotalPrice</p>
+            <p>Closed: @trans.getClosed</p>
+          </div>
+        </fieldset>
+      </center>
+    }
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.cancel()" method="post">
+        <button type="submit">Cancel</button>
+      </form>
+    </div>
 
 
-  <div id="admin">
-    <h3><a href="@routes.HomeController.bookPage()" id="logo">bookkeeper</a></h3>
-  </div>
+    <div id="admin">
+      <h3><a href="@routes.HomeController.bookPage()" id="logo">bookkeeper</a></h3>
+    </div>
 
-</body>
+  </body>
 </html>

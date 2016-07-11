@@ -13,6 +13,10 @@ import java.awt.image.BufferedImage;
 @Entity
 public class Item extends Model{
 
+    public Item() {
+        sold = false;
+    }
+
     @Id
     @Column(unique=true)
     private int id;
@@ -31,6 +35,17 @@ public class Item extends Model{
 
     private int transactionId;
 
+    private boolean sold;
+
+    public boolean isSold() {
+        return sold;
+    }
+    public void setSold(boolean sold) {
+        this.sold = sold;
+    }
+
+    public int getTransactionId() { return transactionId; }
+    public void setTransactionId(int transactionId) { this.transactionId = transactionId; }
 
     public String getName() {
         return name;

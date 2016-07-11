@@ -842,6 +842,10 @@ public class HomeController extends Controller {
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 
+    /**
+     * allows an admin to toggle bookkeeper rights for any user
+     * @return the HTTP response
+     */
     public Result toggleBookkeeper() {
         User user = Form.form(User.class).bindFromRequest().get();
 
@@ -865,6 +869,10 @@ public class HomeController extends Controller {
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 
+    /**
+     * renders the financial page for the bookkeeper
+     * @return the HTTP response
+     */
     public Result bookPage() {
         if (loggedInUser.isBookkeeper()) {
             return ok(bookkeeper.render(JavaApplicationDatabase.getAllTransactions()));
@@ -873,6 +881,10 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * allows an admin to change their password
+     * @return the HTTP response
+     */
     public Result adminChangePassword() {
         String[] postAction = request().body().asFormUrlEncoded().get("password");
         String[] postAction1 = request().body().asFormUrlEncoded().get("id");

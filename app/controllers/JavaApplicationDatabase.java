@@ -1253,6 +1253,11 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
+    /**
+     * db access to toggle bookkeeper rights for a user
+     * @param user the user to toggle bookkeeper rights for
+     * @return the number of rows affected
+     */
     public static int toggleBookkeeper(User user) {
 
         int result = 0;

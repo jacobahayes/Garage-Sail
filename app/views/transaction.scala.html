@@ -176,10 +176,10 @@
           </div>
 
           <div id="transaction-form">
-            <form action="/transactions/transaction/view" method="post">
+            <form action="@routes.HomeController.singleTransaction()" method="post">
               <input type="hidden" id="action" name="action" value="@trans.getSaleId()">
               <input type="hidden" id="action" name="action" value="@trans.getId()">
-              <button type="submit">View Transaction</button>
+              <button type="submit">Edit Transaction</button>
             </form>
           </div>
 
@@ -204,6 +204,14 @@
             <p>Payment Method: @trans.getPaymentMethod</p>
             <p>Total Price: $@trans.getTotalPrice</p>
             <p>Closed: @trans.getClosed</p>
+          </div>
+
+          <div id="transaction-form">
+            <form action="@routes.HomeController.renderReceipt()" method="post">
+              <input type="hidden" id="action" name="action" value="@trans.getSaleId()">
+              <input type="hidden" id="action" name="action" value="@trans.getId()">
+              <button type="submit">View Receipt</button>
+            </form>
           </div>
         </fieldset>
       </center>

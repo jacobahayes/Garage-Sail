@@ -289,10 +289,23 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result externalSale() {
+
         Sale sale = Form.form(Sale.class).bindFromRequest().get();
         saleInView = JavaApplicationDatabase.getSale(sale.getId());
-
-
+        System.out.println(saleInView.getId());
+        System.out.println(saleInView.getDescription());
+        Transaction transaction = JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId());
+        if (transaction == null) {
+            transaction = new Transaction();
+            transaction.setSaleId(saleInView.getId());
+            transaction.setUserId(loggedInUser.getId());
+            transaction.save();
+        }
+        System.out.println(transaction.getId());
+        System.out.println(transaction.getSaleId());
+        System.out.println(transaction.getUserId());
+        System.out.println(transaction.getId());
+        transactionId = transaction.getId();
         List<Item> itemsfromdb = new ArrayList<>();
         try {
             itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
@@ -664,27 +677,26 @@ public class HomeController extends Controller {
         return ok(transaction.render(open, closed, loggedInUser));
     }
 
-    public Result completeViewTransaction(Http.Request request) {
-        return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
-    }
-
-    public Result renderTransaction() {
-        currentTransaction = JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId());
-        return ok(singletransaction.render(JavaApplicationDatabase.getSaleItems(saleInView.getId())));
-    }
-
     /**
      * allows the user to view a single transaction
      * @return the HTTP response
      */
     public Result viewSingleTransaction() {
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
-        int action = Integer.parseInt(postAction[0]);
-        int id = Integer.parseInt(postAction[1]);
-        System.out.println(id);
-        transactionId = id;
-        saleInView = JavaApplicationDatabase.getSale(action);
-        return completeViewTransaction(request());
+        List<Item> returnlist = new ArrayList<>();
+        returnlist = JavaApplicationDatabase.getTransactionItems(transactionId);
+        return ok(singletransaction.render(returnlist));
+    }
+
+    public Result singleTransaction() {
+        Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
+        Transaction returnTransaction = new Transaction();
+        try {
+            returnTransaction = JavaApplicationDatabase.getTransaction(transaction.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        transactionId = returnTransaction.getId();
+        return viewSingleTransaction();
     }
 
     /**
@@ -706,6 +718,35 @@ public class HomeController extends Controller {
         return viewTransactions();
     }
 
+    public Result addItemToTransaction() {
+        Item item = Form.form(Item.class).bindFromRequest().get();
+        Item returnItem = new Item();
+        System.out.println(returnItem.getId());
+        Transaction currentTransaction = new Transaction();
+        List<Item> itemlist = new ArrayList<>();
+
+        try {
+            returnItem = JavaApplicationDatabase.getItem(item.getId());
+            currentTransaction = JavaApplicationDatabase.getTransaction(transactionId);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(currentTransaction.getId());
+
+        try {
+            itemlist = JavaApplicationDatabase.getTransactionItems(currentTransaction.getId());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(returnItem.getDescription());
+        System.out.println(returnItem.getId());
+        System.out.println(currentTransaction.getId());
+        returnItem.setTransactionId(currentTransaction.getId());
+        JavaApplicationDatabase.updateItem(returnItem.getId(), returnItem);
+        return viewSingleTransaction();
+    }
+
 
 
 
@@ -718,9 +759,6 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result processSale() {
-        //String[] postAction = request().body().asFormUrlEncoded().get("action");
-
-        String[] postAction = request().body().asFormUrlEncoded().get("transactionitems");
         String[] paymentAction = request().body().asFormUrlEncoded().get("paymentmethod");
 
         String itemString = "";
@@ -743,40 +781,23 @@ public class HomeController extends Controller {
 
         double totalPrice = 0.0;
         List<Item> itemsfromdb = new ArrayList<>();
-        /**
-         for (String itemId : postAction) {
-         System.out.println("Item ID: " + itemId);
-         System.out.println("Try to get item from database . . .");
-         Item returnItem = JavaApplicationDatabase.getItem(Integer.parseInt(itemId));
-         itemsfromdb.add(returnItem);
-         itemString = itemString + "," + itemId;
-         totalPrice = totalPrice + returnItem.getListPrice();
-         System.out.println("Price: " + returnItem.getListPrice());
-         System.out.println("Total Price: " + totalPrice);
-         returnItem.setSold(true);
-         returnItem.setTransactionId(transactionId);
-         JavaApplicationDatabase.updateItem(returnItem.getId(), returnItem);
-         System.out.println();
-         System.out.println();
-         System.out.println();
-         }
-         */
+        try {
+            itemsfromdb = JavaApplicationDatabase.getTransactionItems(transactionId);
+        } catch (Exception E) {
+            badRequest("Could not get items");
+        }
         transaction.setDate(dateNow);
         transaction.setTime(timeNow);
-        transaction.setItems(itemString);
         transaction.setTotalPrice(totalPrice);
         transaction.setClosed(true);
         transaction.setPaymentMethod(paymentMethod);
-
-        System.out.println(postAction[0]);
-        System.out.println(postAction[1]);
 
         System.out.println(transaction.getDate());
         System.out.println(transaction.getTotalPrice());
         System.out.println(transaction.getTime());
         System.out.println(transaction.getPaymentMethod());
 
-        int result = 1; //JavaApplicationDatabase.updateTransaction(transactionId, transaction);
+        int result = JavaApplicationDatabase.updateTransaction(transactionId, transaction);
 
         if (result == 1) {
             return ok(receipt.render(transaction, itemsfromdb));
@@ -786,8 +807,16 @@ public class HomeController extends Controller {
     }
 
     public Result renderReceipt() {
-        List<Item> items = new ArrayList<>(); //change
-        return ok(receipt.render(currentTransaction, items)); //bug?
+        Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
+        Transaction returnTransaction = new Transaction();
+        List<Item> items = new ArrayList<>();
+        try {
+            returnTransaction = JavaApplicationDatabase.getTransaction(transactionId);
+            items = JavaApplicationDatabase.getTransactionItems(transactionId);
+        } catch (Exception E) {
+            badRequest("Could not get items");
+        }
+        return ok(receipt.render(returnTransaction, items));
     }
 
 

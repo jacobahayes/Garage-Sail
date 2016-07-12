@@ -34,7 +34,6 @@ public class Item extends Model{
     private BufferedImage img;
 
     private int transactionId;
-
     private boolean sold;
 
     public boolean isSold() {
@@ -99,7 +98,6 @@ public class Item extends Model{
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -107,7 +105,6 @@ public class Item extends Model{
     public int getSaleId() {
         return saleId;
     }
-
     public void setSaleId(int saleId) {
         this.saleId = saleId;
     }

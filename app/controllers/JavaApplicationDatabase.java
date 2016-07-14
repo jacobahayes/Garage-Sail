@@ -6,11 +6,13 @@ import models.Item;
 import models.Sale;
 import models.Transaction;
 import models.User;
-import play.mvc.*;
-import play.db.*;
-import views.html.item;
+import play.mvc.Controller;
+import play.db.DB;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +20,19 @@ class JavaApplicationDatabase extends Controller {
 
     private static DB db;
 
+    /**
+     * db class constructor
+     * @param db the database to connect to
+     */
     @Inject
     public JavaApplicationDatabase(DB db) {
         this.db = db;
     }
 
-    static Connection conn = db.getConnection();
+    private static Connection conn = db.getConnection();
 
 
-    //-----------------------------------------Profile logic----------------------------------------------------------------
+    //---------------------Profile logic----------------------------
 
     /**
      * db access to attempt login
@@ -62,7 +68,7 @@ class JavaApplicationDatabase extends Controller {
 
             while (rs.next()) {
 
-                returnUser= new User();
+                returnUser = new User();
                 returnUser.setFirstName(rs.getString("first_name"));
                 returnUser.setLastName(rs.getString("last_name"));
                 returnUser.setUsername(rs.getString("username"));
@@ -212,7 +218,8 @@ class JavaApplicationDatabase extends Controller {
      * @param newLastName the new last name
      * @return the number of rows affected by the update
      */
-    public static int updateName(User user, String newFirstName, String newLastName) {
+    public static int updateName(
+            User user, String newFirstName, String newLastName) {
 
         int result = 0;
         Statement stmt = null;
@@ -289,7 +296,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
             stmt = conn.createStatement();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -322,7 +329,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
             stmt = conn.createStatement();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -368,7 +375,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
 
-            while (rs!=null && rs.next()) {
+            while (rs != null && rs.next()) {
 
                 User user = new User();
 
@@ -399,7 +406,8 @@ class JavaApplicationDatabase extends Controller {
             return returnList;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
+            System.out.println(e.getMessage()
+                    + "Fail to get the sales from the result set");
         }
         return returnList;
     }
@@ -408,7 +416,7 @@ class JavaApplicationDatabase extends Controller {
 
 
 
-    //-----------------------------------------------------Item logic-------------------------------------------------------------------
+    //--------------------Item logic----------------------------
 
     /**
      * db access to update item
@@ -423,7 +431,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
             stmt = conn.createStatement();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -478,7 +486,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
 
-            while (rs!=null && rs.next()) {
+            while (rs != null && rs.next()) {
 
                 Item returnItem = new Item();
 
@@ -507,7 +515,8 @@ class JavaApplicationDatabase extends Controller {
             return returnList;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
+            System.out.println(e.getMessage()
+                    + "Fail to get the sales from the result set");
         }
         return returnList;
     }
@@ -571,7 +580,7 @@ class JavaApplicationDatabase extends Controller {
 
 
 
-    //---------------------------------------------------Search logic-------------------------------------------------------------------
+    //--------------------Search logic----------------------------
 
     /**
      * db access search item by name in a sale
@@ -756,7 +765,7 @@ class JavaApplicationDatabase extends Controller {
 
 
 
-    //------------------------------------------------------Sale logic----------------------------------------------------------------
+    //-------------------------------Sale logic------------------------
 
     /**
      * db access to get user's sales
@@ -788,7 +797,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
 
-            while (rs!=null && rs.next()) {
+            while (rs != null && rs.next()) {
 
                 Sale returnSale = new Sale();
 
@@ -812,7 +821,8 @@ class JavaApplicationDatabase extends Controller {
             return returnList;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the sales from the resultset");
+            System.out.println(e.getMessage()
+                    + "Fail to get the sales from the resultset");
         }
         return returnList;
     }
@@ -897,7 +907,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
 
-            while (rs!=null && rs.next()) {
+            while (rs != null && rs.next()) {
 
                 Sale returnSale = new Sale();
 
@@ -917,7 +927,8 @@ class JavaApplicationDatabase extends Controller {
             }
             return returnList;
         } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the sales from the resultset");
+            System.out.println(e.getMessage()
+                    + "Fail to get the sales from the resultset");
         }
         return returnList;
     }
@@ -925,7 +936,7 @@ class JavaApplicationDatabase extends Controller {
 
 
 
-    //--------------------------------------------------Transaction logic------------------------------------------------------
+    //-------------------Transaction logic-------------------------------
 
     /**
      * db access to get transaction for a user within a sale
@@ -973,6 +984,11 @@ class JavaApplicationDatabase extends Controller {
         return transaction;
     }
 
+    /**
+     * db access to get a transaction by its id
+     * @param transId the transaction id
+     * @return the found transaction (if any)
+     */
     public static Transaction getTransaction(int transId) {
 
         ResultSet rs = null;
@@ -1069,7 +1085,8 @@ class JavaApplicationDatabase extends Controller {
      * @param newTransaction the new transaction to update
      * @return result if successful
      */
-    public static int updateTransaction(int transId, Transaction newTransaction) {
+    public static int updateTransaction(
+            int transId, Transaction newTransaction) {
 
         int result = 0;
         Statement stmt = null;
@@ -1082,7 +1099,8 @@ class JavaApplicationDatabase extends Controller {
 
         StringBuffer buf = new StringBuffer();
         buf.append("UPDATE transaction");
-        buf.append(" SET paymentmethod='" + newTransaction.getPaymentMethod() + "'");
+        buf.append(" SET paymentmethod='"
+                + newTransaction.getPaymentMethod() + "'");
         buf.append(", date='" + newTransaction.getDate() + "'");
         buf.append(", time='" + newTransaction.getTime() + "'");
         buf.append(", items='" + newTransaction.getItems() + "'");
@@ -1148,6 +1166,11 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    /**
+     * db access to get items in a transaction
+     * @param transid the transaction id to search
+     * @return a list of items
+     */
     public static List<Item> getTransactionItems(int transid) {
 
         ResultSet rs = null;
@@ -1173,7 +1196,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
 
-            while (rs!=null && rs.next()) {
+            while (rs != null && rs.next()) {
 
                 Item returnItem = new Item();
 
@@ -1202,7 +1225,8 @@ class JavaApplicationDatabase extends Controller {
             return returnList;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage() + "Fail to get the sales from the result set");
+            System.out.println(e.getMessage()
+                    + "Fail to get the sales from the result set");
         }
         return returnList;
     }
@@ -1212,7 +1236,7 @@ class JavaApplicationDatabase extends Controller {
 
 
 
-//--------------------------------------------------Admin logic------------------------------------------------------
+//--------------------------Admin logic--------------------
 
     /**
      * db access to lock or unlock a user
@@ -1226,7 +1250,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
             stmt = conn.createStatement();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -1262,7 +1286,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
             stmt = conn.createStatement();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -1292,7 +1316,7 @@ class JavaApplicationDatabase extends Controller {
 
         try {
             stmt = conn.createStatement();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

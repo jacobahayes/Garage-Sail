@@ -1,28 +1,41 @@
 package controllers;
 
-import javax.inject.Inject;
-
-import com.avaje.ebean.Model;
-import com.avaje.ebean.RawSql;
-import com.avaje.ebean.RawSqlBuilder;
 import models.Item;
 import models.Sale;
 import models.User;
 import models.Transaction;
 import play.data.Form;
-import play.mvc.*;
-import play.db.*;
-import java.util.*;
-
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+import views.html.additem;
+import views.html.adminpage;
+import views.html.allsales;
+import views.html.allsearchitems;
+import views.html.basictag;
+import views.html.bookkeeper;
+import views.html.createsale;
+import views.html.externalsale;
+import views.html.homepage;
+import views.html.index;
+import views.html.item;
+import views.html.profile;
+import views.html.receipt;
+import views.html.registration;
+import views.html.salepage;
+import views.html.sales;
+import views.html.searchitemresults;
+import views.html.searchsalesresults;
+import views.html.similaritems;
+import views.html.singletransaction;
+import views.html.tag;
+import views.html.transaction;
 
 import java.util.List;
-import java.util.logging.Logger;
-
-import static play.libs.Json.toJson;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -31,26 +44,28 @@ import java.util.Calendar;
 public class HomeController extends Controller {
 
 
-    public static User loggedInUser = null;
-    public static Sale saleInView = null;
-    public static Transaction currentTransaction = null;
-    public static int loginCount = 0;
-    public static int transactionId;
+    private static User loggedInUser = null;
+    private static Sale saleInView = null;
+    private static Transaction currentTransaction = null;
+    private static int loginCount = 0;
+    private static int transactionId;
 
 
-    //------------------------------------------Homepage-ish logic--------------------------------------------------------------
+    //-----------------------Homepage-ish logic------------------------
 
     /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
+     * renders the initial login page
+     * @return the HTTP response
      */
     public Result index() {
         loggedInUser = null;
         return ok(index.render("Your new application is ready."));
     }
 
+    /**
+     * renders the homepage
+     * @return the HTTP response
+     */
     public Result renderHome() {
         return ok(homepage.render());
     }
@@ -66,13 +81,14 @@ public class HomeController extends Controller {
         String username = loginUser.getUsername();
         String password = loginUser.getPassword();
 
-        User foundUser = JavaApplicationDatabase.attemptLogin(username, password);
+        User foundUser = JavaApplicationDatabase.attemptLogin(
+                username, password);
 
 
         if (foundUser != null && !foundUser.getLocked() && loginCount < 3) {
             loggedInUser = foundUser;
             loginCount = 0;
-            if(foundUser.getAdmin().equalsIgnoreCase("true")) {
+            if (foundUser.getAdmin().equalsIgnoreCase("true")) {
                 loggedInUser.setAdmin("true");
             } else {
                 loggedInUser.setAdmin("false");
@@ -108,7 +124,8 @@ public class HomeController extends Controller {
      */
     public Result registerUser() {
 
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         String action = postAction[0];
 
         if ("register".equals(action)) {
@@ -170,7 +187,7 @@ public class HomeController extends Controller {
 
 
 
-    //------------------------------------------Profile logic--------------------------------------------------------------
+    //--------------------Profile logic--------------------------------
 
     /**
      * renders the my profile page
@@ -186,15 +203,18 @@ public class HomeController extends Controller {
      */
     public Result editName() {
 
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         User updateUser = Form.form(User.class).bindFromRequest().get();
         String newFirstName = updateUser.getFirstName();
         String newLastName = updateUser.getLastName();
 
-        int result = JavaApplicationDatabase.updateName(loggedInUser, newFirstName, newLastName);
+        int result = JavaApplicationDatabase.updateName(
+                loggedInUser, newFirstName, newLastName);
 
         if (result == 1) {
-            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            loggedInUser = JavaApplicationDatabase.getUser(
+                    loggedInUser.getId());
             return ok(profile.render(loggedInUser));
 
         } else {
@@ -209,14 +229,17 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result editEmail() {
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         User updateUser = Form.form(User.class).bindFromRequest().get();
         String newEmail = updateUser.getEmail();
 
-        int result = JavaApplicationDatabase.updateEmail(loggedInUser, newEmail);
+        int result = JavaApplicationDatabase.updateEmail(
+                loggedInUser, newEmail);
         System.out.println("RESULT: " + result);
         if (result == 1) {
-            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            loggedInUser = JavaApplicationDatabase.getUser(
+                    loggedInUser.getId());
             return ok(profile.render(loggedInUser));
         } else {
             return badRequest("An error occured while saving");
@@ -229,14 +252,17 @@ public class HomeController extends Controller {
      */
     public Result editUsername() {
 
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         User updateUser = Form.form(User.class).bindFromRequest().get();
         String newUsername = updateUser.getUsername();
 
-        int result = JavaApplicationDatabase.updateUsername(loggedInUser, newUsername);
+        int result = JavaApplicationDatabase.updateUsername(
+                loggedInUser, newUsername);
         if (result == 1) {
 
-            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            loggedInUser = JavaApplicationDatabase.getUser(
+                    loggedInUser.getId());
             return ok(profile.render(loggedInUser));
 
         } else {
@@ -252,13 +278,16 @@ public class HomeController extends Controller {
      */
     public Result editPassword() {
 
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         User updateUser = Form.form(User.class).bindFromRequest().get();
         String newPassword = updateUser.getPassword();
 
-        int result = JavaApplicationDatabase.updatePassword(loggedInUser, newPassword);
+        int result = JavaApplicationDatabase.updatePassword(
+                loggedInUser, newPassword);
         if (result == 1) {
-            loggedInUser = JavaApplicationDatabase.getUser(loggedInUser.getId());
+            loggedInUser = JavaApplicationDatabase.getUser(
+                    loggedInUser.getId());
             return ok(profile.render(loggedInUser));
         } else {
             return badRequest("An error occured while saving");
@@ -268,7 +297,7 @@ public class HomeController extends Controller {
 
 
 
-    //------------------------------------------Sale logic--------------------------------------------------------------
+    //----------------------------Sale logic--------------------------------
 
     /**
      * browse all sales in thes system
@@ -278,7 +307,7 @@ public class HomeController extends Controller {
         List<Sale> salesfromdb = new ArrayList<>();
         try {
             salesfromdb = JavaApplicationDatabase.getAllSales();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(allsales.render(salesfromdb));
@@ -294,7 +323,8 @@ public class HomeController extends Controller {
         saleInView = JavaApplicationDatabase.getSale(sale.getId());
         System.out.println(saleInView.getId());
         System.out.println(saleInView.getDescription());
-        Transaction transaction = JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId());
+        Transaction transaction = JavaApplicationDatabase.getOpenTransaction(
+                loggedInUser.getId(), saleInView.getId());
         if (transaction == null) {
             transaction = new Transaction();
             transaction.setSaleId(saleInView.getId());
@@ -308,8 +338,9 @@ public class HomeController extends Controller {
         transactionId = transaction.getId();
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(externalsale.render(saleInView, itemsfromdb));
@@ -320,7 +351,8 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result addSale() {
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         Sale newSale = Form.form(Sale.class).bindFromRequest().get();
 
 
@@ -345,13 +377,13 @@ public class HomeController extends Controller {
      * renders the sale screen with the user's sales
      * @return the HTTP response
      */
-    public Result saleScreen(){
+    public Result saleScreen() {
         List<Sale> salesfromdb = new ArrayList<>();
 
         try {
-            salesfromdb = JavaApplicationDatabase.getMySales(loggedInUser.getId());
-            
-        } catch(Exception e) {
+            salesfromdb = JavaApplicationDatabase.getMySales(
+                    loggedInUser.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -380,8 +412,9 @@ public class HomeController extends Controller {
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(salepage.render(saleInView, itemsfromdb));
@@ -395,8 +428,9 @@ public class HomeController extends Controller {
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(salepage.render(saleInView, itemsfromdb));
@@ -405,13 +439,15 @@ public class HomeController extends Controller {
 
 
 
-    //------------------------------------------Item logic--------------------------------------------------------------
+    //--------------------Item logic-------------------------------
 
     /**
      * renders the add item screen
      * @return the HTTP response
      */
-    public Result renderAddItem() { return ok(additem.render(saleInView)); }
+    public Result renderAddItem() {
+        return ok(additem.render(saleInView));
+    }
 
 
     /**
@@ -420,7 +456,8 @@ public class HomeController extends Controller {
      */
     public Result addItem() {
 
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         String action = postAction[0];
 
         if ("additem".equals(action)) {
@@ -440,6 +477,7 @@ public class HomeController extends Controller {
 
     /**
      * completes the add item process, returns to add item page
+     * @param request the HTTP request
      * @return the HTTP response
      */
     public Result completeAddItem(Http.Request request) {
@@ -474,7 +512,8 @@ public class HomeController extends Controller {
         Item selectedItem = Form.form(Item.class).bindFromRequest().get();
         System.out.println(selectedItem.getId());
         System.out.println(selectedItem.getName());
-        Item itemToRender = JavaApplicationDatabase.getItem(selectedItem.getId());
+        Item itemToRender = JavaApplicationDatabase.getItem(
+                selectedItem.getId());
 
         return ok(item.render(itemToRender));
     }
@@ -487,10 +526,11 @@ public class HomeController extends Controller {
 
         Item updatedItem = Form.form(Item.class).bindFromRequest().get();
 
-        int result = JavaApplicationDatabase.updateItem(updatedItem.getId(), updatedItem);
+        int result = JavaApplicationDatabase.updateItem(
+                updatedItem.getId(), updatedItem);
         if (result == 1) {
-            //Item itemToRender = JavaApplicationDatabase.getItem(updatedItem.getId());
-            List<Item> itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+            List<Item> itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
             //return ok(item.render(itemToRender));
             return ok(salepage.render(saleInView, itemsfromdb));
 
@@ -507,11 +547,14 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result addItemById() {
-        String[] postAction = request().body().asFormUrlEncoded().get("action");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "action");
         String action = postAction[0];
         List<Item> itemsToAdd = new ArrayList<>();
         while (!action.isEmpty()) {
-            Item item = JavaApplicationDatabase.getItem(Integer.parseInt(action.substring(0, action.indexOf(','))));
+            Item item = JavaApplicationDatabase.getItem(
+                    Integer.parseInt(
+                            action.substring(0, action.indexOf(','))));
             action = action.substring(action.indexOf(',') + 1);
             itemsToAdd.add(item);
             if (action.equals(",")) {
@@ -521,13 +564,17 @@ public class HomeController extends Controller {
         return TODO;
     }
 
+    /**
+     * shows the related items view
+     * @return the HTTP response
+     */
     public Result relatedItems() {
         return ok(similaritems.render());
     }
 
 
 
-    //----------------------------------------------Search logic------------------------------------------------------------------
+    //-------------------Search logic-------------------------------
 
     /**
      * allows for searching an item in a sale by name
@@ -540,11 +587,11 @@ public class HomeController extends Controller {
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.searchItemInSale(saleInView, searchSale.getName());
-        } catch(Exception e) {
+            itemsfromdb = JavaApplicationDatabase.searchItemInSale(
+                    saleInView, searchSale.getName());
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        //List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, searchSale.getName());
 
         return ok(searchitemresults.render(saleInView, itemsfromdb));
     }
@@ -560,11 +607,11 @@ public class HomeController extends Controller {
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.searchAllItems(searchSale.getName());
-        } catch(Exception e) {
+            itemsfromdb = JavaApplicationDatabase.searchAllItems(
+                    searchSale.getName());
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        //List<Item> returnList = JavaApplicationDatabase.searchItemInSale(saleInView, searchSale.getName());
 
         return ok(allsearchitems.render(saleInView, itemsfromdb));
     }
@@ -577,9 +624,10 @@ public class HomeController extends Controller {
         Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
         List<Sale> foundSales = new ArrayList<>();
         try {
-            foundSales = JavaApplicationDatabase.searchAllSales(searchSale.getName());
+            foundSales = JavaApplicationDatabase.searchAllSales(
+                    searchSale.getName());
             return ok(searchsalesresults.render(saleInView, foundSales));
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(searchsalesresults.render(saleInView, foundSales));
@@ -589,7 +637,7 @@ public class HomeController extends Controller {
 
 
 
-    //----------------------------------------------Tag logic------------------------------------------------------------------
+    //------------------Tag logic------------------------
 
     /**
      * renders the pring tage page for an item
@@ -602,7 +650,7 @@ public class HomeController extends Controller {
         try {
             Item itemInView = JavaApplicationDatabase.getItem(item.getId());
             itemsfromdb.add(itemInView);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(tag.render(itemsfromdb, saleInView, loggedInUser));
@@ -619,7 +667,7 @@ public class HomeController extends Controller {
         try {
             Item itemInView = JavaApplicationDatabase.getItem(item.getId());
             itemsfromdb.add(itemInView);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
@@ -632,8 +680,9 @@ public class HomeController extends Controller {
     public Result printAllTags() {
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(tag.render(itemsfromdb, saleInView, loggedInUser));
@@ -646,8 +695,9 @@ public class HomeController extends Controller {
     public Result basicTags() {
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
-        } catch(Exception e) {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ok(basictag.render(itemsfromdb, saleInView, loggedInUser));
@@ -657,14 +707,16 @@ public class HomeController extends Controller {
 
 
 
-    //---------------------------------------------------Transaction logic----------------------------------------------------------------------
+    //-------------------Transaction logic---------------------------
 
     /**
      * renders the transactions page
      * @return the HTTP response
      */
     public Result viewTransactions() {
-        List<Transaction> transactionsList = JavaApplicationDatabase.viewTransactions(loggedInUser.getId());
+        List<Transaction> transactionsList = new ArrayList<Transaction>();
+        transactionsList = JavaApplicationDatabase.viewTransactions(
+                loggedInUser.getId());
         List<Transaction> open = new ArrayList<>();
         List<Transaction> closed = new ArrayList<>();
         for (Transaction transaction : transactionsList) {
@@ -683,16 +735,23 @@ public class HomeController extends Controller {
      */
     public Result viewSingleTransaction() {
         List<Item> returnlist = new ArrayList<>();
-        returnlist = JavaApplicationDatabase.getTransactionItems(transactionId);
+        returnlist = JavaApplicationDatabase.getTransactionItems(
+                transactionId);
         return ok(singletransaction.render(returnlist));
     }
 
+    /**
+     * renders a single transaction view
+     * @return the HTTP response
+     */
     public Result singleTransaction() {
-        Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
+        Transaction transaction = Form.form(
+                Transaction.class).bindFromRequest().get();
         Transaction returnTransaction = new Transaction();
         try {
-            returnTransaction = JavaApplicationDatabase.getTransaction(transaction.getId());
-        } catch(Exception e) {
+            returnTransaction = JavaApplicationDatabase.getTransaction(
+                    transaction.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         transactionId = returnTransaction.getId();
@@ -704,20 +763,28 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result addTransaction() {
-        Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
+        Transaction transaction = Form.form(
+                Transaction.class).bindFromRequest().get();
         try {
-            if (JavaApplicationDatabase.getOpenTransaction(loggedInUser.getId(), saleInView.getId()) == null) { //if empty (not already a transaction), save it.  else, go to transaction page.
+            //if empty (not already a transaction), save it.
+            // else, go to transaction page.
+            if (JavaApplicationDatabase.getOpenTransaction(
+                    loggedInUser.getId(), saleInView.getId()) == null) {
                 transaction.setSaleId(saleInView.getId());
                 transaction.setUserId(loggedInUser.getId());
                 transaction.setClosed(false);
                 transaction.save();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             return viewTransactions();
         }
         return viewTransactions();
     }
 
+    /**
+     * allows user to add an item to their transaction
+     * @return the HTTP response
+     */
     public Result addItemToTransaction() {
         Item item = Form.form(Item.class).bindFromRequest().get();
         Item returnItem = new Item();
@@ -727,15 +794,17 @@ public class HomeController extends Controller {
 
         try {
             returnItem = JavaApplicationDatabase.getItem(item.getId());
-            currentTransaction = JavaApplicationDatabase.getTransaction(transactionId);
-        } catch(Exception e) {
+            currentTransaction = JavaApplicationDatabase.getTransaction(
+                    transactionId);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println(currentTransaction.getId());
 
         try {
-            itemlist = JavaApplicationDatabase.getTransactionItems(currentTransaction.getId());
-        } catch(Exception e) {
+            itemlist = JavaApplicationDatabase.getTransactionItems(
+                    currentTransaction.getId());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -752,14 +821,15 @@ public class HomeController extends Controller {
 
 
 
-    //---------------------------------------------Processing logic------------------------------------------------------------
+    //-------------------Processing logic------------------------------------
 
     /**
      * allows a user to process a transaction within a sale
      * @return the HTTP response
      */
     public Result processSale() {
-        String[] paymentAction = request().body().asFormUrlEncoded().get("paymentmethod");
+        String[] paymentAction = request().body().asFormUrlEncoded().get(
+                "paymentmethod");
 
         String itemString = "";
         Transaction transaction = new Transaction();
@@ -782,8 +852,9 @@ public class HomeController extends Controller {
         double totalPrice = 0.0;
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getTransactionItems(transactionId);
-        } catch (Exception E) {
+            itemsfromdb = JavaApplicationDatabase.getTransactionItems(
+                    transactionId);
+        } catch (Exception e) {
             badRequest("Could not get items");
         }
         transaction.setDate(dateNow);
@@ -797,7 +868,8 @@ public class HomeController extends Controller {
         System.out.println(transaction.getTime());
         System.out.println(transaction.getPaymentMethod());
 
-        int result = JavaApplicationDatabase.updateTransaction(transactionId, transaction);
+        int result = JavaApplicationDatabase.updateTransaction(
+                transactionId, transaction);
 
         if (result == 1) {
             return ok(receipt.render(transaction, itemsfromdb));
@@ -806,14 +878,20 @@ public class HomeController extends Controller {
         }
     }
 
+    /**
+     * renders the receipt page
+     * @return the HTTP response
+     */
     public Result renderReceipt() {
-        Transaction transaction = Form.form(Transaction.class).bindFromRequest().get();
+        Transaction transaction = Form.form(
+                Transaction.class).bindFromRequest().get();
         Transaction returnTransaction = new Transaction();
         List<Item> items = new ArrayList<>();
         try {
-            returnTransaction = JavaApplicationDatabase.getTransaction(transactionId);
+            returnTransaction = JavaApplicationDatabase.getTransaction(
+                    transactionId);
             items = JavaApplicationDatabase.getTransactionItems(transactionId);
-        } catch (Exception E) {
+        } catch (Exception e) {
             badRequest("Could not get items");
         }
         return ok(receipt.render(returnTransaction, items));
@@ -824,7 +902,7 @@ public class HomeController extends Controller {
 
 
 
-    //-----------------------------------------------------Admin logic----------------------------------------------------------
+    //-----------------Admin logic-------------------------------------------
 
     /**
      * renders the admin page if a user is an admin type
@@ -929,7 +1007,8 @@ public class HomeController extends Controller {
      */
     public Result bookPage() {
         if (loggedInUser.isBookkeeper()) {
-            return ok(bookkeeper.render(JavaApplicationDatabase.getAllTransactions()));
+            return ok(bookkeeper.render(
+                    JavaApplicationDatabase.getAllTransactions()));
         } else {
             return viewTransactions();
         }
@@ -940,11 +1019,13 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result adminChangePassword() {
-        String[] postAction = request().body().asFormUrlEncoded().get("password");
+        String[] postAction = request().body().asFormUrlEncoded().get(
+                "password");
         String[] postAction1 = request().body().asFormUrlEncoded().get("id");
         String password = postAction[0];
         int id = Integer.parseInt(postAction1[0]);
-        JavaApplicationDatabase.updatePassword(JavaApplicationDatabase.getUser(id), password);
+        JavaApplicationDatabase.updatePassword(
+                JavaApplicationDatabase.getUser(id), password);
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
 }

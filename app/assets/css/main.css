@@ -1,0 +1,511 @@
+#logo {
+    text-align: left;
+    text-size: 40px;
+    color: #ffd6cc;
+    text-decoration: none;
+}
+
+#login_form {
+    text-align: center;
+    margin: auto;
+    width: 200px;
+}
+
+#login_form input {
+    width: 150px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+}
+
+#registration_form {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+}
+
+#registration_form input {
+    width: 250px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+}
+
+input[type=checkbox]:not(old){
+    width     : 2em;
+    margin    : 0;
+    padding   : 0;
+    font-size : 1em;
+}
+
+input[type=checkbox]:not(old) + label{
+    display      : inline-block;
+    margin-left  : -2em;
+    line-height  : 1.5em;
+}
+
+input[type=checkbox]:not(old):checked + label{
+    background-position : 0 -24px;
+}
+
+input[type=checkbox]:not(old) + label > span{
+    display          : inline-block;
+    width            : 0.875em;
+    height           : 0.875em;
+    margin           : 0.25em 0.5em 0.25em 0.25em;
+    border           : 0.0625em solid rgb(192,192,192);
+    border-radius    : 0.25em;
+    background       : rgb(224,224,224);
+    background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+    background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+    background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+    background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+    background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+    vertical-align   : bottom;
+}
+
+input[type=checkbox]:not(old):checked + label > span{
+    background-image :    -moz-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+    background-image :     -ms-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+    background-image :      -o-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+    background-image : -webkit-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+    background-image :         linear-gradient(rgb(224,224,224),rgb(240,240,240));
+}
+
+input[type=checkbox]:not(old):checked + label > span:before{
+    content     : '✓';
+    display     : block;
+    width       : 1em;
+    color       : rgb(255, 214, 204);
+    font-size   : 0.875em;
+    line-height : 1em;
+    text-align  : center;
+    text-shadow : 0 0 0.0714em rgb(255, 214, 204);
+    font-weight : bold;
+}
+
+#share-buttons img {
+    width: 50px;
+    padding: 0px;
+    border: 0;
+    box-shadow: 0;
+    display: inline;
+}
+
+#register {
+    text-align: center;
+}
+
+#cancel_button {
+    width: 45px;
+}
+
+#login_button {
+    width: 125px;
+}
+
+#signup {
+    color: #999999;
+}
+
+#password, #password_confirm {
+    -webkit-text-security: circle;
+}
+
+
+#saleinfo {
+    font-size: 20px;
+}
+
+.itemandtag {
+    float: right;
+}
+
+#iteminfo {
+    text-align: center;
+    padding: 1px;
+}
+
+#image img {
+    float: left;
+    align: center;
+    margins: auto;
+}
+
+body {
+    background-color: #FFFFFF;
+    font-family: "Poiret One";
+}
+
+#logout {
+    text-align: right;
+    text-size: 40px;
+    color: #000000;
+    text-decoration: none;
+}
+
+#heading {
+    text-align: center;
+    color: #000000;
+}
+
+#title {
+    font-size: 80px;
+}
+
+#instructions {
+    font-size: 20px;
+}
+
+#admin {
+    font-size: 10px;
+    float: right;
+    margin-bottom: 0px;
+}
+
+#createsale {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+}
+
+#createsale input {
+    text-align: left;
+    margin: auto;
+    width: 250px;
+    padding: 10px;
+}
+
+#additem {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+}
+
+#additem input {
+    width: 250px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+}
+
+#buttons {
+    text-align: center;
+}
+
+button {
+    /*background-color: #000000;*/
+    width: 175px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+
+    background-color: #ffd6cc;
+    color: #999999;
+    border: none;
+    margin: auto;
+}
+
+button:hover {
+    background-color: #ff9980; /* Green */
+    color: #000000;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#textarea {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+}
+
+#textarea input{
+    white-space: pre-wrap;
+    padding: 10px;
+    margin: auto;
+    width: 250px;
+    height: 250px;
+
+}
+
+#piclabel {
+    font-size: 15px;
+    color: #000000;
+}
+
+#edit-name-form input {
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    width: auto;
+}
+
+#edit-password-form input {
+    width: 250px;
+    margin: auto;
+    padding: 10px;
+    text-align: left;
+}
+
+#cancel-form {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+}
+
+legend {
+    color: #000000;
+    text-size: 20px;
+    text-style: bold;
+    text-align:center;
+}
+
+#edit-form input {
+    padding: 10px;
+}
+
+#transaction-form input {
+    display: flex;
+    padding: 10px;
+    float: right;
+}
+
+#transaction-form {
+    display: flex;
+    text-align: center;
+    float: right;
+}
+
+#fields fieldset {
+    margin: auto;
+    text-align: center;
+    width: 500px;
+}
+
+#fields {
+    width: 500px;
+    margin: auto;
+}
+
+#boatpicture img{
+    width: 128px;
+    height: 128px;
+}
+
+#updateitem {
+    text-align: center;
+    margin: auto;
+    width: 280px;
+}
+
+#searchfield fieldset {
+  margin: auto;
+  text-align: center;
+}
+
+#searchfield {
+  display: flex;
+}
+
+#searchallsales fieldset {
+  float: left;
+}
+
+#searchallitems fieldset {
+  float: right;
+}
+
+#edit-form {
+  text-align: center;
+  margin: auto;
+  width: 280px;
+}
+
+#sidebyside {
+  text-align: center;
+  margin: auto;
+  display: flex;
+}
+
+#wrapper1 {
+    text-align: center;
+    margins: auto;
+    display: table;
+    border: none;
+    width: 600px;
+}
+
+.cell1 {
+    display: table-cell;
+    vertical-align: middle;
+    height: 50px;
+}
+
+.content1 {
+    float: left;
+}
+
+.content21{
+    float: right;
+}
+
+
+#wrapper {
+    text-align: center;
+    margins: auto;
+    display: table;
+    border: none;
+    width: 200px;;
+}
+
+.cell {
+    display: table-cell;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.content {
+    float: left;
+}
+
+.content2{
+    float: right;
+}
+
+
+.home-menu li{
+    width: 70%;
+    height: 100px;
+    overflow: hidden;
+    display: block;
+    background: #999999;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin-bottom: 4px;
+    border-left: 10px solid rgba(103, 134, 141, 0.79);
+    transition: all 300ms ease-in-out;
+}
+.home-menu li:last-child{
+    margin-bottom: 0px;
+}
+.home-menu li a{
+    text-align: left;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #000000;
+    position:relative;
+}
+.sailboat{
+    font-family: 'Monoton', cursive;
+    font-size: 20px;
+    text-shadow: 0px 0px 1px #FFFFFF;
+    line-height: 90px;
+    position: absolute;
+    width: 90px;
+    left: 20px;
+    text-align: center;
+    transition: all 300ms linear;
+}
+.menu-content{
+    position: absolute;
+    left: 120px;
+    width: 370px;
+    height: 60px;
+    top: 45px;
+}
+.content-main{
+    font-size: 42px;
+    transition: all 300ms linear;
+}
+.content-sub{
+    font-size: 18px;
+    color: #000000;
+    transition: all 300ms linear;
+}
+.home-menu li:hover{
+    border-color: #ff9980;
+    background: #ffd6cc;
+}
+.home-menu li:hover .image{
+    height: 75px;
+}
+.home-menu li:hover .content-main{
+    color: #000000;
+    font-size: 25px;
+}
+.content-menu li:hover .content-sub{
+    color: #fff;
+    font-size: 50px;
+}
+#space {
+    height: 3px;
+    width: 5px;
+}
+.image {
+    height: 100px;
+    transition: all 300ms linear;
+}
+#boatpicture img{
+    width: 128px;
+    height: 128px;
+}
+
+#right {
+    float: right;
+}
+
+input[type=radio   ]:not(old){
+  width     : 2em;
+  margin    : 0;
+  padding   : 0;
+  font-size : 1em;
+}
+
+input[type=radio   ]:not(old) + label{
+  display      : inline-block;
+  margin-left  : -2em;
+  line-height  : 1.5em;
+}
+
+input[type=radio   ]:not(old) + label > span{
+  display          : inline-block;
+  width            : 0.875em;
+  height           : 0.875em;
+  margin           : 0.25em 0.5em 0.25em 0.25em;
+  border           : 0.0625em solid rgb(192,192,192);
+  border-radius    : 0.25em;
+  background       : rgb(224,224,224);
+  background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  vertical-align   : bottom;
+}
+
+input[type=radio   ]:not(old):checked + label > span{
+  background-image :    -moz-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :     -ms-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :      -o-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image : -webkit-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :         linear-gradient(rgb(224,224,224),rgb(240,240,240));
+}
+
+input[type=radio]:not(old):checked + label > span > span{
+  display          : block;
+  width            : 0.5em;
+  height           : 0.5em;
+  margin           : 0.125em;
+  border           : 0.0625em solid rgb(115,153,77);
+  border-radius    : 0.125em;
+  background       : rgb(153,204,102);
+  background-image :    -moz-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :     -ms-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :      -o-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image : -webkit-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :         linear-gradient(rgb(179,217,140),rgb(153,204,102));
+}
+

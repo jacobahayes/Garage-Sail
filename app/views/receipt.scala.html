@@ -8,6 +8,27 @@
   </head>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/main.css")">
+
+  <script>
+    function sendMail() {
+      var email = document.getElementById('email').value;
+
+      var heading = 'Transaction:' + @transaction.getId + '\n'
+              + 'Date:' + @transaction.getDate + '\n'
+              + 'Time:' + @transaction.getTime + '\n\n'
+              + 'Total Price:' + @transaction.getTotalPrice + '\n'
+              + 'Payment Method: ' + @transaction.getPaymentMethod + '\n\n';
+
+      var items = 'Items: \n\n';
+      @for(item <- transactionitems) {
+        items = items + @item.getName + ' :: $' + @item.getListPrice;
+      }
+
+      var body = 'Receipt for Garage Sale\n\n' + heading + items;
+      window.open('mailto:' + email + '?subject=Your%20Receipt&body=' + body);
+    }
+  </script>
+
   <body>
     <div id="logo">
       <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
@@ -45,6 +66,14 @@
     <div id="edit-form">
       <form action="javascript:window.print()">
         <button type="submit">Print</button>
+      </form>
+    </div>
+    <div id="email-form">
+
+      <form action="javascript:sendMail();" name="pmForm" id="pmForm" method="post">
+        Email:
+        <input name="email" id="email" type="text" maxlength="64" placeholder="email address"/>
+          <button type="submit">Send Email Receipt</button>
       </form>
     </div>
     <div id="space"></div>

@@ -71,7 +71,7 @@ POST    /alltags                   controllers.HomeController.printAllTags()
 GET     /alltags/basic             controllers.HomeController.basicTags()
 POST    /alltags/basic             controllers.HomeController.basicTags()
 
-GET     /relateditems              controllers.HomeController.relatedItems()
+GET     /relateditems/:itemName     controllers.HomeController.relatedItems(itemName: String)
 
 GET     /admin                     controllers.HomeController.adminPage()
 POST    /admin                     controllers.HomeController.adminPage()

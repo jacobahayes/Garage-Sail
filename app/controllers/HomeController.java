@@ -568,8 +568,8 @@ public class HomeController extends Controller {
      * shows the related items view
      * @return the HTTP response
      */
-    public Result relatedItems() {
-        return ok(similaritems.render());
+    public Result relatedItems(String itemName) {
+        return ok(similaritems.render(itemName));
     }
 
 

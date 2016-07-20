@@ -31,7 +31,7 @@
           <p><b>Price:</b> $@item.getListPrice</p>
         </div>
         <div class="itemandtag">
-          <form action="@routes.HomeController.relatedItems()">
+          <form action="@routes.HomeController.relatedItems(item.getName)">
             <input type="hidden" name="id" id ="id" value="@item.getId"/>
             <button type="submit">View Related Items</button>
           </form>

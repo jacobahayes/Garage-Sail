@@ -97,23 +97,6 @@ url += encodeURI("@itemName");
 url += "&paginationInput.entriesPerPage=5";
 url += urlfilter;
 
-//try stuff
-//var xhr = new XMLHttpRequest();
-//xhr.open('GET', url, true);
-//xhr.send();
-//xhr.onreadystatechange = processRequest;
-//
-//function processRequest(e) {
-//    if (xhr.readyState == 4 && xhr.status == 200) {
-//        var response = JSON.parse(xhr.responseText);
-//        alert(response.ip);
-//        document.write(response);
-//    }
-//}
-//end try stuf
-
-alert('some-unique-string');
-
 // Submit the request
 s=document.createElement('script'); // create script element
 s.src= url;
@@ -121,7 +104,6 @@ document.body.appendChild(s);
 
 // Display the request as a clickable link for testing
 document.write("<a href=\"" + url + "\">" + url + "</a>");
-alert('some-unique-string2');
 
 </script>
   </body>

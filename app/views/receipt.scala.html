@@ -13,18 +13,18 @@
     function sendMail() {
       var email = document.getElementById('email').value;
 
-      var heading = 'Transaction:' + @transaction.getId + '\n'
-              + 'Date: @transaction.getDate\n'
-              + 'Time: @transaction.getTime\n\n'
-              + 'Total Price:' + @transaction.getTotalPrice + '\n'
-              + 'Payment Method: @transaction.getPaymentMethod\n\n';
+      var heading = '-Transaction:' + @transaction.getId + '%0A'
+              + '-Date: @transaction.getDate%0A'
+              + '-Time: @transaction.getTime%0A'
+              + '-Total Price:' + @transaction.getTotalPrice + '%0A'
+              + '-Payment Method: @transaction.getPaymentMethod%0A';
 
-      var items = 'Items: \n\n';
+      var items = '-Items:%0A';
       @for(item <- transactionitems) {
         items = items + @item.getName + ' :: $' + @item.getListPrice;
       }
 
-      var body = 'Receipt for Garage Sale\n\n' + heading + items;
+      var body = 'Receipt for Garage Sale:%0A' + heading + items;
       window.open('mailto:' + email + '?subject=Your%20Receipt&body=' + body);
     }
   </script>

@@ -35,6 +35,8 @@ GET     /mysales/salepage/searchitemresults          controllers.HomeController.
 POST    /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/item     controllers.HomeController.renderItem()
 POST    /mysales/salepage/item     controllers.HomeController.updateItem()
+GET     /mysales/salepage/maketransaction   controllers.HomeController.makeTransaction()
+POST    /mysales/salepage/maketransaction   controllers.HomeController.processTransaction()
 
 GET     /mysales/createsale        controllers.HomeController.renderCreateSale()
 
@@ -43,7 +45,9 @@ POST    /mysales/createsale/add    controllers.HomeController.addSale()
 POST    /add                       controllers.HomeController.addItem()
 GET     /add                       controllers.HomeController.renderAddItem()
 
-POST   /add/item                   controllers.HomeController.addItemById()
+POST    /add/item                   controllers.HomeController.addItemsToTransaction()
+POST    /add/item                   controllers.HomeController.addItemById()
+
 
 GET    /transactions                controllers.HomeController.viewTransactions()
 POST   /transactions                controllers.HomeController.viewTransactions()

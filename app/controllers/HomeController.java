@@ -19,6 +19,7 @@ import views.html.externalsale;
 import views.html.homepage;
 import views.html.index;
 import views.html.item;
+import views.html.maketransaction;
 import views.html.profile;
 import views.html.receipt;
 import views.html.registration;
@@ -745,12 +746,14 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result singleTransaction() {
+        System.out.println("singleTransaction");
         Transaction transaction = Form.form(
                 Transaction.class).bindFromRequest().get();
         Transaction returnTransaction = new Transaction();
         try {
             returnTransaction = JavaApplicationDatabase.getTransaction(
                     transaction.getId());
+            System.out.println(returnTransaction.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -817,7 +820,58 @@ public class HomeController extends Controller {
     }
 
 
+    public Result makeTransaction() {
 
+        currentTransaction = new Transaction();
+        currentTransaction.setSaleId(saleInView.getId());
+        currentTransaction.setItems("");
+        return ok(maketransaction.render(currentTransaction));
+    }
+
+    public Result addItemsToTransaction() {
+
+        Item item = Form.form(Item.class).bindFromRequest().get();
+        currentTransaction.setItems(currentTransaction.getItems() + item.getName() + ", ");
+        return ok(maketransaction.render(currentTransaction));
+    }
+
+    public Result processTransaction() {
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String[] paymentAction = request().body().asFormUrlEncoded().get(
+                "paymentmethod");
+        String paymentMethod = paymentAction[0];
+        if (paymentMethod.equalsIgnoreCase("creditdebit")) {
+            currentTransaction.setPaymentMethod("creditdebit");
+        } else if (paymentMethod.equalsIgnoreCase("bitcoin")) {
+            currentTransaction.setPaymentMethod("bitcoin");
+        } else {
+            currentTransaction.setPaymentMethod("cash");
+        }
+
+        Calendar currentDate = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
+        SimpleDateFormat formattertime = new SimpleDateFormat("hh:mm:ss");
+        String dateNow = formatter.format(currentDate.getTime());
+        String timeNow = formattertime.format(currentDate.getTime());
+
+
+
+        currentTransaction.setDate(dateNow);
+        currentTransaction.setTime(timeNow);
+        currentTransaction.setTotalPrice(0);
+        currentTransaction.setClosed(true);
+        currentTransaction.setPaymentMethod(paymentMethod);
+
+        return ok(salepage.render(saleInView, itemsfromdb));
+    }
 
 
 

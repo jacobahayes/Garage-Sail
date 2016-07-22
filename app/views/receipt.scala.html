@@ -9,7 +9,7 @@
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/main.css")">
 
-  <script>
+  <script type="text/javascript">
     function sendMail() {
       window.open('mailto:test');
     }
@@ -55,12 +55,9 @@
       </form>
     </div>
     <div id="email-form">
-
-      <form action="javascript:sendMail();" name="pmForm" id="pmForm" method="post">
         Email:
         <input name="email" id="email" type="text" maxlength="64" placeholder="email address"/>
-          <button type="submit">Send Email Receipt</button>
-      </form>
+          <button type="submit" onclick="sendMail();">Send Email Receipt</button>
     </div>
     <div id="space"></div>
     <div id="space"></div>

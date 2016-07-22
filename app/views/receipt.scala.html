@@ -11,7 +11,21 @@
 
   <script>
     function sendMail() {
-      window.open('mailto:test');
+      var email = document.getElementById('email').value;
+
+      var heading = 'Transaction:' + @transaction.getId + '\n'
+              + 'Date: @transaction.getDate\n'
+              + 'Time: @transaction.getTime\n\n'
+              + 'Total Price:' + @transaction.getTotalPrice + '\n'
+              + 'Payment Method: @transaction.getPaymentMethod\n\n';
+
+      var items = 'Items: \n\n';
+      @for(item <- transactionitems) {
+        items = items + @item.getName + ' :: $' + @item.getListPrice;
+      }
+
+      var body = 'Receipt for Garage Sale\n\n' + heading + items;
+      window.open('mailto:' + email + '?subject=Your%20Receipt&body=' + body);
     }
   </script>
 

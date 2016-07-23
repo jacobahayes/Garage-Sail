@@ -880,9 +880,9 @@ public class HomeController extends Controller {
         currentTransaction.setPaymentMethod(paymentMethod);
         currentTransaction.save();
 
+        Transaction latestTransaction = new Transaction();
         for (String itemId : currentTransaction.getItems()) {
             Item boughtItem = new Item();
-            Transaction latestTransaction = new Transaction();
             try {
                 boughtItem = JavaApplicationDatabase.getItem(Integer.parseInt(itemId));
                 System.out.println(boughtItem.getName() + ": " + boughtItem.getId());
@@ -895,13 +895,13 @@ public class HomeController extends Controller {
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(
-                    saleInView.getId());
+            latestTransaction = JavaApplicationDatabase.getMostRecentTransaction();
+            itemsfromdb = JavaApplicationDatabase.getTransactionItems(latestTransaction.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return ok(salepage.render(saleInView, itemsfromdb));
+        return ok(receipt.render(currentTransaction, itemsfromdb));
     }
 
 

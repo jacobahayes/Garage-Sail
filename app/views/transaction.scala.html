@@ -1,4 +1,4 @@
-@(open: List[Transaction], closed: List[Transaction], user: User)
+@(closed: List[Transaction], user: User)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,45 +19,13 @@
     <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
     <div id="heading">
       <p id="title">Transactions</p>
-      <p id="instruction"><b>open transactions</b></p>
     </div>
 
-    @for(trans <- open) {
-      <center>
-        <fieldset id="fields">
-
-          <legend><b>Sale: @trans.getSaleId</b></legend>
-          <div id="iteminfo">
-            <p>Date: @trans.getDate</p>
-            <p>Time: @trans.getTime</p>
-            <p>ID: @trans.getId</p>
-            <p>Payment Method: @trans.getPaymentMethod</p>
-            <p>Total Price: $@trans.getTotalPrice</p>
-            <p>Closed: @trans.getClosed</p>
-          </div>
-
-          <div id="transaction-form">
-            <form action="@routes.HomeController.singleTransaction()" method="post">
-              <input type="hidden" id="action" name="action" value="@trans.getSaleId()">
-              <input type="hidden" id="action" name="action" value="@trans.getId()">
-              <button type="submit">Edit Transaction</button>
-            </form>
-          </div>
-
-        </fieldset>
-      </center>
-    }
-    <div id="space"></div>
-    <div id="space"></div>
-
-    <div id="heading">
-      <p id="instruction"><b>closed transactions</b></p>
-    </div>
     @for(trans <- closed) {
       <center>
         <fieldset id="fields">
 
-          <legend><b>Sale: @trans.getSaleId</b></legend>
+          <legend><b>Sale: @trans.getSaleName</b></legend>
           <div id="iteminfo">
             <p>Date: @trans.getDate</p>
             <p>Time: @trans.getTime</p>
@@ -67,13 +35,6 @@
             <p>Closed: @trans.getClosed</p>
           </div>
 
-          <div id="transaction-form">
-            <form action="@routes.HomeController.renderReceipt()" method="post">
-              <input type="hidden" id="action" name="action" value="@trans.getSaleId()">
-              <input type="hidden" id="action" name="action" value="@trans.getId()">
-              <button type="submit">View Receipt</button>
-            </form>
-          </div>
         </fieldset>
       </center>
     }

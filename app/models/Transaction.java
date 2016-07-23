@@ -29,6 +29,15 @@ public class Transaction extends Model {
     private double totalPrice;
     private String receipt;
     private boolean closed;
+    private String saleName;
+
+    public String getSaleName() {
+        return saleName;
+    }
+
+    public void setSaleName(String saleName) {
+        this.saleName = saleName;
+    }
 
     /**
      * getter for closed variable

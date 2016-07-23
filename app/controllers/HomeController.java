@@ -352,21 +352,12 @@ public class HomeController extends Controller {
      * @return the HTTP response
      */
     public Result addSale() {
-        String[] postAction = request().body().asFormUrlEncoded().get(
-                "action");
+
         Sale newSale = Form.form(Sale.class).bindFromRequest().get();
 
-
-        //FOR TESTING IT DEFAULTS TO USERNAME STUART. ** REMOVE LATER **
-        if (loggedInUser == null) {
-            //System.out.println("no username");
-            loggedInUser = new User();
-            loggedInUser.setUsername("stuart");
-            newSale.setSaleAdminId(loggedInUser.getId());
-        } else {
-            newSale.setSaleAdminId(loggedInUser.getId());
-        }
-
+        newSale.setSaleAdminId(loggedInUser.getId());
+        System.out.println(newSale.getName());
+        System.out.println(newSale.getId());
         newSale.save();
         saleInView = newSale;
 
@@ -716,18 +707,8 @@ public class HomeController extends Controller {
      */
     public Result viewTransactions() {
         List<Transaction> transactionsList = new ArrayList<Transaction>();
-        transactionsList = JavaApplicationDatabase.viewTransactions(
-                loggedInUser.getId());
-        List<Transaction> open = new ArrayList<>();
-        List<Transaction> closed = new ArrayList<>();
-        for (Transaction transaction : transactionsList) {
-            if (transaction.getClosed()) {
-                closed.add(transaction);
-            } else {
-                open.add(transaction);
-            }
-        }
-        return ok(transaction.render(open, closed, loggedInUser));
+        transactionsList = JavaApplicationDatabase.viewTransactions(loggedInUser.getId());
+        return ok(transaction.render(transactionsList, loggedInUser));
     }
 
     /**
@@ -824,6 +805,8 @@ public class HomeController extends Controller {
 
         currentTransaction = new Transaction();
         currentTransaction.setSaleId(saleInView.getId());
+        currentTransaction.setSaleName(saleInView.getName());
+        currentTransaction.setUserId(loggedInUser.getId());
         currentTransaction.setItems(new ArrayList<String>());
         return ok(maketransaction.render(currentTransaction));
     }

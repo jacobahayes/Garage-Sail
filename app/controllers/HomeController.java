@@ -14,6 +14,7 @@ import views.html.allsales;
 import views.html.allsearchitems;
 import views.html.basictag;
 import views.html.bookkeeper;
+import views.html.closedsale;
 import views.html.createsale;
 import views.html.externalsale;
 import views.html.homepage;
@@ -355,9 +356,9 @@ public class HomeController extends Controller {
 
         Sale newSale = Form.form(Sale.class).bindFromRequest().get();
 
+        System.out.println(loggedInUser.getFirstName());
         newSale.setSaleAdminId(loggedInUser.getId());
-        System.out.println(newSale.getName());
-        System.out.println(newSale.getId());
+        newSale.setStatus("open");
         newSale.save();
         saleInView = newSale;
 
@@ -379,9 +380,18 @@ public class HomeController extends Controller {
             e.printStackTrace();
         }
 
+        List<Sale> open = new ArrayList<>();
+        List<Sale> closed = new ArrayList<>();
 
+        for (Sale sale : salesfromdb) {
+            if (sale.getStatus() != null && sale.getStatus().equals("open")) {
+                open.add(sale);
+            } else {
+                closed.add(sale);
+            }
+        }
 
-        return ok(sales.render(salesfromdb));
+        return ok(sales.render(open, closed));
     }
 
     /**
@@ -401,15 +411,38 @@ public class HomeController extends Controller {
         Sale sale = Form.form(Sale.class).bindFromRequest().get();
         saleInView = JavaApplicationDatabase.getSale(sale.getId());
 
+        if (saleInView.getStatus() != null && saleInView.getStatus().equals("closed")) {
+            List<Item> itemsfromdb = new ArrayList<>();
+            try {
+                itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                        saleInView.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        List<Item> itemsfromdb = new ArrayList<>();
-        try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(
-                    saleInView.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
+            List<Item> solditems = new ArrayList<>();
+            List<Item> unsolditems = new ArrayList<>();
+            for (Item item : itemsfromdb) {
+                if (item.isSold()) {
+                    solditems.add(item);
+                } else {
+                    unsolditems.add(item);
+                }
+            }
+
+            return ok(closedsale.render(saleInView, solditems, unsolditems));
+
+        } else {
+
+            List<Item> itemsfromdb = new ArrayList<>();
+            try {
+                itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                        saleInView.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return ok(salepage.render(saleInView, itemsfromdb));
         }
-        return ok(salepage.render(saleInView, itemsfromdb));
     }
 
     /**
@@ -427,6 +460,22 @@ public class HomeController extends Controller {
         }
         return ok(salepage.render(saleInView, itemsfromdb));
     }
+
+    public Result closeSale() {
+
+        try {
+            JavaApplicationDatabase.closeSale(saleInView.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return saleScreen();
+    }
+
+//    public Result viewFinancialReport() {
+//
+//        return ok(report.render(saleInView));
+//    }
 
 
 

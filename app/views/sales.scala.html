@@ -1,4 +1,4 @@
-@(mysales: List[Sale])
+@(open: List[Sale], closed: List[Sale])
 
 
 <!DOCTYPE html>
@@ -26,7 +26,9 @@
     <p id="title">My Sales</p>
     <p id="instructions">your sales (if any) show up here</p>
 
-    @for(sale <- mysales) {
+    <p id="instructions">open sales</p>
+
+    @for(sale <- open) {
         <center>
             <form action="@routes.HomeController.salePage()">
               <input type="hidden" name="id" id ="id" value="@sale.getId"/>
@@ -37,6 +39,29 @@
     }
 
   <div id="space"></div>
+
+    <p id="instructions">closed sales</p>
+
+      @for(sale <- closed) {
+          <center>
+              <form action="@routes.HomeController.salePage()">
+                  <input type="hidden" name="id" id ="id" value="@sale.getId"/>
+                  <button>@sale.getName</button>
+              </form>
+          </center>
+          <div id="space"></div>
+      }
+
+  </div>
+
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="space"></div>
   
   <form action="@routes.HomeController.renderCreateSale()" method="get">
     <center><button action="submit">Create a Sale</button></center>

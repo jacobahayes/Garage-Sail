@@ -47,16 +47,17 @@
     </div>
 
 
-    <fieldset id="fields">
     @for(item <- transactionitems) {
-      <legend id="legend"><b>@item.getName</b></legend>
-      <img src="@item.getImg" alt="Image not available" id="image">
-      <div id="iteminfo">
-        <p><b>Description:</b> @item.getDescription</p>
-        <p><b>Price:</b> $@item.getListPrice</p>
-      </div>
+      <fieldset id="fields">
+        <legend id="legend"><b>@item.getName</b></legend>
+        <img src="@item.getImg" alt="Image not available" id="image">
+        <div id="iteminfo">
+          <p><b>Description:</b> @item.getDescription</p>
+          <p><b>Price:</b> $@item.getListPrice</p>
+        </div>
+      </fieldset>
     }
-    </fieldset>
+
 
     <div id="space"></div>
     <div id="space"></div>

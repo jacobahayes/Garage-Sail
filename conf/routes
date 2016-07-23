@@ -37,6 +37,8 @@ GET     /mysales/salepage/item     controllers.HomeController.renderItem()
 POST    /mysales/salepage/item     controllers.HomeController.updateItem()
 GET     /mysales/salepage/maketransaction   controllers.HomeController.makeTransaction()
 POST    /mysales/salepage/maketransaction   controllers.HomeController.processTransaction()
+GET     /mysales/salepage/closesale   controllers.HomeController.closeSale()
+GET     /mysales/salepage/financialreport   controllers.HomeController.viewFinancialReport()
 
 GET     /mysales/createsale        controllers.HomeController.renderCreateSale()
 

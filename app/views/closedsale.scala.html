@@ -1,0 +1,103 @@
+@(sale: Sale, solditems: List[Item], unsolditems: List[Item])
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta property="og:url"           content="https://garagesail.herokuapp.com/browsesales/externalsale?id=@sale.getId" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="My Sale" />
+    <meta property="og:description"   content="My Sale" />
+    <title>Sale Page</title>
+  </head>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link rel="sailboat" type="image/png" href="@routes.Assets.versioned("images/sailboat.png")">
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/main.css")">
+
+  <body>
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
+    <center id="boatpicture"><img src="@routes.Assets.versioned("images/sailboat.png")"></center>
+    <div id="heading">
+      <p id="title">@sale.getName</p>
+
+      <div class="fb-share-button" data-href="https://garagesail.herokuapp.com/browsesales/externalsale?id=&#064;sale.getId" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgaragesail.herokuapp.com%2Fbrowsesales%2Fexternalsale%3Fid%3D%2540sale.getId&amp;src=sdkpreparse">Share</a></div>
+      <div id="space"></div>
+      <a href="https://twitter.com/intent/tweet?text=Check%20out%20my%20garage%20sale%20on%20Garage%20Sail!" class="twitter-share-button" data-show-count="false">Tweet</a>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      <p id="saleinfo">@sale.getDescription</p>
+      <p id="saleinfo"><b>Location:</b> @sale.getLocation <b>Date and Time:</b> @sale.getDate <b>from</b> @sale.getStartTime - @sale.getEndTime</p>
+      <p id="saleinfo">**Sale Closed**</p>
+
+
+
+    <p id="saleinfo"><b>Items Sold</b></p>
+
+    @for(item <- solditems) {
+      <fieldset id="fields">
+        <legend id="legend"><b>@item.getName</b></legend>
+        <img src="@item.getImg" alt="Image not available" id="image">
+        <div id="iteminfo">
+          <p><b>Description:</b> @item.getDescription</p>
+          <p><b>Price:</b> @item.getListPrice</p>
+          <p><b>Sold:</b> @item.isSold</p>
+          <p><b>Id:</b> @item.getId</p>
+        </div>
+      </fieldset>
+    }
+    <div id="space"></div>
+    <div id="space"></div>
+
+    <p id="saleinfo"><b>Items Unsold</b></p>
+
+    @for(item <- unsolditems) {
+      <fieldset id="fields">
+        <legend id="legend"><b>@item.getName</b></legend>
+        <img src="@item.getImg" alt="Image not available" id="image">
+        <div id="iteminfo">
+          <p><b>Description:</b> @item.getDescription</p>
+          <p><b>Price:</b> @item.getListPrice</p>
+          <p><b>Sold:</b> @item.isSold</p>
+          <p><b>Id:</b> @item.getId</p>
+        </div>
+      </fieldset>
+    }
+    <div id="space"></div>
+    <div id="space"></div>
+
+      <div id="space"></div>
+      <div id="space"></div>
+      <div id="edit-form">
+        <form action="@routes.HomeController.viewFinancialReport()" method="get">
+          <button type="submit">View Financial Report</button>
+        </form>
+      </div>
+
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.cancel()" method="post">
+        <button type="submit">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+
+
+  </body>
+
+
+
+</html>

@@ -878,6 +878,7 @@ class JavaApplicationDatabase extends Controller {
                 returnSale.setDescription(rs.getString("description"));
                 returnSale.setName(rs.getString("name"));
                 returnSale.setId(rs.getInt("id"));
+                returnSale.setStatus(rs.getString("status"));
 
                 if (returnSale != null) {
                     returnList.add(returnSale);
@@ -935,7 +936,7 @@ class JavaApplicationDatabase extends Controller {
                 sale.setStartTime(rs.getString("start_time"));
                 sale.setEndTime(rs.getString("end_time"));
                 sale.setSaleAdminId(rs.getInt("sale_admin_id"));
-
+                sale.setStatus(rs.getString("status"));
 
             }
 
@@ -988,6 +989,7 @@ class JavaApplicationDatabase extends Controller {
                 returnSale.setDescription(rs.getString("description"));
                 returnSale.setName(rs.getString("name"));
                 returnSale.setId(rs.getInt("id"));
+                returnSale.setStatus(rs.getString("status"));
 
                 if (returnSale != null) {
                     returnList.add(returnSale);
@@ -999,6 +1001,31 @@ class JavaApplicationDatabase extends Controller {
                     + "Fail to get the sales from the resultset");
         }
         return returnList;
+    }
+
+    public static int closeSale(int saleId) {
+
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE sale");
+        buf.append(" SET status='closed'");
+        buf.append(" WHERE id=" + saleId);
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
     }
 
 

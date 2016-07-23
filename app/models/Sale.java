@@ -24,6 +24,7 @@ public class Sale extends Model {
     private int saleAdminId;
     private String location;
     private String description;
+    private String status;
     private List<Item> itemList;
 
     /**
@@ -34,8 +35,17 @@ public class Sale extends Model {
         return name;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     /**
      * setter for name variable
+
      * @param name the name to set
      */
     public void setName(String name) {

@@ -102,6 +102,14 @@
     <div id="space"></div>
     <div id="space"></div>
     <div id="edit-form">
+      <form action="@routes.HomeController.closeSale()" method="get">
+        <input type="hidden" name="id" value="@sale.getId"/>
+        <button type="submit">Close Sale</button>
+      </form>
+    </div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="edit-form">
       <form action="@routes.HomeController.cancel()" method="post">
         <button type="submit">Cancel</button>
       </form>

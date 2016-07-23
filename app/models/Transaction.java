@@ -5,6 +5,7 @@ import com.avaje.ebean.Model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.ArrayList;
 
 /**
  * Created by spencer on 6/22/2016.
@@ -19,7 +20,7 @@ public class Transaction extends Model {
     private int saleId;
     private int userId;
 
-    private String items;
+    private ArrayList<String> items;
     private String paymentmethod;
 
     private String date;
@@ -97,7 +98,7 @@ public class Transaction extends Model {
      * getter for items variable
      * @return the items
      */
-    public String getItems() {
+    public ArrayList<String> getItems() {
         return items;
     }
 
@@ -105,8 +106,16 @@ public class Transaction extends Model {
      * setter for items variable
      * @param items the items to set
      */
-    public void setItems(String items) {
+    public void setItems(ArrayList<String> items) {
         this.items = items;
+    }
+
+    /**
+     * add an item to the transaction
+     * @param itemId the items to set
+     */
+    public void addItem(String itemId) {
+        items.add(itemId);
     }
 
     /**

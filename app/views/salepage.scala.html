@@ -53,24 +53,27 @@
     <div id="space"></div>
 
     @for(item <- saleitems) {
-      <fieldset id="fields">
-        <legend id="legend"><b>@item.getName</b></legend>
-        <img src="@item.getImg" alt="Image not available" id="image">
-        <div id="iteminfo">
-          <p><b>Description:</b> @item.getDescription</p>
+        <fieldset id="fields">
+          <legend id="legend"><b>@item.getName</b></legend>
+          <img src="@item.getImg" alt="Image not available" id="image">
+          <div id="iteminfo">
+            <p><b>Description:</b> @item.getDescription</p>
+            <p><b>Price:</b> @item.getListPrice</p>
+            <p><b>Sold:</b> @item.isSold</p>
+            <p><b>Id:</b> @item.getId</p>
+          </div>
+        <div class="itemandtag">
+          <form action="@routes.HomeController.renderItem()">
+            <input type="hidden" name="id" id ="id" value="@item.getId"/>
+            <button type="submit">Edit Item</button>
+          </form>
+          <div id="space"></div>
+          <form action="@routes.HomeController.singleBasicTag()" target="_blank">
+            <input type="hidden" name="id" value="@item.getId"/>
+            <button>View Tag</button>
+          </form>
         </div>
-      <div class="itemandtag">
-        <form action="@routes.HomeController.renderItem()">
-          <input type="hidden" name="id" id ="id" value="@item.getId"/>
-          <button type="submit">Edit Item</button>
-        </form>
-        <div id="space"></div>
-        <form action="@routes.HomeController.singleBasicTag()" target="_blank">
-          <input type="hidden" name="id" value="@item.getId"/>
-          <button>View Tag</button>
-        </form>
-      </div>
-      </fieldset>
+        </fieldset>
     }
     <div id="space"></div>
     <div id="space"></div>

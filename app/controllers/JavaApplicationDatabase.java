@@ -498,7 +498,7 @@ class JavaApplicationDatabase extends Controller {
                 returnItem.setListPrice(rs.getDouble("list_price"));
                 returnItem.setBottomPrice(rs.getDouble("bottom_price"));
                 returnItem.setId(rs.getInt("id"));
-                returnItem.setId(rs.getInt("transaction_id"));
+                returnItem.setTransactionId(rs.getInt("transaction_id"));
                 if (rs.getInt("sold") == 1) {
                     returnItem.setSold(true);
                 } else {
@@ -540,7 +540,7 @@ class JavaApplicationDatabase extends Controller {
 
         StringBuffer buf = new StringBuffer();
         buf.append("SELECT * FROM item");
-        buf.append(" WHERE id='" + itemId + "'");
+        buf.append(" WHERE id=" + itemId + "");
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -559,7 +559,7 @@ class JavaApplicationDatabase extends Controller {
                 item.setListPrice(rs.getDouble("list_price"));
                 item.setBottomPrice(rs.getDouble("bottom_price"));
                 item.setId(rs.getInt("id"));
-                item.setId(rs.getInt("transaction_id"));
+                item.setTransactionId(rs.getInt("transaction_id"));
                 if (rs.getInt("sold") == 1) {
                     item.setSold(true);
                 } else {
@@ -576,7 +576,75 @@ class JavaApplicationDatabase extends Controller {
     }
 
 
+    /**
+     * db access to sell an item
+     * @param itemId the id of the item to be updated
+     * @param transactionId the id of the transaction to sell the item to
+     * @return the number of rows affected by the update
+     */
+    public static int sellItem(int itemId, int transactionId) {
 
+        int result = 0;
+        Statement stmt = null;
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("UPDATE item");
+        buf.append(" SET sold='" + 1 + "'");
+        buf.append(", transaction_id='" + transactionId + "'");
+        buf.append(" WHERE id=" + itemId);
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            result = stmt.executeUpdate(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return result;
+    }
+
+    public static Transaction getMostRecentTransaction() {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        Transaction transaction = new Transaction();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM transaction ORDER BY id DESC LIMIT 1");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+
+                transaction = new Transaction();
+                transaction.setId(rs.getInt("id"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the transaction");
+        }
+
+        return transaction;
+    }
 
 
 

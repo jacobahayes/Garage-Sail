@@ -824,26 +824,25 @@ public class HomeController extends Controller {
 
         currentTransaction = new Transaction();
         currentTransaction.setSaleId(saleInView.getId());
-        currentTransaction.setItems("");
+        currentTransaction.setItems(new ArrayList<String>());
         return ok(maketransaction.render(currentTransaction));
     }
 
     public Result addItemsToTransaction() {
 
         Item item = Form.form(Item.class).bindFromRequest().get();
-        currentTransaction.setItems(currentTransaction.getItems() + item.getName() + ", ");
+        currentTransaction.addItem(item.getName());
+        Item boughtItem = new Item();
+        try {
+            boughtItem = JavaApplicationDatabase.getItem(Integer.parseInt(item.getName()));
+            currentTransaction.setTotalPrice(currentTransaction.getTotalPrice() + boughtItem.getListPrice());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ok(maketransaction.render(currentTransaction));
     }
 
     public Result processTransaction() {
-
-        List<Item> itemsfromdb = new ArrayList<>();
-        try {
-            itemsfromdb = JavaApplicationDatabase.getSaleItems(
-                    saleInView.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         String[] paymentAction = request().body().asFormUrlEncoded().get(
                 "paymentmethod");
@@ -862,13 +861,45 @@ public class HomeController extends Controller {
         String dateNow = formatter.format(currentDate.getTime());
         String timeNow = formattertime.format(currentDate.getTime());
 
+        double totalPrice = 0.0;
 
+        for (String itemId : currentTransaction.getItems()) {
+            Item boughtItem = new Item();
+            try {
+                boughtItem = JavaApplicationDatabase.getItem(Integer.parseInt(itemId));
+                totalPrice = totalPrice + boughtItem.getListPrice();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         currentTransaction.setDate(dateNow);
         currentTransaction.setTime(timeNow);
-        currentTransaction.setTotalPrice(0);
+        currentTransaction.setTotalPrice(totalPrice);
         currentTransaction.setClosed(true);
         currentTransaction.setPaymentMethod(paymentMethod);
+        currentTransaction.save();
+
+        for (String itemId : currentTransaction.getItems()) {
+            Item boughtItem = new Item();
+            Transaction latestTransaction = new Transaction();
+            try {
+                boughtItem = JavaApplicationDatabase.getItem(Integer.parseInt(itemId));
+                System.out.println(boughtItem.getName() + ": " + boughtItem.getId());
+                latestTransaction = JavaApplicationDatabase.getMostRecentTransaction();
+                JavaApplicationDatabase.sellItem(boughtItem.getId(), latestTransaction.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(
+                    saleInView.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return ok(salepage.render(saleInView, itemsfromdb));
     }

@@ -3,96 +3,79 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                          controllers.HomeController.index
-GET     /logout                    controllers.HomeController.index
-POST    /login                     controllers.HomeController.login()
+GET     /                                               controllers.HomeController.index
+GET     /logout                                         controllers.HomeController.index
+POST    /login                                          controllers.HomeController.login()
 
 
-GET     /home                      controllers.HomeController.renderHome()
+GET     /home                                           controllers.HomeController.renderHome()
 
-GET     /registration              controllers.HomeController.registration()
-POST    /registration              controllers.HomeController.registerUser()
+GET     /registration                                   controllers.HomeController.registration()
+POST    /registration                                   controllers.HomeController.registerUser()
 
-GET     /profile                   controllers.HomeController.profile()
-POST    /profile/name              controllers.HomeController.editName()
-POST    /profile/email             controllers.HomeController.editEmail()
-POST    /profile/username          controllers.HomeController.editUsername()
-POST    /profile/password          controllers.HomeController.editPassword()
-POST    /profile                   controllers.HomeController.cancel()
-POST    /admin                     controllers.HomeController.adminChangePassword()
+GET     /profile                                        controllers.HomeController.profile()
+POST    /profile/name                                   controllers.HomeController.editName()
+POST    /profile/email                                  controllers.HomeController.editEmail()
+POST    /profile/username                               controllers.HomeController.editUsername()
+POST    /profile/password                               controllers.HomeController.editPassword()
+POST    /profile                                        controllers.HomeController.cancel()
+POST    /admin                                          controllers.HomeController.adminChangePassword()
 
-GET     /browsesales               controllers.HomeController.browseSales()
-POST    /browsesales               controllers.HomeController.browseSales()
-GET     /browsesales/search        controllers.HomeController.searchAllSales()
-GET     /browsesales/clearsalesearch        controllers.HomeController.clearSaleSearch()
-GET     /browsesales/clearitemsearch        controllers.HomeController.clearItemSearch()
-GET     /browsesales/search/items  controllers.HomeController.searchAllItems()
-GET     /browsesales/externalsale  controllers.HomeController.externalSale()
-GET     /browsesales/externalsale/clearsearch          controllers.HomeController.clearItemSearch()
-POST    /browsesales/externalsale/add   controllers.HomeController.addItemToTransaction()
-
-
-GET     /mysales                   controllers.HomeController.saleScreen()
-GET     /mysales/salepage          controllers.HomeController.salePage()
-GET     /mysales/salepage/searchitemresults          controllers.HomeController.searchItemInSale()
-GET     /mysales/salepage/clearsearch          controllers.HomeController.clearItemSearch()
-POST    /mysales/salepage          controllers.HomeController.salePage()
-GET     /mysales/salepage/item     controllers.HomeController.renderItem()
-POST    /mysales/salepage/item     controllers.HomeController.updateItem()
-GET     /mysales/salepage/maketransaction   controllers.HomeController.makeTransaction()
-POST    /mysales/salepage/maketransaction   controllers.HomeController.processTransaction()
-GET     /mysales/salepage/closesale   controllers.HomeController.closeSale()
-GET     /mysales/salepage/financialreport   controllers.HomeController.viewFinancialReport()
-
-GET     /mysales/createsale        controllers.HomeController.renderCreateSale()
-
-POST    /mysales/createsale/add    controllers.HomeController.addSale()
-
-POST    /add                       controllers.HomeController.addItem()
-GET     /add                       controllers.HomeController.renderAddItem()
-
-POST    /add/item                   controllers.HomeController.addItemsToTransaction()
-POST    /add/item                   controllers.HomeController.addItemById()
+GET     /browsesales                                    controllers.HomeController.browseSales()
+POST    /browsesales                                    controllers.HomeController.browseSales()
+GET     /browsesales/search                             controllers.HomeController.searchAllSales()
+GET     /browsesales/clearsalesearch                    controllers.HomeController.clearSaleSearch()
+GET     /browsesales/clearitemsearch                    controllers.HomeController.clearItemSearch()
+GET     /browsesales/search/items                       controllers.HomeController.searchAllItems()
+GET     /browsesales/externalsale                       controllers.HomeController.externalSale()
+GET     /browsesales/externalsale/clearsearch           controllers.HomeController.clearItemSearch()
 
 
-GET    /transactions                controllers.HomeController.viewTransactions()
-POST   /transactions                controllers.HomeController.viewTransactions()
-POST   /transactions                controllers.HomeController.singleTransaction()
-GET    /transactions/add            controllers.HomeController.addTransaction()
-POST   /transactions/add            controllers.HomeController.addTransaction()
-GET    /transactions/add            controllers.HomeController.addTransaction()
+GET     /mysales                                        controllers.HomeController.saleScreen()
+GET     /mysales/salepage                               controllers.HomeController.salePage()
+GET     /mysales/salepage/searchitemresults             controllers.HomeController.searchItemInSale()
+GET     /mysales/salepage/clearsearch                   controllers.HomeController.clearItemSearch()
+POST    /mysales/salepage                               controllers.HomeController.salePage()
+GET     /mysales/salepage/item                          controllers.HomeController.renderItem()
+GET     /mysales/salepage/donationletter                controllers.HomeController.donationLetter()
+POST    /mysales/salepage/item                          controllers.HomeController.updateItem()
+GET     /mysales/salepage/maketransaction               controllers.HomeController.makeTransaction()
+POST    /mysales/salepage/maketransaction               controllers.HomeController.processTransaction()
+GET     /mysales/salepage/closesale                     controllers.HomeController.closeSale()
+GET     /mysales/salepage/financialreport               controllers.HomeController.viewFinancialReport()
 
-POST   /transactions/transaction/view         controllers.HomeController.viewSingleTransaction()
+GET     /mysales/createsale                             controllers.HomeController.renderCreateSale()
 
-POST   /transactions/transaction/processsale    controllers.HomeController.processSale()
-GET    /receipt                    controllers.HomeController.renderReceipt()
-POST   /receipt                    controllers.HomeController.renderReceipt()
+POST    /mysales/createsale/add                         controllers.HomeController.addSale()
+
+POST    /add                                            controllers.HomeController.addItem()
+GET     /add                                            controllers.HomeController.renderAddItem()
+
+POST    /add/item                                       controllers.HomeController.addItemsToTransaction()
 
 
+GET    /transactions                                    controllers.HomeController.viewTransactions()
+POST   /transactions                                    controllers.HomeController.viewTransactions()
 
 
+GET     /tag                                            controllers.HomeController.printTag()
+POST    /tag                                            controllers.HomeController.printTag()
+GET     /tag/itemtag                                    controllers.HomeController.singleBasicTag()
+GET     /alltags                                        controllers.HomeController.printAllTags()
+POST    /alltags                                        controllers.HomeController.printAllTags()
+GET     /alltags/basic                                  controllers.HomeController.basicTags()
+POST    /alltags/basic                                  controllers.HomeController.basicTags()
 
+GET     /relateditems/:itemName                         controllers.HomeController.relatedItems(itemName: String)
 
-GET     /tag                       controllers.HomeController.printTag()
-POST    /tag                       controllers.HomeController.printTag()
-GET     /tag/itemtag               controllers.HomeController.singleBasicTag()
-GET     /alltags                   controllers.HomeController.printAllTags()
-POST    /alltags                   controllers.HomeController.printAllTags()
-GET     /alltags/basic             controllers.HomeController.basicTags()
-POST    /alltags/basic             controllers.HomeController.basicTags()
-
-GET     /relateditems/:itemName     controllers.HomeController.relatedItems(itemName: String)
-
-GET     /admin                     controllers.HomeController.adminPage()
-POST    /admin                     controllers.HomeController.adminPage()
-GET     /admin/lock                controllers.HomeController.lockUnlock()
-POST    /admin/lock                controllers.HomeController.lockUnlock()
-GET     /admin/toggle              controllers.HomeController.toggleAdmin()
-POST    /admin/toggle              controllers.HomeController.toggleAdmin()
-GET     /admin/bookkeeper          controllers.HomeController.toggleBookkeeper()
-POST    /admin/bookkeeper          controllers.HomeController.toggleBookkeeper()
-GET     /bookkeep                  controllers.HomeController.bookPage()
-POST    /bookkeep                  controllers.HomeController.bookPage()
+GET     /admin                                          controllers.HomeController.adminPage()
+POST    /admin                                          controllers.HomeController.adminPage()
+GET     /admin/lock                                     controllers.HomeController.lockUnlock()
+POST    /admin/lock                                     controllers.HomeController.lockUnlock()
+GET     /admin/toggle                                   controllers.HomeController.toggleAdmin()
+POST    /admin/toggle                                   controllers.HomeController.toggleAdmin()
+GET     /admin/bookkeeper                               controllers.HomeController.toggleBookkeeper()
+POST    /admin/bookkeeper                               controllers.HomeController.toggleBookkeeper()
 
 
 # An example controller showing how to use dependency injection

@@ -35,17 +35,24 @@ public class Sale extends Model {
         return name;
     }
 
+    /**
+     * getter for status variable
+     * @return the status
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * setter for status
+     * @param status the status to set
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
     /**
      * setter for name variable
-
      * @param name the name to set
      */
     public void setName(String name) {

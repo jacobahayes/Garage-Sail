@@ -609,6 +609,10 @@ class JavaApplicationDatabase extends Controller {
         return result;
     }
 
+    /**
+     * db access to get the most recent transaction
+     * @return the found transaction (if any)
+     */
     public static Transaction getMostRecentTransaction() {
 
         ResultSet rs = null;
@@ -831,10 +835,6 @@ class JavaApplicationDatabase extends Controller {
 
 
 
-
-
-
-
     //-------------------------------Sale logic------------------------
 
     /**
@@ -1005,6 +1005,11 @@ class JavaApplicationDatabase extends Controller {
         return returnList;
     }
 
+    /**
+     * db access to close a sale
+     * @param saleId the id of teh sale to close
+     * @return the number of rows affected (if any)
+     */
     public static int closeSale(int saleId) {
 
         int result = 0;
@@ -1385,9 +1390,6 @@ class JavaApplicationDatabase extends Controller {
         }
         return returnList;
     }
-
-
-
 
 
 

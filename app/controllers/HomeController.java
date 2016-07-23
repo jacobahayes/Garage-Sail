@@ -13,9 +13,9 @@ import views.html.adminpage;
 import views.html.allsales;
 import views.html.allsearchitems;
 import views.html.basictag;
-import views.html.bookkeeper;
 import views.html.closedsale;
 import views.html.createsale;
+import views.html.donationletter;
 import views.html.externalsale;
 import views.html.homepage;
 import views.html.index;
@@ -27,10 +27,7 @@ import views.html.registration;
 import views.html.report;
 import views.html.salepage;
 import views.html.sales;
-import views.html.searchitemresults;
-import views.html.searchsalesresults;
 import views.html.similaritems;
-import views.html.singletransaction;
 import views.html.tag;
 import views.html.transaction;
 
@@ -51,10 +48,9 @@ public class HomeController extends Controller {
     private static Sale saleInView = null;
     private static Transaction currentTransaction = null;
     private static int loginCount = 0;
-    private static int transactionId;
 
 
-    //-----------------------Homepage-ish logic------------------------
+    //-----------------------Homepage/Login/Register logic--------------------
 
     /**
      * renders the initial login page
@@ -332,6 +328,11 @@ public class HomeController extends Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if (loggedInUser.getId() == saleInView.getSaleAdminId()) {
+            return salePage();
+        }
+
         return ok(externalsale.render(saleInView, itemsfromdb));
     }
 
@@ -590,26 +591,23 @@ public class HomeController extends Controller {
     }
 
     /**
-     * adds a new item by its id number
+     * renders a donation letter for an item
      * @return the HTTP response
      */
-    public Result addItemById() {
-        String[] postAction = request().body().asFormUrlEncoded().get(
-                "action");
-        String action = postAction[0];
-        List<Item> itemsToAdd = new ArrayList<>();
-        while (!action.isEmpty()) {
-            Item item = JavaApplicationDatabase.getItem(
-                    Integer.parseInt(
-                            action.substring(0, action.indexOf(','))));
-            action = action.substring(action.indexOf(',') + 1);
-            itemsToAdd.add(item);
-            if (action.equals(",")) {
-                action = "";
-            }
+    public Result donationLetter() {
+
+        Item item = Form.form(Item.class).bindFromRequest().get();
+        Item foundItem = new Item();
+        try {
+            foundItem = JavaApplicationDatabase.getItem(item.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return TODO;
+
+        return ok(donationletter.render(foundItem, saleInView));
+
     }
+
 
     /**
      * shows the related items view
@@ -641,7 +639,11 @@ public class HomeController extends Controller {
             e.printStackTrace();
         }
 
-        return ok(salepage.render(saleInView, itemsfromdb));
+        if (loggedInUser.getId() == saleInView.getSaleAdminId()) {
+            return ok(salepage.render(saleInView, itemsfromdb));
+        }
+
+        return ok(externalsale.render(saleInView, itemsfromdb));
     }
 
     /**
@@ -683,7 +685,17 @@ public class HomeController extends Controller {
 
     public Result clearItemSearch() {
 
-        return salePage();
+        List<Item> itemsfromdb = new ArrayList<>();
+        try {
+            itemsfromdb = JavaApplicationDatabase.getSaleItems(saleInView.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (loggedInUser.getId() == saleInView.getSaleAdminId()) {
+            return ok(salepage.render(saleInView, itemsfromdb));
+        }
+
+        return ok(externalsale.render(saleInView, itemsfromdb));
     }
 
     public Result clearSaleSearch() {
@@ -775,96 +787,12 @@ public class HomeController extends Controller {
         return ok(transaction.render(transactionsList, loggedInUser));
     }
 
-    /**
-     * allows the user to view a single transaction
-     * @return the HTTP response
-     */
-    public Result viewSingleTransaction() {
-        List<Item> returnlist = new ArrayList<>();
-        returnlist = JavaApplicationDatabase.getTransactionItems(
-                transactionId);
-        return ok(singletransaction.render(returnlist));
-    }
+
 
     /**
-     * renders a single transaction view
+     * allows a user to create a transaction
      * @return the HTTP response
      */
-    public Result singleTransaction() {
-        System.out.println("singleTransaction");
-        Transaction transaction = Form.form(
-                Transaction.class).bindFromRequest().get();
-        Transaction returnTransaction = new Transaction();
-        try {
-            returnTransaction = JavaApplicationDatabase.getTransaction(
-                    transaction.getId());
-            System.out.println(returnTransaction.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        transactionId = returnTransaction.getId();
-        return viewSingleTransaction();
-    }
-
-    /**
-     * allows the user to add a transaction
-     * @return the HTTP response
-     */
-    public Result addTransaction() {
-        Transaction transaction = Form.form(
-                Transaction.class).bindFromRequest().get();
-        try {
-            //if empty (not already a transaction), save it.
-            // else, go to transaction page.
-            if (JavaApplicationDatabase.getOpenTransaction(
-                    loggedInUser.getId(), saleInView.getId()) == null) {
-                transaction.setSaleId(saleInView.getId());
-                transaction.setUserId(loggedInUser.getId());
-                transaction.setClosed(false);
-                transaction.save();
-            }
-        } catch (Exception e) {
-            return viewTransactions();
-        }
-        return viewTransactions();
-    }
-
-    /**
-     * allows user to add an item to their transaction
-     * @return the HTTP response
-     */
-    public Result addItemToTransaction() {
-        Item item = Form.form(Item.class).bindFromRequest().get();
-        Item returnItem = new Item();
-        System.out.println(returnItem.getId());
-        Transaction currentTransaction = new Transaction();
-        List<Item> itemlist = new ArrayList<>();
-
-        try {
-            returnItem = JavaApplicationDatabase.getItem(item.getId());
-            currentTransaction = JavaApplicationDatabase.getTransaction(
-                    transactionId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(currentTransaction.getId());
-
-        try {
-            itemlist = JavaApplicationDatabase.getTransactionItems(
-                    currentTransaction.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(returnItem.getDescription());
-        System.out.println(returnItem.getId());
-        System.out.println(currentTransaction.getId());
-        returnItem.setTransactionId(currentTransaction.getId());
-        JavaApplicationDatabase.updateItem(returnItem.getId(), returnItem);
-        return viewSingleTransaction();
-    }
-
-
     public Result makeTransaction() {
 
         currentTransaction = new Transaction();
@@ -875,6 +803,10 @@ public class HomeController extends Controller {
         return ok(maketransaction.render(currentTransaction));
     }
 
+    /**
+     * allows a user to add items to a transaction
+     * @return the HTTP response
+     */
     public Result addItemsToTransaction() {
 
         Item item = Form.form(Item.class).bindFromRequest().get();
@@ -891,6 +823,10 @@ public class HomeController extends Controller {
         return ok(maketransaction.render(currentTransaction));
     }
 
+    /**
+     * allows a user to process a transaction within a sale
+     * @return the HTTP response
+     */
     public Result processTransaction() {
 
         String[] paymentAction = request().body().asFormUrlEncoded().get(
@@ -952,89 +888,6 @@ public class HomeController extends Controller {
 
         return ok(receipt.render(currentTransaction, itemsfromdb));
     }
-
-
-
-
-    //-------------------Processing logic------------------------------------
-
-    /**
-     * allows a user to process a transaction within a sale
-     * @return the HTTP response
-     */
-    public Result processSale() {
-        String[] paymentAction = request().body().asFormUrlEncoded().get(
-                "paymentmethod");
-
-        String itemString = "";
-        Transaction transaction = new Transaction();
-
-        String paymentMethod = paymentAction[0];
-        if (paymentMethod.equalsIgnoreCase("creditdebit")) {
-            transaction.setPaymentMethod("creditdebit");
-        } else if (paymentMethod.equalsIgnoreCase("bitcoin")) {
-            transaction.setPaymentMethod("bitcoin");
-        } else {
-            transaction.setPaymentMethod("cash");
-        }
-
-        Calendar currentDate = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
-        SimpleDateFormat formattertime = new SimpleDateFormat("hh:mm:ss");
-        String dateNow = formatter.format(currentDate.getTime());
-        String timeNow = formattertime.format(currentDate.getTime());
-
-        double totalPrice = 0.0;
-        List<Item> itemsfromdb = new ArrayList<>();
-        try {
-            itemsfromdb = JavaApplicationDatabase.getTransactionItems(
-                    transactionId);
-        } catch (Exception e) {
-            badRequest("Could not get items");
-        }
-        transaction.setDate(dateNow);
-        transaction.setTime(timeNow);
-        transaction.setTotalPrice(totalPrice);
-        transaction.setClosed(true);
-        transaction.setPaymentMethod(paymentMethod);
-
-        System.out.println(transaction.getDate());
-        System.out.println(transaction.getTotalPrice());
-        System.out.println(transaction.getTime());
-        System.out.println(transaction.getPaymentMethod());
-
-        int result = JavaApplicationDatabase.updateTransaction(
-                transactionId, transaction);
-
-        if (result == 1) {
-            return ok(receipt.render(transaction, itemsfromdb));
-        } else {
-            return badRequest("Could not complete transaction.");
-        }
-    }
-
-    /**
-     * renders the receipt page
-     * @return the HTTP response
-     */
-    public Result renderReceipt() {
-        Transaction transaction = Form.form(
-                Transaction.class).bindFromRequest().get();
-        Transaction returnTransaction = new Transaction();
-        List<Item> items = new ArrayList<>();
-        try {
-            returnTransaction = JavaApplicationDatabase.getTransaction(
-                    transactionId);
-            items = JavaApplicationDatabase.getTransactionItems(transactionId);
-        } catch (Exception e) {
-            badRequest("Could not get items");
-        }
-        return ok(receipt.render(returnTransaction, items));
-    }
-
-
-
-
 
 
     //-----------------Admin logic-------------------------------------------
@@ -1137,19 +990,6 @@ public class HomeController extends Controller {
     }
 
     /**
-     * renders the financial page for the bookkeeper
-     * @return the HTTP response
-     */
-    public Result bookPage() {
-        if (loggedInUser.isBookkeeper()) {
-            return ok(bookkeeper.render(
-                    JavaApplicationDatabase.getAllTransactions()));
-        } else {
-            return viewTransactions();
-        }
-    }
-
-    /**
      * allows an admin to change their password
      * @return the HTTP response
      */
@@ -1163,4 +1003,5 @@ public class HomeController extends Controller {
                 JavaApplicationDatabase.getUser(id), password);
         return ok(adminpage.render(JavaApplicationDatabase.getUsers()));
     }
+
 }

@@ -31,10 +31,20 @@ public class Transaction extends Model {
     private boolean closed;
     private String saleName;
 
+
+    /**
+     * getter for sale name variable
+     * @return the sale name
+     */
     public String getSaleName() {
         return saleName;
     }
 
+
+    /**
+     * setter for sale name variable
+     * @param saleName the sale name to set
+     */
     public void setSaleName(String saleName) {
         this.saleName = saleName;
     }

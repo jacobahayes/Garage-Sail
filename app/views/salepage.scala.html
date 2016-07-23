@@ -85,6 +85,11 @@
             <input type="hidden" name="id" value="@item.getId"/>
             <button>View Tag</button>
           </form>
+          <div id="space"></div>
+          <form action="@routes.HomeController.donationLetter()" target="_blank">
+            <input type="hidden" name="id" value="@item.getId"/>
+            <button>Donation Letter</button>
+          </form>
         </div>
         </fieldset>
     }

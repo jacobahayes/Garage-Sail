@@ -1,0 +1,24 @@
+@(item: Item, sale: Sale)
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Donation Letter</title>
+  </head>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/main.css")">
+
+  <body>
+
+    <div>
+      <p>To Whom it may concern, </p>
+      <p>This letter signifies that ____________________________ donated the following item:</p>
+      <p>@item.getName (@item.getDescription)</p>
+      <p>to the garage sale: @sale.getName on @sale.getDate</p>
+      <p>Please give them credit for doing so.</p>
+      <p>Thanks,</p>
+    </div>
+
+  </body>
+</html>

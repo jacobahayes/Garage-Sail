@@ -1089,6 +1089,9 @@ class JavaApplicationDatabase extends Controller {
                 transaction.setId(rs.getInt("id"));
                 transaction.setDate(rs.getString("date"));
                 transaction.setTime(rs.getString("time"));
+                transaction.setSaleName(rs.getString("sale_name"));
+                transaction.setTotalPrice(rs.getDouble("total_price"));
+                transaction.setPaymentMethod(rs.getString("paymentmethod"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage() + "Fail to get the item");
@@ -1102,7 +1105,7 @@ class JavaApplicationDatabase extends Controller {
      * @param userId the user id
      * @return the found transactions (if any)
      */
-    public static List<Transaction> viewTransactions(int userId) {
+    public static List<Transaction> getTransactions(int userId) {
 
         ResultSet rs = null;
         Statement stmt = null;
@@ -1136,6 +1139,9 @@ class JavaApplicationDatabase extends Controller {
                 transaction.setId(rs.getInt("id"));
                 transaction.setDate(rs.getString("date"));
                 transaction.setTime(rs.getString("time"));
+                transaction.setSaleName(rs.getString("sale_name"));
+                transaction.setTotalPrice(rs.getDouble("total_price"));
+                transaction.setPaymentMethod(rs.getString("paymentmethod"));
 
                 if (transaction != null) {
                     returnList.add(transaction);

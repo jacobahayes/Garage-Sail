@@ -707,7 +707,7 @@ public class HomeController extends Controller {
      */
     public Result viewTransactions() {
         List<Transaction> transactionsList = new ArrayList<Transaction>();
-        transactionsList = JavaApplicationDatabase.viewTransactions(loggedInUser.getId());
+        transactionsList = JavaApplicationDatabase.getTransactions(loggedInUser.getId());
         return ok(transaction.render(transactionsList, loggedInUser));
     }
 

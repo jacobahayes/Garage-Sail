@@ -96,8 +96,16 @@ input[type=checkbox]:not(old):checked + label > span:before{
     text-align: center;
 }
 
-#cancel_button {
+#X_button {
     width: 45px;
+}
+
+#cancel_button {
+    width: 80px;
+}
+
+#add_button {
+    width: 125px;
 }
 
 #login_button {

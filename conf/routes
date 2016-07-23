@@ -24,14 +24,18 @@ POST    /admin                     controllers.HomeController.adminChangePasswor
 GET     /browsesales               controllers.HomeController.browseSales()
 POST    /browsesales               controllers.HomeController.browseSales()
 GET     /browsesales/search        controllers.HomeController.searchAllSales()
+GET     /browsesales/clearsalesearch        controllers.HomeController.clearSaleSearch()
+GET     /browsesales/clearitemsearch        controllers.HomeController.clearItemSearch()
 GET     /browsesales/search/items  controllers.HomeController.searchAllItems()
 GET     /browsesales/externalsale  controllers.HomeController.externalSale()
+GET     /browsesales/externalsale/clearsearch          controllers.HomeController.clearItemSearch()
 POST    /browsesales/externalsale/add   controllers.HomeController.addItemToTransaction()
 
 
 GET     /mysales                   controllers.HomeController.saleScreen()
 GET     /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/searchitemresults          controllers.HomeController.searchItemInSale()
+GET     /mysales/salepage/clearsearch          controllers.HomeController.clearItemSearch()
 POST    /mysales/salepage          controllers.HomeController.salePage()
 GET     /mysales/salepage/item     controllers.HomeController.renderItem()
 POST    /mysales/salepage/item     controllers.HomeController.updateItem()

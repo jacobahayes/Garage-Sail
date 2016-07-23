@@ -49,6 +49,12 @@
             <div id="space"></div>
           </div>
         </form>
+        <form action="@routes.HomeController.clearSaleSearch()" method="get">
+          <div id="sidebyside">
+            <button type="Submit">Clear Sale Search</button>
+            <div id="space"></div>
+          </div>
+        </form>
       </div>
     </div>
     <div class="cell">
@@ -66,10 +72,18 @@
             <div id="space"></div>
           </div>
         </form>
+        <form action="@routes.HomeController.clearItemSearch()" method="get">
+          <div id="sidebyside">
+            <button type="Submit">Clear Item Search</button>
+            <div id="space"></div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
   </center>
+
+
 
 
   @for(sale <- allsales) {

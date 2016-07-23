@@ -50,6 +50,13 @@
         <div id="space"></div>
         </div>
       </form>
+      <form action="@routes.HomeController.clearItemSearch()" method="get">
+        <div id="sidebyside">
+          <input type="hidden" name="id" id ="id" value="@sale.getId"/>
+          <button type="Submit">Clear Search</button>
+          <div id="space"></div>
+        </div>
+      </form>
     </div>
     <div id="space"></div>
     <form action="@routes.HomeController.renderAddItem()">

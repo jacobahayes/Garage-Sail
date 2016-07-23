@@ -1,0 +1,55 @@
+@(sale: Sale, transactions: List[Transaction], revenue: Double, numTransactions: Integer)
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Financial Report</title>
+  </head>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("css/main.css")">
+
+  <body>
+    <div id="logo">
+      <h3><a href="@routes.HomeController.renderHome()" id="logo">Garage Sail</a></h3>
+    </div>
+
+
+    <div id="heading">
+      <p id="title">Report for @sale.getName</p>
+      <p id="instructions"><b>Date: @sale.getDate</b></p>
+      <p id="instructions"><b>Time: @sale.getStartTime - @sale.getEndTime</b></p>
+      <p id="instructions"><b>Total Revenue: $@revenue</b></p>
+      <p id="instructions"><b>Total Transactions: @numTransactions</b></p>
+    </div>
+
+
+    @for(trans <- transactions) {
+        <div id="iteminfo">
+          <h4 id="iteminfo"><b>Transaction id: @trans.getId</b></h4>
+          <p><b>Total Price:</b> $@trans.getTotalPrice</p>
+          <p><b>Payment Method:</b> @trans.getPaymentMethod</p>
+        </div>
+    }
+
+
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="space"></div>
+
+    <div id="edit-form">
+      <form action="javascript:window.print()">
+        <button type="submit">Print</button>
+      </form>
+    </div>
+    <div id="space"></div>
+    <div id="space"></div>
+    <div id="edit-form">
+      <form action="@routes.HomeController.cancel()" method="post">
+        <button type="submit">Return Home</button>
+      </form>
+    </div>
+
+  </body>
+</html>

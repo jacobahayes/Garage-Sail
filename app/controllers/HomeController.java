@@ -24,6 +24,7 @@ import views.html.maketransaction;
 import views.html.profile;
 import views.html.receipt;
 import views.html.registration;
+import views.html.report;
 import views.html.salepage;
 import views.html.sales;
 import views.html.searchitemresults;
@@ -323,21 +324,7 @@ public class HomeController extends Controller {
 
         Sale sale = Form.form(Sale.class).bindFromRequest().get();
         saleInView = JavaApplicationDatabase.getSale(sale.getId());
-        System.out.println(saleInView.getId());
-        System.out.println(saleInView.getDescription());
-        Transaction transaction = JavaApplicationDatabase.getOpenTransaction(
-                loggedInUser.getId(), saleInView.getId());
-        if (transaction == null) {
-            transaction = new Transaction();
-            transaction.setSaleId(saleInView.getId());
-            transaction.setUserId(loggedInUser.getId());
-            transaction.save();
-        }
-        System.out.println(transaction.getId());
-        System.out.println(transaction.getSaleId());
-        System.out.println(transaction.getUserId());
-        System.out.println(transaction.getId());
-        transactionId = transaction.getId();
+
         List<Item> itemsfromdb = new ArrayList<>();
         try {
             itemsfromdb = JavaApplicationDatabase.getSaleItems(
@@ -472,10 +459,29 @@ public class HomeController extends Controller {
         return saleScreen();
     }
 
-//    public Result viewFinancialReport() {
-//
-//        return ok(report.render(saleInView));
-//    }
+    public Result viewFinancialReport() {
+
+        if (loggedInUser.isBookkeeper() || loggedInUser.getAdmin().equals("true")) {
+
+            List<Transaction> transactions = new ArrayList<>();
+            try {
+                transactions = JavaApplicationDatabase.getTransactionsForSale(saleInView.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            double revenue = 0.0;
+            int numTransactions = 0;
+            for (Transaction trans : transactions) {
+                numTransactions++;
+                revenue = revenue + trans.getTotalPrice();
+            }
+
+            return ok(report.render(saleInView, transactions, revenue, numTransactions));
+        }
+
+        return ok();
+    }
 
 
 
@@ -624,17 +630,18 @@ public class HomeController extends Controller {
     public Result searchItemInSale() {
 
         // ??
-        Sale searchSale = Form.form(Sale.class).bindFromRequest().get();
+        Item searchItem = Form.form(Item.class).bindFromRequest().get();
+        System.out.println(searchItem.getName());
 
         List<Item> itemsfromdb = new ArrayList<>();
         try {
             itemsfromdb = JavaApplicationDatabase.searchItemInSale(
-                    saleInView, searchSale.getName());
+                    saleInView, searchItem.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return ok(searchitemresults.render(saleInView, itemsfromdb));
+        return ok(salepage.render(saleInView, itemsfromdb));
     }
 
     /**
@@ -654,7 +661,7 @@ public class HomeController extends Controller {
             e.printStackTrace();
         }
 
-        return ok(allsearchitems.render(saleInView, itemsfromdb));
+        return ok(allsearchitems.render(itemsfromdb));
     }
 
     /**
@@ -667,14 +674,22 @@ public class HomeController extends Controller {
         try {
             foundSales = JavaApplicationDatabase.searchAllSales(
                     searchSale.getName());
-            return ok(searchsalesresults.render(saleInView, foundSales));
+            return ok(allsales.render(foundSales));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ok(searchsalesresults.render(saleInView, foundSales));
+        return ok(allsales.render(foundSales));
     }
 
+    public Result clearItemSearch() {
 
+        return salePage();
+    }
+
+    public Result clearSaleSearch() {
+
+        return browseSales();
+    }
 
 
 
@@ -863,11 +878,13 @@ public class HomeController extends Controller {
     public Result addItemsToTransaction() {
 
         Item item = Form.form(Item.class).bindFromRequest().get();
-        currentTransaction.addItem(item.getName());
         Item boughtItem = new Item();
         try {
             boughtItem = JavaApplicationDatabase.getItem(Integer.parseInt(item.getName()));
-            currentTransaction.setTotalPrice(currentTransaction.getTotalPrice() + boughtItem.getListPrice());
+            if (!boughtItem.isSold()) {
+                currentTransaction.addItem(item.getName());
+                currentTransaction.setTotalPrice(currentTransaction.getTotalPrice() + boughtItem.getListPrice());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

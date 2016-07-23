@@ -671,8 +671,8 @@ class JavaApplicationDatabase extends Controller {
         StringBuffer buf = new StringBuffer();
         buf.append("SELECT * FROM item");
         buf.append(" WHERE sale_id='" + sale.getId() + "'");
-        buf.append(" AND name LIKE '%" + name + "%'");
-        buf.append(" OR description LIKE '%" + name + "%'");
+        buf.append(" AND (name LIKE '%" + name + "%'");
+        buf.append(" OR description LIKE '%" + name + "%')");
 
         System.out.println("Execute Query: " + buf.toString());
         try {
@@ -692,7 +692,8 @@ class JavaApplicationDatabase extends Controller {
                 returnItem.setDescription(rs.getString("description"));
                 returnItem.setQuantity(rs.getInt("quantity"));
                 returnItem.setId(rs.getInt("id"));
-                returnItem.setId(rs.getInt("transaction_id"));
+                returnItem.setSaleId(rs.getInt("sale_id"));
+                returnItem.setTransactionId(rs.getInt("transaction_id"));
                 if (rs.getInt("sold") == 1) {
                     returnItem.setSold(true);
                 } else {
@@ -752,7 +753,8 @@ class JavaApplicationDatabase extends Controller {
                 returnItem.setDescription(rs.getString("description"));
                 returnItem.setQuantity(rs.getInt("quantity"));
                 returnItem.setId(rs.getInt("id"));
-                returnItem.setId(rs.getInt("transaction_id"));
+                returnItem.setSaleId(rs.getInt("sale_id"));
+                returnItem.setTransactionId(rs.getInt("transaction_id"));
                 if (rs.getInt("sold") == 1) {
                     returnItem.setSold(true);
                 } else {
@@ -1178,6 +1180,58 @@ class JavaApplicationDatabase extends Controller {
             System.out.println(e.getMessage() + "Fail to get the item");
         }
         return returnList;
+    }
+
+    /**
+     * db access to get a transaction by its sale id
+     * @param saleId the sale id
+     * @return the found transaction (if any)
+     */
+    public static List<Transaction> getTransactionsForSale(int saleId) {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Transaction> transactions = new ArrayList<Transaction>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM transaction");
+        buf.append(" WHERE sale_id='" + saleId + "'");
+
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs.next()) {
+                Transaction transaction = new Transaction();
+
+                transaction.setSaleId(rs.getInt("sale_id"));
+                transaction.setUserId(rs.getInt("user_id"));
+                transaction.setId(rs.getInt("id"));
+                transaction.setDate(rs.getString("date"));
+                transaction.setTime(rs.getString("time"));
+                transaction.setSaleName(rs.getString("sale_name"));
+                transaction.setTotalPrice(rs.getDouble("total_price"));
+                transaction.setPaymentMethod(rs.getString("paymentmethod"));
+
+                transactions.add(transaction);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + "Fail to get the transactions");
+        }
+
+        return transactions;
     }
 
     /**

@@ -1,4 +1,4 @@
-@(sale: Sale, array: List[Item])
+@(array: List[Item])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +29,7 @@
           <p><b>Description:</b> @item.getDescription</p>
           <p><b>Quantity:</b> @item.getQuantity</p>
           <p><b>Price:</b> $@item.getListPrice</p>
+          <p><b>Sale Id:</b> @item.getSaleId</p>
         </div>
         <div class="itemandtag">
           <form action="@routes.HomeController.relatedItems(item.getName)">

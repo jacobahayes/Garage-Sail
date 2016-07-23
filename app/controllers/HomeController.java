@@ -462,7 +462,7 @@ public class HomeController extends Controller {
 
     public Result viewFinancialReport() {
 
-        if (loggedInUser.isBookkeeper() || loggedInUser.getAdmin().equals("true")) {
+        if (loggedInUser.isBookkeeper() || (saleInView.getSaleAdminId() == loggedInUser.getId())) {
 
             List<Transaction> transactions = new ArrayList<>();
             try {

@@ -1006,6 +1006,62 @@ class JavaApplicationDatabase extends Controller {
     }
 
     /**
+     * db access to get all open sales in the system
+     * @return the found sales (if any)
+     */
+    public static List<Sale> getAllOpenSales() {
+
+        ResultSet rs = null;
+        Statement stmt = null;
+        List<Sale> returnList = new ArrayList<>();
+
+        try {
+            stmt = conn.createStatement();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        StringBuffer buf = new StringBuffer();
+        buf.append("SELECT * FROM sale");
+        buf.append(" WHERE status='open'");
+
+        System.out.println("Execute Query: " + buf.toString());
+        try {
+            rs = stmt.executeQuery(buf.toString());
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "Query Execute fail");
+        }
+
+        try {
+
+            while (rs != null && rs.next()) {
+
+                Sale returnSale = new Sale();
+
+
+                returnSale.setEndTime(rs.getString("start_time"));
+                returnSale.setEndTime(rs.getString("end_time"));
+                returnSale.setDate(rs.getString("date"));
+                returnSale.setSaleAdminId(rs.getInt("sale_admin_id"));
+                returnSale.setLocation(rs.getString("location"));
+                returnSale.setDescription(rs.getString("description"));
+                returnSale.setName(rs.getString("name"));
+                returnSale.setId(rs.getInt("id"));
+                returnSale.setStatus(rs.getString("status"));
+
+                if (returnSale != null) {
+                    returnList.add(returnSale);
+                }
+            }
+            return returnList;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage()
+                    + "Fail to get the sales from the resultset");
+        }
+        return returnList;
+    }
+
+    /**
      * db access to close a sale
      * @param saleId the id of teh sale to close
      * @return the number of rows affected (if any)

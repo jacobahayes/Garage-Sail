@@ -305,7 +305,7 @@ public class HomeController extends Controller {
     public Result browseSales() {
         List<Sale> salesfromdb = new ArrayList<>();
         try {
-            salesfromdb = JavaApplicationDatabase.getAllSales();
+            salesfromdb = JavaApplicationDatabase.getAllOpenSales();
         } catch (Exception e) {
             e.printStackTrace();
         }

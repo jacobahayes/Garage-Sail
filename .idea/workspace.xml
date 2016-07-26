@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cf7f39b0-441a-4d43-bc98-9b4e5fd5ce93" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/additem.scala.html" afterPath="$PROJECT_DIR$/app/views/additem.scala.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/receipt.scala.html" afterPath="$PROJECT_DIR$/app/views/receipt.scala.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/registration.scala.html" afterPath="$PROJECT_DIR$/app/views/registration.scala.html" />
     </list>
     <ignored path="play-java.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,6 +29,16 @@
     <option name="SORT_POSITIONED" value="false" />
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - sql5124112@sql5.freemysqlhosting.net" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="ExternalProjectsData">
@@ -50,11 +61,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="additem.scala.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="additem.scala.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/additem.scala.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="525">
               <caret line="35" column="101" selection-start-line="35" selection-start-column="101" selection-end-line="35" selection-end-column="101" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registration.scala.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/registration.scala.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="212">
+              <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="receipt.scala.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/receipt.scala.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="563">
+              <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -106,7 +137,6 @@
         <option value="$PROJECT_DIR$/app/views/index.scala.html" />
         <option value="$PROJECT_DIR$/app/views/item.scala.html" />
         <option value="$PROJECT_DIR$/app/views/bookkeeper.scala.html" />
-        <option value="$PROJECT_DIR$/app/views/registration.scala.html" />
         <option value="$PROJECT_DIR$/app/views/adminpage.scala.html" />
         <option value="$PROJECT_DIR$/app/views/singletransaction.scala.html" />
         <option value="$PROJECT_DIR$/conf/evolutions/default/1.sql" />
@@ -114,7 +144,6 @@
         <option value="$PROJECT_DIR$/app/models/Item.java" />
         <option value="$PROJECT_DIR$/app/views/maketransaction.scala.html" />
         <option value="$PROJECT_DIR$/app/views/createsale.scala.html" />
-        <option value="$PROJECT_DIR$/app/views/receipt.scala.html" />
         <option value="$PROJECT_DIR$/app/views/closedsale.scala.html" />
         <option value="$PROJECT_DIR$/app/views/report.scala.html" />
         <option value="$PROJECT_DIR$/app/views/allsales.scala.html" />
@@ -130,6 +159,8 @@
         <option value="$PROJECT_DIR$/app/controllers/HomeController.java" />
         <option value="$PROJECT_DIR$/app/controllers/JavaApplicationDatabase.java" />
         <option value="$PROJECT_DIR$/app/views/additem.scala.html" />
+        <option value="$PROJECT_DIR$/app/views/registration.scala.html" />
+        <option value="$PROJECT_DIR$/app/views/receipt.scala.html" />
       </list>
     </option>
   </component>
@@ -873,7 +904,7 @@
       <workItem from="1468286673664" duration="5814000" />
       <workItem from="1468507157592" duration="4012000" />
       <workItem from="1468528067305" duration="36036000" />
-      <workItem from="1469314037882" duration="2298000" />
+      <workItem from="1469314037882" duration="4223000" />
     </task>
     <task id="LOCAL-00001" summary="db backend to save sales">
       <created>1466718503349</created>
@@ -1078,11 +1109,18 @@
       <option name="project" value="LOCAL" />
       <updated>1469378485549</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="changed add item placeholders to explicitly tell the user that it takes numbers only for the price and quantity">
+      <created>1469379300930</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1469379300930</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227132000" />
+    <option name="totallyTimeSpent" value="229057000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1850" height="992" extended-state="0" />
@@ -1170,7 +1208,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="query for mysales is hooked up and displays the description of the users mysales...." />
     <MESSAGE value="fixed sql to pull items for sale,&#10;redirected pages in correct order" />
     <MESSAGE value="fixed page redirect,&#10;allowed items in sales to be displayed properly" />
     <MESSAGE value="fixed additem redirect" />
@@ -1195,7 +1232,8 @@
     <MESSAGE value="added donation letter functionality" />
     <MESSAGE value="fixed display of financial report for sale admins and bookkeepers" />
     <MESSAGE value="changed browse sales to only view sales that are open instead of all in system" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed browse sales to only view sales that are open instead of all in system" />
+    <MESSAGE value="changed add item placeholders to explicitly tell the user that it takes numbers only for the price and quantity" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed add item placeholders to explicitly tell the user that it takes numbers only for the price and quantity" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1208,7 +1246,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.user" />
     <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.user" />
     <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.user" />
     <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.user" />
@@ -1290,14 +1327,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/singletransaction.scala.html" />
-    <entry file="file://$PROJECT_DIR$/app/views/registration.scala.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="908">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf/evolutions/default/1.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1456,14 +1485,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/receipt.scala.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="86" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/salepage.scala.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -1528,10 +1549,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="dbDummy://dbtable:/efdbe7a/db2a8cb9-aaab-46d1-aa27-bd0ead539b48/sql5124112.user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/additem.scala.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
+        <state relative-caret-position="525">
           <caret line="35" column="101" selection-start-line="35" selection-start-column="101" selection-end-line="35" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/registration.scala.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/receipt.scala.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
           <folding />
         </state>
       </provider>

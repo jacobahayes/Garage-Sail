@@ -21,7 +21,7 @@
 
       var items = '-Items:%0A';
       @for(item <- transactionitems) {
-        items = items + @item.getName + ' :: $' + @item.getListPrice;
+        items = items + "@item.getName" + ' Price: $' + @item.getListPrice + '%0A';
       }
 
       var body = 'Receipt for Garage Sale:%0A' + heading + items;
